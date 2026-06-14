@@ -13,7 +13,7 @@ struct RootView: View {
 
     var body: some View {
         if authViewModel.isAuthenticated {
-            HomeView(viewModel: container.makeHomeViewModel())
+            HomeView(viewModel: container.makeHomeViewModel(), container: container)
         } else {
             AuthView(viewModel: authViewModel)
         }

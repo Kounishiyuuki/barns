@@ -2,9 +2,11 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject private var viewModel: HomeViewModel
+    private let container: DependencyContainer
 
-    init(viewModel: HomeViewModel) {
+    init(viewModel: HomeViewModel, container: DependencyContainer) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        self.container = container
     }
 
     var body: some View {
@@ -32,7 +34,11 @@ struct HomeView: View {
                         .foregroundStyle(.secondary)
                 }
                 Section("Your greenery") {
-                    LabeledContent("Registered items", value: "\(content.summary.registeredItemCount)")
+                    NavigationLink {
+                        MyItemsView(viewModel: container.makeMyItemsViewModel(), container: container)
+                    } label: {
+                        LabeledContent("My Items", value: "\(content.summary.registeredItemCount)")
+                    }
                     LabeledContent("Next care", value: content.summary.nextCareLabel)
                 }
                 Section("Explore") {
@@ -47,5 +53,8 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView(viewModel: DependencyContainer().makeHomeViewModel())
+    HomeView(
+        viewModel: DependencyContainer().makeHomeViewModel(),
+        container: DependencyContainer()
+    )
 }
