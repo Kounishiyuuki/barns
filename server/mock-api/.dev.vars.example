@@ -1,0 +1,5 @@
+# Example local config for the barns mock API. Copy to .dev.vars (gitignored).
+# Contains NO secrets — the mock API needs no credentials.
+
+# Port the mock API listens on (optional; defaults to 8787).
+PORT=8787
