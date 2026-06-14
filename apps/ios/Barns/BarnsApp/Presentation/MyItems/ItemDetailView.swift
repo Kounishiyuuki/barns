@@ -10,7 +10,6 @@ struct ItemDetailView: View {
     var body: some View {
         content
             .navigationTitle("Item")
-            .navigationBarTitleDisplayMode(.inline)
             .task { await viewModel.load() }
     }
 

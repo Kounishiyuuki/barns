@@ -24,7 +24,6 @@ struct AddItemView: View {
             }
         }
         .navigationTitle("Add item")
-        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
                 Button("Cancel") { dismiss() }
