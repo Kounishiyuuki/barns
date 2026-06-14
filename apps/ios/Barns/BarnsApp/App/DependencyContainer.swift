@@ -2,15 +2,18 @@ struct DependencyContainer {
     private let authRepository: AuthRepository
     private let homeRepository: HomeRepository
     private let productItemRepository: ProductItemRepository
+    private let careRepository: CareRepository
 
     init(
         authRepository: AuthRepository = MockAuthRepository(),
         homeRepository: HomeRepository = MockHomeRepository(),
-        productItemRepository: ProductItemRepository = MockProductItemRepository()
+        productItemRepository: ProductItemRepository = MockProductItemRepository(),
+        careRepository: CareRepository = MockCareRepository()
     ) {
         self.authRepository = authRepository
         self.homeRepository = homeRepository
         self.productItemRepository = productItemRepository
+        self.careRepository = careRepository
     }
 
     @MainActor
@@ -48,6 +51,23 @@ struct DependencyContainer {
     func makeAddItemViewModel() -> AddItemViewModel {
         AddItemViewModel(
             addProductItemUseCase: AddProductItemUseCase(repository: productItemRepository)
+        )
+    }
+
+    @MainActor
+    func makeCareViewModel() -> CareViewModel {
+        CareViewModel(
+            getCareTasksUseCase: GetCareTasksUseCase(repository: careRepository),
+            getCareLogsUseCase: GetCareLogsUseCase(repository: careRepository)
+        )
+    }
+
+    @MainActor
+    func makeCareTaskDetailViewModel(taskId: CareTask.ID) -> CareTaskDetailViewModel {
+        CareTaskDetailViewModel(
+            taskId: taskId,
+            getCareTaskDetailUseCase: GetCareTaskDetailUseCase(repository: careRepository),
+            completeCareTaskUseCase: CompleteCareTaskUseCase(repository: careRepository)
         )
     }
 }
