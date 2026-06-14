@@ -9,19 +9,43 @@ struct HomeView: View {
 
     var body: some View {
         NavigationStack {
+            content
+                .navigationTitle("barns")
+        }
+        .task { await viewModel.load() }
+    }
+
+    @ViewBuilder
+    private var content: some View {
+        switch viewModel.state {
+        case .loading:
+            ProgressView()
+        case .failed(let message):
+            Text(message)
+                .foregroundStyle(.secondary)
+        case .loaded(let content):
             List {
-                Section("Today") {
-                    Text(viewModel.state.title)
+                Section {
+                    Text(content.greeting)
                         .font(.headline)
-                    Text(viewModel.state.message)
+                    Text(content.summary.welcomeMessage)
                         .foregroundStyle(.secondary)
                 }
+                Section("Your greenery") {
+                    LabeledContent("Registered items", value: "\(content.summary.registeredItemCount)")
+                    LabeledContent("Next care", value: content.summary.nextCareLabel)
+                }
+                Section("Explore") {
+                    Text(content.summary.patternsEntryLabel)
+                }
+                Section("Support") {
+                    Text(content.summary.supportGuidance)
+                }
             }
-            .navigationTitle("barns")
         }
     }
 }
 
 #Preview {
-    HomeView(viewModel: HomeViewModel())
+    HomeView(viewModel: DependencyContainer().makeHomeViewModel())
 }

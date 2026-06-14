@@ -6,7 +6,10 @@ struct BarnsApp: App {
 
     var body: some Scene {
         WindowGroup {
-            HomeView(viewModel: environment.dependencyContainer.makeHomeViewModel())
+            RootView(
+                authViewModel: environment.dependencyContainer.makeAuthViewModel(),
+                container: environment.dependencyContainer
+            )
         }
     }
 }

@@ -1,20 +1,44 @@
-import Foundation
+import Combine
 
 @MainActor
 final class HomeViewModel: ObservableObject {
-    @Published private(set) var state: HomeUiState
+    @Published private(set) var state: HomeUiState = .loading
 
-    init(state: HomeUiState = .placeholder) {
-        self.state = state
+    private let getHomeSummaryUseCase: GetHomeSummaryUseCase
+    private let getCurrentUserUseCase: GetCurrentUserUseCase
+
+    init(
+        getHomeSummaryUseCase: GetHomeSummaryUseCase,
+        getCurrentUserUseCase: GetCurrentUserUseCase
+    ) {
+        self.getHomeSummaryUseCase = getHomeSummaryUseCase
+        self.getCurrentUserUseCase = getCurrentUserUseCase
+    }
+
+    func load() async {
+        state = .loading
+        do {
+            let summary = try await getHomeSummaryUseCase.execute()
+            let user = try await getCurrentUserUseCase.execute()
+            state = .loaded(HomeContent(greeting: greeting(for: user), summary: summary))
+        } catch {
+            state = .failed("Unable to load home. Please try again.")
+        }
+    }
+
+    private func greeting(for user: User?) -> String {
+        guard let user else { return "Welcome to barns" }
+        return "Welcome back, \(user.displayName)"
     }
 }
 
-struct HomeUiState: Equatable {
-    let title: String
-    let message: String
+enum HomeUiState: Equatable {
+    case loading
+    case loaded(HomeContent)
+    case failed(String)
+}
 
-    static let placeholder = HomeUiState(
-        title: "After-sales care starts here",
-        message: "Your registered greenery, care reminders, and phone consultation guidance will appear here."
-    )
+struct HomeContent: Equatable {
+    let greeting: String
+    let summary: HomeSummary
 }
