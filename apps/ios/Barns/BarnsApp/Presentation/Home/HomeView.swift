@@ -39,7 +39,11 @@ struct HomeView: View {
                     } label: {
                         LabeledContent("My Items", value: "\(content.summary.registeredItemCount)")
                     }
-                    LabeledContent("Next care", value: content.summary.nextCareLabel)
+                    NavigationLink {
+                        CareView(viewModel: container.makeCareViewModel(), container: container)
+                    } label: {
+                        LabeledContent("Next care", value: content.summary.nextCareLabel)
+                    }
                 }
                 Section("Explore") {
                     Text(content.summary.patternsEntryLabel)
