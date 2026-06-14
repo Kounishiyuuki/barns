@@ -1,0 +1,23 @@
+[
+  {
+    "id": "cat-wall-green",
+    "name": "壁面緑化",
+    "description": "屋内外の壁面を植物やグリーン素材で演出するカテゴリ。",
+    "colorHex": "#1F4D3A",
+    "imageUrl": null
+  },
+  {
+    "id": "cat-interior-green",
+    "name": "インテリアグリーン",
+    "description": "室内空間に置く鉢植えや装飾グリーン。",
+    "colorHex": "#6F8F72",
+    "imageUrl": null
+  },
+  {
+    "id": "cat-maintenance-supply",
+    "name": "メンテナンス用品",
+    "description": "日常の手入れや清掃に使う関連用品。",
+    "colorHex": "#A98B61",
+    "imageUrl": null
+  }
+]

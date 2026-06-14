@@ -1,0 +1,20 @@
+[
+  {
+    "id": "pattern-calm-grid",
+    "name": "落ち着いたグリッド配置",
+    "recommendedSpace": "受付、会議室、リビング",
+    "mood": "整然、上質、静か",
+    "maintenanceLevel": "standard",
+    "description": "深いグリーンを基調に、直線的な配置で落ち着いた印象を作るパターン。",
+    "imageUrl": null
+  },
+  {
+    "id": "pattern-natural-flow",
+    "name": "自然な流れのミックス配置",
+    "recommendedSpace": "店舗、サロン、共有スペース",
+    "mood": "自然、柔らかい、親しみ",
+    "maintenanceLevel": "medium",
+    "description": "葉の形や色味に変化を持たせ、自然な奥行きを感じさせるパターン。",
+    "imageUrl": null
+  }
+]

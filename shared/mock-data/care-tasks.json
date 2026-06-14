@@ -1,0 +1,24 @@
+[
+  {
+    "id": "task-001",
+    "productItemId": "item-wall-green-001",
+    "title": "壁面グリーンのほこり確認",
+    "careType": "cleaning",
+    "dueDate": "2026-06-20",
+    "repeatRule": "monthly",
+    "status": "pending",
+    "reminderEnabled": true,
+    "imageUrl": null
+  },
+  {
+    "id": "task-002",
+    "productItemId": "item-interior-green-001",
+    "title": "土の乾き具合を確認",
+    "careType": "watering",
+    "dueDate": "2026-06-18",
+    "repeatRule": "weekly",
+    "status": "pending",
+    "reminderEnabled": true,
+    "imageUrl": null
+  }
+]

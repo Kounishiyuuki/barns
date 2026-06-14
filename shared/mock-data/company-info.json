@@ -1,0 +1,11 @@
+{
+  "id": "company-info-default",
+  "displayName": "barns support",
+  "description": "壁面緑化・インテリアグリーンの購入後サポート窓口です。",
+  "inquiryPolicy": "MVPでは外部問い合わせを電話相談へ誘導します。実電話番号は本リポジトリに含めず、リリース前に会社承認済みの設定値から差し込みます。",
+  "phoneLabel": "電話で相談する",
+  "phoneNumber": null,
+  "address": null,
+  "businessHoursNote": "営業時間は会社確認後に設定します。",
+  "imageUrl": null
+}

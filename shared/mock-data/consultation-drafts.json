@@ -1,0 +1,14 @@
+[
+  {
+    "id": "draft-001",
+    "productItemId": "item-wall-green-001",
+    "topic": "壁面グリーンの一部の浮きが気になる",
+    "category": "maintenance",
+    "urgency": "normal",
+    "body": "右下付近の一部が少し浮いて見える。いつ頃からかは不明。電話相談時に確認したい。",
+    "status": "draft",
+    "createdAt": "2026-06-12T11:00:00+09:00",
+    "updatedAt": "2026-06-12T11:00:00+09:00",
+    "imageUrl": null
+  }
+]

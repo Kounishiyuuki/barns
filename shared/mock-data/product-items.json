@@ -1,0 +1,28 @@
+[
+  {
+    "id": "item-wall-green-001",
+    "categoryId": "cat-wall-green",
+    "name": "リビング壁面グリーン",
+    "type": "installed",
+    "installedOrPurchasedAt": "2026-04-10",
+    "locationLabel": "リビング壁面",
+    "status": "active",
+    "careGuideIds": ["guide-wall-green-basic", "guide-cleaning-basic"],
+    "notes": "直射日光と空調の風が長時間当たらないように確認する。",
+    "imageUrl": null,
+    "updatedAt": "2026-06-01T09:00:00+09:00"
+  },
+  {
+    "id": "item-interior-green-001",
+    "categoryId": "cat-interior-green",
+    "name": "受付スペース グリーン",
+    "type": "purchased",
+    "installedOrPurchasedAt": "2026-05-05",
+    "locationLabel": "受付カウンター横",
+    "status": "active",
+    "careGuideIds": ["guide-watering-basic"],
+    "notes": "葉の乾燥が目立つ場合は設置場所の湿度を確認する。",
+    "imageUrl": null,
+    "updatedAt": "2026-06-03T10:30:00+09:00"
+  }
+]

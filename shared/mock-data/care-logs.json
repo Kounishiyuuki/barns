@@ -1,0 +1,20 @@
+[
+  {
+    "id": "log-001",
+    "productItemId": "item-wall-green-001",
+    "careTaskId": "task-001",
+    "careType": "cleaning",
+    "performedAt": "2026-05-20T14:00:00+09:00",
+    "memo": "表面のほこりを柔らかいクロスで軽く拭き取った。",
+    "imageUrl": null
+  },
+  {
+    "id": "log-002",
+    "productItemId": "item-interior-green-001",
+    "careTaskId": "task-002",
+    "careType": "watering",
+    "performedAt": "2026-06-10T09:30:00+09:00",
+    "memo": "土の表面が乾いていたため少量の水を与えた。",
+    "imageUrl": null
+  }
+]
