@@ -1,0 +1,14 @@
+{
+  "name": "barns-mock-api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Lightweight read-only mock API server for the barns MVP. Serves static support data only.",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node --test"
+  }
+}
