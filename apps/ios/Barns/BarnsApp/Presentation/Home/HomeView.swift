@@ -46,10 +46,18 @@ struct HomeView: View {
                     }
                 }
                 Section("Explore") {
-                    Text(content.summary.patternsEntryLabel)
+                    NavigationLink {
+                        PatternListView(viewModel: container.makePatternListViewModel(), container: container)
+                    } label: {
+                        Text(content.summary.patternsEntryLabel)
+                    }
                 }
                 Section("Support") {
-                    Text(content.summary.supportGuidance)
+                    NavigationLink {
+                        SupportView(viewModel: container.makeSupportViewModel(), container: container)
+                    } label: {
+                        Text(content.summary.supportGuidance)
+                    }
                 }
             }
         }

@@ -3,17 +3,26 @@ struct DependencyContainer {
     private let homeRepository: HomeRepository
     private let productItemRepository: ProductItemRepository
     private let careRepository: CareRepository
+    private let patternRepository: PatternRepository
+    private let supportRepository: SupportRepository
+    private let consultationDraftRepository: ConsultationDraftRepository
 
     init(
         authRepository: AuthRepository = MockAuthRepository(),
         homeRepository: HomeRepository = MockHomeRepository(),
         productItemRepository: ProductItemRepository = MockProductItemRepository(),
-        careRepository: CareRepository = MockCareRepository()
+        careRepository: CareRepository = MockCareRepository(),
+        patternRepository: PatternRepository = MockPatternRepository(),
+        supportRepository: SupportRepository = MockSupportRepository(),
+        consultationDraftRepository: ConsultationDraftRepository = MockConsultationDraftRepository()
     ) {
         self.authRepository = authRepository
         self.homeRepository = homeRepository
         self.productItemRepository = productItemRepository
         self.careRepository = careRepository
+        self.patternRepository = patternRepository
+        self.supportRepository = supportRepository
+        self.consultationDraftRepository = consultationDraftRepository
     }
 
     @MainActor
@@ -68,6 +77,43 @@ struct DependencyContainer {
             taskId: taskId,
             getCareTaskDetailUseCase: GetCareTaskDetailUseCase(repository: careRepository),
             completeCareTaskUseCase: CompleteCareTaskUseCase(repository: careRepository)
+        )
+    }
+
+    @MainActor
+    func makePatternListViewModel() -> PatternListViewModel {
+        PatternListViewModel(
+            getPatternsUseCase: GetPatternsUseCase(repository: patternRepository)
+        )
+    }
+
+    @MainActor
+    func makePatternDetailViewModel(patternId: WallGreenPattern.ID) -> PatternDetailViewModel {
+        PatternDetailViewModel(
+            patternId: patternId,
+            getPatternDetailUseCase: GetPatternDetailUseCase(repository: patternRepository)
+        )
+    }
+
+    @MainActor
+    func makeSupportViewModel() -> SupportViewModel {
+        SupportViewModel(
+            getSupportInfoUseCase: GetSupportInfoUseCase(repository: supportRepository)
+        )
+    }
+
+    @MainActor
+    func makePhoneInquiryViewModel() -> PhoneInquiryViewModel {
+        PhoneInquiryViewModel(
+            getSupportInfoUseCase: GetSupportInfoUseCase(repository: supportRepository)
+        )
+    }
+
+    @MainActor
+    func makeConsultationDraftViewModel() -> ConsultationDraftViewModel {
+        ConsultationDraftViewModel(
+            getConsultationDraftUseCase: GetConsultationDraftUseCase(repository: consultationDraftRepository),
+            saveConsultationDraftUseCase: SaveConsultationDraftUseCase(repository: consultationDraftRepository)
         )
     }
 }
