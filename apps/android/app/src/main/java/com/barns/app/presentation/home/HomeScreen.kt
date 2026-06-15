@@ -1,5 +1,6 @@
 package com.barns.app.presentation.home
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,7 +22,10 @@ import androidx.compose.ui.unit.dp
  * Home screen. Source skeleton: renders the MVP summary state.
  */
 @Composable
-fun HomeScreen(viewModel: HomeViewModel) {
+fun HomeScreen(
+    viewModel: HomeViewModel,
+    onOpenMyItems: () -> Unit = {},
+) {
     val state by viewModel.state.collectAsState()
 
     LaunchedEffect(viewModel) {
@@ -52,6 +56,7 @@ fun HomeScreen(viewModel: HomeViewModel) {
                 Text(text = content.greeting, style = MaterialTheme.typography.titleLarge)
                 Text(text = content.summary.welcomeMessage, style = MaterialTheme.typography.bodyMedium)
                 ListItem(
+                    modifier = Modifier.clickable { onOpenMyItems() },
                     headlineContent = { Text("Registered items") },
                     supportingContent = { Text(content.summary.registeredItemCount.toString()) },
                 )
