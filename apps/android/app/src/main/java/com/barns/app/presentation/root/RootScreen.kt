@@ -10,11 +10,13 @@ import androidx.compose.runtime.setValue
 import com.barns.app.app.DependencyContainer
 import com.barns.app.presentation.auth.AuthScreen
 import com.barns.app.presentation.auth.AuthViewModel
+import com.barns.app.presentation.care.CareScreen
 import com.barns.app.presentation.home.HomeScreen
 import com.barns.app.presentation.myitems.MyItemsScreen
 
 /**
- * Composition root. Gates the source skeleton behind a mock guest sign-in.
+ * Composition root. Gates the source skeleton behind a mock guest sign-in,
+ * then routes between the home destinations with minimal manual navigation.
  */
 @Composable
 fun RootScreen(
@@ -28,14 +30,26 @@ fun RootScreen(
     }
 
     if (authState is AuthViewModel.State.Authenticated) {
-        var showMyItems by remember { mutableStateOf(false) }
-        if (showMyItems) {
-            MyItemsScreen(container = container, onBack = { showMyItems = false })
-        } else {
-            val homeViewModel = remember(container) { container.makeHomeViewModel() }
-            HomeScreen(viewModel = homeViewModel, onOpenMyItems = { showMyItems = true })
+        var route by remember { mutableStateOf<RootRoute>(RootRoute.Home) }
+        when (route) {
+            RootRoute.MyItems -> MyItemsScreen(container = container, onBack = { route = RootRoute.Home })
+            RootRoute.Care -> CareScreen(container = container, onBack = { route = RootRoute.Home })
+            RootRoute.Home -> {
+                val homeViewModel = remember(container) { container.makeHomeViewModel() }
+                HomeScreen(
+                    viewModel = homeViewModel,
+                    onOpenMyItems = { route = RootRoute.MyItems },
+                    onOpenCare = { route = RootRoute.Care },
+                )
+            }
         }
     } else {
         AuthScreen(viewModel = authViewModel)
     }
+}
+
+private sealed interface RootRoute {
+    data object Home : RootRoute
+    data object MyItems : RootRoute
+    data object Care : RootRoute
 }
