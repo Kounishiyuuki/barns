@@ -2,7 +2,13 @@ import Combine
 
 @MainActor
 final class HomeViewModel: ObservableObject {
-    @Published private(set) var state: HomeUiState = .loading
+    enum State: Equatable {
+        case loading
+        case loaded(HomeContent)
+        case failed(String)
+    }
+
+    @Published private(set) var state: State = .loading
 
     private let getHomeSummaryUseCase: GetHomeSummaryUseCase
     private let getCurrentUserUseCase: GetCurrentUserUseCase
@@ -30,12 +36,6 @@ final class HomeViewModel: ObservableObject {
         guard let user else { return "Welcome to barns" }
         return "Welcome back, \(user.displayName)"
     }
-}
-
-enum HomeUiState: Equatable {
-    case loading
-    case loaded(HomeContent)
-    case failed(String)
 }
 
 struct HomeContent: Equatable {
