@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 fun HomeScreen(
     viewModel: HomeViewModel,
     onOpenMyItems: () -> Unit = {},
+    onOpenCare: () -> Unit = {},
 ) {
     val state by viewModel.state.collectAsState()
 
@@ -61,6 +62,7 @@ fun HomeScreen(
                     supportingContent = { Text(content.summary.registeredItemCount.toString()) },
                 )
                 ListItem(
+                    modifier = Modifier.clickable { onOpenCare() },
                     headlineContent = { Text("Next care") },
                     supportingContent = { Text(content.summary.nextCareLabel) },
                 )
