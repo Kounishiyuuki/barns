@@ -1,0 +1,8 @@
+# Gradle / Android Studio generated and user-specific files (project itself stays tracked)
+.gradle/
+build/
+.idea/
+*.iml
+local.properties
+captures/
+.cxx/
