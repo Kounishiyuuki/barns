@@ -1,0 +1,29 @@
+name: iOS CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build (iOS Simulator)
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: List project
+        run: xcodebuild -list -project apps/ios/Barns/Barns.xcodeproj
+
+      - name: Build for iOS Simulator
+        run: >
+          xcodebuild
+          -project apps/ios/Barns/Barns.xcodeproj
+          -scheme Barns
+          -destination 'generic/platform=iOS Simulator'
+          -configuration Debug
+          CODE_SIGNING_ALLOWED=NO
+          build
