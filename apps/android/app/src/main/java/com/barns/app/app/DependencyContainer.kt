@@ -25,6 +25,22 @@ import com.barns.app.presentation.home.HomeViewModel
 import com.barns.app.presentation.myitems.AddItemViewModel
 import com.barns.app.presentation.myitems.ItemDetailViewModel
 import com.barns.app.presentation.myitems.MyItemsViewModel
+import com.barns.app.data.repository.MockConsultationDraftRepository
+import com.barns.app.data.repository.MockPatternRepository
+import com.barns.app.data.repository.MockSupportRepository
+import com.barns.app.domain.repository.ConsultationDraftRepository
+import com.barns.app.domain.repository.PatternRepository
+import com.barns.app.domain.repository.SupportRepository
+import com.barns.app.domain.usecase.patterns.GetPatternDetailUseCase
+import com.barns.app.domain.usecase.patterns.GetPatternsUseCase
+import com.barns.app.domain.usecase.support.GetConsultationDraftUseCase
+import com.barns.app.domain.usecase.support.GetSupportInfoUseCase
+import com.barns.app.domain.usecase.support.SaveConsultationDraftUseCase
+import com.barns.app.presentation.patterns.PatternDetailViewModel
+import com.barns.app.presentation.patterns.PatternListViewModel
+import com.barns.app.presentation.support.ConsultationDraftViewModel
+import com.barns.app.presentation.support.PhoneInquiryViewModel
+import com.barns.app.presentation.support.SupportViewModel
 
 /**
  * Minimal manual dependency container for the source skeleton. Mirrors the
@@ -36,6 +52,9 @@ class DependencyContainer(
     private val homeRepository: HomeRepository = MockHomeRepository(),
     private val productItemRepository: ProductItemRepository = MockProductItemRepository(),
     private val careRepository: CareRepository = MockCareRepository(),
+    private val patternRepository: PatternRepository = MockPatternRepository(),
+    private val supportRepository: SupportRepository = MockSupportRepository(),
+    private val consultationDraftRepository: ConsultationDraftRepository = MockConsultationDraftRepository(),
 ) {
     fun makeAuthViewModel(): AuthViewModel =
         AuthViewModel(
@@ -76,5 +95,32 @@ class DependencyContainer(
             taskId = taskId,
             getCareTaskDetailUseCase = GetCareTaskDetailUseCase(careRepository),
             completeCareTaskUseCase = CompleteCareTaskUseCase(careRepository),
+        )
+
+    fun makePatternListViewModel(): PatternListViewModel =
+        PatternListViewModel(
+            getPatternsUseCase = GetPatternsUseCase(patternRepository),
+        )
+
+    fun makePatternDetailViewModel(patternId: String): PatternDetailViewModel =
+        PatternDetailViewModel(
+            patternId = patternId,
+            getPatternDetailUseCase = GetPatternDetailUseCase(patternRepository),
+        )
+
+    fun makeSupportViewModel(): SupportViewModel =
+        SupportViewModel(
+            getSupportInfoUseCase = GetSupportInfoUseCase(supportRepository),
+        )
+
+    fun makePhoneInquiryViewModel(): PhoneInquiryViewModel =
+        PhoneInquiryViewModel(
+            getSupportInfoUseCase = GetSupportInfoUseCase(supportRepository),
+        )
+
+    fun makeConsultationDraftViewModel(): ConsultationDraftViewModel =
+        ConsultationDraftViewModel(
+            getConsultationDraftUseCase = GetConsultationDraftUseCase(consultationDraftRepository),
+            saveConsultationDraftUseCase = SaveConsultationDraftUseCase(consultationDraftRepository),
         )
 }

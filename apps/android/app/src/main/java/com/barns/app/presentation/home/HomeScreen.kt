@@ -26,6 +26,8 @@ fun HomeScreen(
     viewModel: HomeViewModel,
     onOpenMyItems: () -> Unit = {},
     onOpenCare: () -> Unit = {},
+    onOpenPatterns: () -> Unit = {},
+    onOpenSupport: () -> Unit = {},
 ) {
     val state by viewModel.state.collectAsState()
 
@@ -67,10 +69,12 @@ fun HomeScreen(
                     supportingContent = { Text(content.summary.nextCareLabel) },
                 )
                 ListItem(
+                    modifier = Modifier.clickable { onOpenPatterns() },
                     headlineContent = { Text("Patterns") },
                     supportingContent = { Text(content.summary.patternsEntryLabel) },
                 )
                 ListItem(
+                    modifier = Modifier.clickable { onOpenSupport() },
                     headlineContent = { Text("Support") },
                     supportingContent = { Text(content.summary.supportGuidance) },
                 )

@@ -13,6 +13,8 @@ import com.barns.app.presentation.auth.AuthViewModel
 import com.barns.app.presentation.care.CareScreen
 import com.barns.app.presentation.home.HomeScreen
 import com.barns.app.presentation.myitems.MyItemsScreen
+import com.barns.app.presentation.patterns.PatternListScreen
+import com.barns.app.presentation.support.SupportScreen
 
 /**
  * Composition root. Gates the source skeleton behind a mock guest sign-in,
@@ -34,12 +36,16 @@ fun RootScreen(
         when (route) {
             RootRoute.MyItems -> MyItemsScreen(container = container, onBack = { route = RootRoute.Home })
             RootRoute.Care -> CareScreen(container = container, onBack = { route = RootRoute.Home })
+            RootRoute.Patterns -> PatternListScreen(container = container, onBack = { route = RootRoute.Home })
+            RootRoute.Support -> SupportScreen(container = container, onBack = { route = RootRoute.Home })
             RootRoute.Home -> {
                 val homeViewModel = remember(container) { container.makeHomeViewModel() }
                 HomeScreen(
                     viewModel = homeViewModel,
                     onOpenMyItems = { route = RootRoute.MyItems },
                     onOpenCare = { route = RootRoute.Care },
+                    onOpenPatterns = { route = RootRoute.Patterns },
+                    onOpenSupport = { route = RootRoute.Support },
                 )
             }
         }
@@ -52,4 +58,6 @@ private sealed interface RootRoute {
     data object Home : RootRoute
     data object MyItems : RootRoute
     data object Care : RootRoute
+    data object Patterns : RootRoute
+    data object Support : RootRoute
 }
