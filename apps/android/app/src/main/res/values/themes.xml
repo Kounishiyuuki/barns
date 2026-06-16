@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Minimal framework theme (NoActionBar) for a Compose host activity.
+         Uses a platform theme to avoid extra UI dependencies. -->
+    <style name="Theme.Barns" parent="android:Theme.Material.Light.NoActionBar" />
+</resources>
