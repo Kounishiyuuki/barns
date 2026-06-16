@@ -1,0 +1,5 @@
+# Xcode user-specific and build output (keep the project itself tracked)
+xcuserdata/
+*.xcuserstate
+build/
+DerivedData/
