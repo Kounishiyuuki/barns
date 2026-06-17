@@ -9,14 +9,17 @@ permissions:
   contents: read
 
 jobs:
-  build:
-    name: Build (iOS Simulator)
+  build-test:
+    name: Build & Test (iOS Simulator)
     runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
 
       - name: List project
         run: xcodebuild -list -project apps/ios/Barns/Barns.xcodeproj
+
+      - name: List available simulators
+        run: xcrun simctl list devices available
 
       - name: Build for iOS Simulator
         run: >
@@ -27,3 +30,13 @@ jobs:
           -configuration Debug
           CODE_SIGNING_ALLOWED=NO
           build
+
+      - name: Run BarnsTests smoke tests
+        run: >
+          xcodebuild
+          -project apps/ios/Barns/Barns.xcodeproj
+          -scheme Barns
+          -destination 'platform=iOS Simulator,name=iPhone 16'
+          -configuration Debug
+          CODE_SIGNING_ALLOWED=NO
+          test
