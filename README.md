@@ -49,6 +49,7 @@ barns/
 
 ## ドキュメント
 
+- [開発セットアップ](docs/development_setup.md)
 - [プロジェクト概要](docs/00_project_overview.md)
 - [要件定義](docs/01_requirements.md)
 - [UI画面設計](docs/02_ui_screen_design.md)
