@@ -59,6 +59,13 @@ struct HomeView: View {
                         Text(content.summary.supportGuidance)
                     }
                 }
+                Section("More") {
+                    NavigationLink {
+                        SettingsView(viewModel: container.makeSettingsViewModel())
+                    } label: {
+                        Text("Settings")
+                    }
+                }
             }
         }
     }
