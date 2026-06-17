@@ -30,5 +30,8 @@ jobs:
       - name: List tasks
         run: ./gradlew tasks
 
+      - name: Run unit tests
+        run: ./gradlew testDebugUnitTest
+
       - name: Assemble debug
         run: ./gradlew assembleDebug
