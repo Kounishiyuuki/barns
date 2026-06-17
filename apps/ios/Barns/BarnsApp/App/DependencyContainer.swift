@@ -110,6 +110,11 @@ struct DependencyContainer {
     }
 
     @MainActor
+    func makeSettingsViewModel() -> SettingsViewModel {
+        SettingsViewModel()
+    }
+
+    @MainActor
     func makeConsultationDraftViewModel() -> ConsultationDraftViewModel {
         ConsultationDraftViewModel(
             getConsultationDraftUseCase: GetConsultationDraftUseCase(repository: consultationDraftRepository),
