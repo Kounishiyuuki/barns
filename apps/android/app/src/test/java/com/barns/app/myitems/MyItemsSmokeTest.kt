@@ -6,6 +6,7 @@ import com.barns.app.domain.model.ProductItemStatus
 import com.barns.app.domain.model.ProductItemType
 import com.barns.app.domain.usecase.myitems.AddProductItemUseCase
 import com.barns.app.domain.usecase.myitems.GetProductItemsUseCase
+import com.barns.app.presentation.myitems.AddItemViewModel
 import com.barns.app.presentation.myitems.ProductItemPresentation
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
@@ -49,6 +50,42 @@ class MyItemsSmokeTest {
         assertTrue(after.any { it.id == created.id })
         // Image fields stay optional for the MVP.
         assertNull(created.imageUrl)
+    }
+
+    @Test
+    fun registerInstalledGreenerySetsType() = runTest {
+        val repository = MockProductItemRepository()
+        val addItem = AddProductItemUseCase(repository)
+
+        val registered = addItem.execute(
+            name = "Lobby wall greenery",
+            categoryId = "cat-wall-green",
+            type = ProductItemType.INSTALLED,
+            locationLabel = "Entrance wall",
+            notes = null,
+        )
+
+        assertEquals(ProductItemType.INSTALLED, registered.type)
+        // Newly registered greenery is active and local-only.
+        assertEquals(ProductItemStatus.ACTIVE, registered.status)
+        assertNull(registered.imageUrl)
+    }
+
+    @Test
+    fun addItemViewModelDefaultsToInstalledAndTracksInput() {
+        val repository = MockProductItemRepository()
+        val viewModel = AddItemViewModel(AddProductItemUseCase(repository))
+
+        // Registration framing: installed greenery is the default type.
+        assertEquals(ProductItemType.INSTALLED, viewModel.state.value.type)
+        assertFalse(viewModel.state.value.canSave)
+
+        viewModel.onNameChange("Window planter")
+        viewModel.onTypeChange(ProductItemType.PURCHASED)
+
+        assertTrue(viewModel.state.value.canSave)
+        assertEquals("Window planter", viewModel.state.value.name)
+        assertEquals(ProductItemType.PURCHASED, viewModel.state.value.type)
     }
 
     @Test
