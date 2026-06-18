@@ -12,7 +12,7 @@ struct MyItemsView: View {
 
     var body: some View {
         content
-            .navigationTitle("My Items")
+            .navigationTitle("My Greenery")
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button {
@@ -41,28 +41,49 @@ struct MyItemsView: View {
         case .loaded(let items):
             if items.isEmpty {
                 ContentUnavailableView(
-                    "No items yet",
+                    "Register your greenery",
                     systemImage: "leaf",
-                    description: Text("Your registered greenery will appear here.")
+                    description: Text("Add the wall greening and interior green you own or had installed to keep their care and support in one place.")
                 )
             } else {
-                List(items) { item in
-                    NavigationLink {
-                        ItemDetailView(viewModel: container.makeItemDetailViewModel(itemId: item.id))
-                    } label: {
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text(item.name)
-                                .font(.headline)
-                            if let location = item.locationLabel {
-                                Text(location)
-                                    .font(.subheadline)
-                                    .foregroundStyle(.secondary)
+                List {
+                    Section {
+                        ForEach(items) { item in
+                            let display = ProductItemPresentation(item: item)
+                            NavigationLink {
+                                ItemDetailView(viewModel: container.makeItemDetailViewModel(itemId: item.id))
+                            } label: {
+                                itemCard(display)
                             }
                         }
+                    } footer: {
+                        Text("Your greenery registry stays on this device.")
                     }
                 }
             }
         }
+    }
+
+    @ViewBuilder
+    private func itemCard(_ display: ProductItemPresentation) -> some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(display.name)
+                .font(.headline)
+            Text(display.ownershipSummary)
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+            HStack(spacing: 6) {
+                Label(display.categoryLabel, systemImage: "leaf")
+                Text("·")
+                Label(display.locationLabel, systemImage: "mappin.and.ellipse")
+            }
+            .font(.caption)
+            .foregroundStyle(.secondary)
+            Text(display.careStatusLabel)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        }
+        .padding(.vertical, 2)
     }
 }
 
