@@ -2,6 +2,7 @@ package com.barns.app.presentation.myitems
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.barns.app.domain.model.ProductItemType
 import com.barns.app.domain.usecase.myitems.AddProductItemUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -30,6 +31,10 @@ class AddItemViewModel(
         _state.value = _state.value.copy(notes = value)
     }
 
+    fun onTypeChange(value: ProductItemType) {
+        _state.value = _state.value.copy(type = value)
+    }
+
     /** Adds the item locally and invokes [onSaved] on success. */
     fun save(onSaved: () -> Unit) {
         val current = _state.value
@@ -40,6 +45,7 @@ class AddItemViewModel(
                 addProductItemUseCase.execute(
                     name = current.name.trim(),
                     categoryId = categoryId,
+                    type = current.type,
                     locationLabel = current.locationLabel.trim().ifBlank { null },
                     notes = current.notes.trim().ifBlank { null },
                 )
@@ -60,6 +66,8 @@ class AddItemViewModel(
 
 data class AddItemUiState(
     val name: String = "",
+    // Registering installed greenery is the primary flow, so default to it.
+    val type: ProductItemType = ProductItemType.INSTALLED,
     val locationLabel: String = "",
     val notes: String = "",
     val isSaving: Boolean = false,

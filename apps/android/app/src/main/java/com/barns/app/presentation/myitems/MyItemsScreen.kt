@@ -83,7 +83,7 @@ private fun MyItemsListScreen(
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             TextButton(onClick = onBack) { Text("Back") }
-            Button(onClick = onAddClick) { Text("Add item") }
+            Button(onClick = onAddClick) { Text("Register greenery") }
         }
         Text(
             text = "My Greenery",

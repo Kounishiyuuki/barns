@@ -17,6 +17,7 @@ class AddProductItemUseCase(
     suspend fun execute(
         name: String,
         categoryId: String,
+        type: ProductItemType = ProductItemType.PURCHASED,
         locationLabel: String?,
         notes: String?,
     ): ProductItem {
@@ -24,7 +25,7 @@ class AddProductItemUseCase(
             id = UUID.randomUUID().toString(),
             categoryId = categoryId,
             name = name,
-            type = ProductItemType.PURCHASED,
+            type = type,
             installedOrPurchasedAt = null,
             locationLabel = locationLabel,
             status = ProductItemStatus.ACTIVE,
