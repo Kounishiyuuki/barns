@@ -28,6 +28,7 @@ fun HomeScreen(
     onOpenCare: () -> Unit = {},
     onOpenPatterns: () -> Unit = {},
     onOpenSupport: () -> Unit = {},
+    onOpenSettings: () -> Unit = {},
 ) {
     val state by viewModel.state.collectAsState()
 
@@ -77,6 +78,11 @@ fun HomeScreen(
                     modifier = Modifier.clickable { onOpenSupport() },
                     headlineContent = { Text("Support") },
                     supportingContent = { Text(content.summary.supportGuidance) },
+                )
+                ListItem(
+                    modifier = Modifier.clickable { onOpenSettings() },
+                    headlineContent = { Text("Settings") },
+                    supportingContent = { Text("App status and guardrails") },
                 )
             }
         }
