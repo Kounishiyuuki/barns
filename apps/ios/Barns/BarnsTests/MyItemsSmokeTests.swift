@@ -32,6 +32,47 @@ final class MyItemsSmokeTests: XCTestCase {
         XCTAssertNil(added.imageUrl)
     }
 
+    func testRegisterInstalledGreenerySetsType() async throws {
+        let repository = MockProductItemRepository()
+        let addItem = AddProductItemUseCase(repository: repository)
+
+        let registered = try await addItem.execute(
+            name: "Lobby wall greenery",
+            categoryId: "cat-wall-green",
+            type: .installed,
+            locationLabel: "Entrance wall",
+            notes: nil
+        )
+
+        XCTAssertEqual(registered.type, .installed)
+        // Newly registered greenery is active and local-only (no image, no remote id).
+        XCTAssertEqual(registered.status, .active)
+        XCTAssertNil(registered.imageUrl)
+    }
+
+    @MainActor
+    func testAddItemViewModelDefaultsToInstalledAndRegisters() async throws {
+        let repository = MockProductItemRepository()
+        let viewModel = AddItemViewModel(
+            addProductItemUseCase: AddProductItemUseCase(repository: repository)
+        )
+
+        // Registration framing: installed greenery is the default type.
+        XCTAssertEqual(viewModel.type, .installed)
+
+        let getItems = GetProductItemsUseCase(repository: repository)
+        let before = try await getItems.execute().count
+
+        viewModel.name = "Window planter"
+        XCTAssertTrue(viewModel.canSave)
+        let saved = await viewModel.save()
+
+        XCTAssertTrue(saved)
+        let after = try await getItems.execute()
+        XCTAssertEqual(after.count, before + 1)
+        XCTAssertTrue(after.contains { $0.name == "Window planter" && $0.type == .installed })
+    }
+
     @MainActor
     func testInstalledItemPresentationFramesOwnershipAndSupport() {
         let item = ProductItem(

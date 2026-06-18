@@ -12,6 +12,7 @@ struct AddProductItemUseCase {
     func execute(
         name: String,
         categoryId: String,
+        type: ProductItemType = .purchased,
         locationLabel: String?,
         notes: String?
     ) async throws -> ProductItem {
@@ -19,7 +20,7 @@ struct AddProductItemUseCase {
             id: UUID().uuidString,
             categoryId: categoryId,
             name: name,
-            type: .purchased,
+            type: type,
             installedOrPurchasedAt: nil,
             locationLabel: locationLabel,
             status: .active,

@@ -10,12 +10,31 @@ struct AddItemView: View {
 
     var body: some View {
         Form {
-            Section("Item") {
-                TextField("Name", text: $viewModel.name)
-                TextField("Installed place", text: $viewModel.locationLabel)
+            Section {
+                TextField("Greenery name", text: $viewModel.name)
+                Picker("Registration type", selection: $viewModel.type) {
+                    Text("Installed greenery").tag(ProductItemType.installed)
+                    Text("Owned greenery").tag(ProductItemType.purchased)
+                }
+            } header: {
+                Text("Greenery")
+            } footer: {
+                Text("Register the wall greening or interior green you own or had installed.")
+            }
+            Section {
+                TextField("Installation or placement", text: $viewModel.locationLabel)
+            } header: {
+                Text("Where it lives")
+            } footer: {
+                Text("For example, the room or wall where this greenery is placed.")
             }
             Section("Memo") {
-                TextField("Memo", text: $viewModel.notes, axis: .vertical)
+                TextField("Notes for your own reference", text: $viewModel.notes, axis: .vertical)
+            }
+            Section {
+                Text("Your registry is kept locally on this device in the current MVP. Care and support guidance stay in one place.")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
             }
             if let errorMessage = viewModel.errorMessage {
                 Text(errorMessage)
@@ -23,13 +42,13 @@ struct AddItemView: View {
                     .font(.footnote)
             }
         }
-        .navigationTitle("Add item")
+        .navigationTitle("Register Greenery")
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
                 Button("Cancel") { dismiss() }
             }
             ToolbarItem(placement: .confirmationAction) {
-                Button("Add") {
+                Button("Register") {
                     Task {
                         if await viewModel.save() { dismiss() }
                     }
