@@ -38,6 +38,7 @@ import com.barns.app.presentation.myitems.ItemDetailViewModel
 import com.barns.app.presentation.myitems.MyItemsViewModel
 import com.barns.app.presentation.patterns.PatternDetailViewModel
 import com.barns.app.presentation.patterns.PatternListViewModel
+import com.barns.app.presentation.settings.SettingsViewModel
 import com.barns.app.presentation.support.ConsultationDraftViewModel
 import com.barns.app.presentation.support.PhoneInquiryViewModel
 import com.barns.app.presentation.support.SupportViewModel
@@ -117,6 +118,8 @@ class DependencyContainer(
         PhoneInquiryViewModel(
             getSupportInfoUseCase = GetSupportInfoUseCase(supportRepository),
         )
+
+    fun makeSettingsViewModel(): SettingsViewModel = SettingsViewModel()
 
     fun makeConsultationDraftViewModel(): ConsultationDraftViewModel =
         ConsultationDraftViewModel(

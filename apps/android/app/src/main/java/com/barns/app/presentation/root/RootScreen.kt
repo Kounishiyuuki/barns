@@ -14,6 +14,7 @@ import com.barns.app.presentation.care.CareScreen
 import com.barns.app.presentation.home.HomeScreen
 import com.barns.app.presentation.myitems.MyItemsScreen
 import com.barns.app.presentation.patterns.PatternListScreen
+import com.barns.app.presentation.settings.SettingsScreen
 import com.barns.app.presentation.support.SupportScreen
 
 /**
@@ -38,6 +39,7 @@ fun RootScreen(
             RootRoute.Care -> CareScreen(container = container, onBack = { route = RootRoute.Home })
             RootRoute.Patterns -> PatternListScreen(container = container, onBack = { route = RootRoute.Home })
             RootRoute.Support -> SupportScreen(container = container, onBack = { route = RootRoute.Home })
+            RootRoute.Settings -> SettingsScreen(container = container, onBack = { route = RootRoute.Home })
             RootRoute.Home -> {
                 val homeViewModel = remember(container) { container.makeHomeViewModel() }
                 HomeScreen(
@@ -46,6 +48,7 @@ fun RootScreen(
                     onOpenCare = { route = RootRoute.Care },
                     onOpenPatterns = { route = RootRoute.Patterns },
                     onOpenSupport = { route = RootRoute.Support },
+                    onOpenSettings = { route = RootRoute.Settings },
                 )
             }
         }
@@ -60,4 +63,5 @@ private sealed interface RootRoute {
     data object Care : RootRoute
     data object Patterns : RootRoute
     data object Support : RootRoute
+    data object Settings : RootRoute
 }
