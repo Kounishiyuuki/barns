@@ -18,7 +18,7 @@ struct MyItemsView: View {
                     Button {
                         isAddingItem = true
                     } label: {
-                        Label("Add item", systemImage: "plus")
+                        Label("Register greenery", systemImage: "plus")
                     }
                 }
             }

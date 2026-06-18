@@ -4,6 +4,8 @@ import Foundation
 @MainActor
 final class AddItemViewModel: ObservableObject {
     @Published var name: String = ""
+    // Registering installed greenery is the primary flow, so default to it.
+    @Published var type: ProductItemType = .installed
     @Published var locationLabel: String = ""
     @Published var notes: String = ""
     @Published private(set) var isSaving: Bool = false
@@ -33,6 +35,7 @@ final class AddItemViewModel: ObservableObject {
             _ = try await addProductItemUseCase.execute(
                 name: name.trimmingCharacters(in: .whitespacesAndNewlines),
                 categoryId: categoryId,
+                type: type,
                 locationLabel: emptyToNil(locationLabel),
                 notes: emptyToNil(notes)
             )
