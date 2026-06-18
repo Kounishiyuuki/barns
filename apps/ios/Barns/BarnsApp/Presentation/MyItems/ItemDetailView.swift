@@ -9,7 +9,8 @@ struct ItemDetailView: View {
 
     var body: some View {
         content
-            .navigationTitle("Item")
+            .navigationTitle("Registered greenery")
+            .navigationBarTitleDisplayMode(.inline)
             .task { await viewModel.load() }
     }
 
@@ -24,12 +25,36 @@ struct ItemDetailView: View {
             Text(message)
                 .foregroundStyle(.secondary)
         case .loaded(let item):
+            let display = ProductItemPresentation(item: item)
             List {
-                LabeledContent("Name", value: item.name)
-                LabeledContent("Category", value: item.categoryId)
-                LabeledContent("Installed place", value: item.locationLabel ?? "—")
-                LabeledContent("Next care", value: "Not scheduled")
-                LabeledContent("Memo", value: item.notes ?? "—")
+                Section("Overview") {
+                    LabeledContent("Name", value: display.name)
+                    LabeledContent("Type", value: display.typeLabel)
+                    LabeledContent("Category", value: display.categoryLabel)
+                    LabeledContent("Installed place", value: display.locationLabel)
+                    LabeledContent("Status", value: display.statusLabel)
+                }
+                Section("Care") {
+                    LabeledContent("Care status", value: display.careStatusLabel)
+                    Text(display.nextActionHint)
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+                Section("Support") {
+                    Text("Need a hand with this greenery? Phone consultation guidance is available from the Support screen.")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+                if let notes = item.notes, !notes.isEmpty {
+                    Section("Memo") {
+                        Text(notes)
+                    }
+                }
+                Section {
+                    Text("This registry is kept locally on your device in the current MVP.")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                }
             }
         }
     }
