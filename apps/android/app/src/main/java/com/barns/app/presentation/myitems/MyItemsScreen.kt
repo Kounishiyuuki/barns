@@ -86,7 +86,7 @@ private fun MyItemsListScreen(
             Button(onClick = onAddClick) { Text("Add item") }
         }
         Text(
-            text = "My Items",
+            text = "My Greenery",
             style = MaterialTheme.typography.titleLarge,
             modifier = Modifier.padding(vertical = 8.dp),
         )
@@ -102,19 +102,43 @@ private fun MyItemsListScreen(
             is MyItemsViewModel.State.Loaded -> {
                 if (current.items.isEmpty()) {
                     Text(
-                        text = "Your registered greenery will appear here.",
+                        text = "Register your greenery",
+                        style = MaterialTheme.typography.titleMedium,
+                        modifier = Modifier.padding(top = 8.dp),
+                    )
+                    Text(
+                        text = "Add the wall greening and interior green you own or had " +
+                            "installed to keep their care and support in one place.",
                         style = MaterialTheme.typography.bodyMedium,
                     )
                 } else {
                     LazyColumn {
                         items(current.items) { item ->
+                            val display = ProductItemPresentation.from(item)
                             ListItem(
                                 modifier = Modifier.clickable { onItemClick(item.id) },
-                                headlineContent = { Text(item.name) },
-                                supportingContent = item.locationLabel?.let { { Text(it) } },
+                                headlineContent = { Text(display.name) },
+                                supportingContent = {
+                                    Column {
+                                        Text(display.ownershipSummary)
+                                        Text(
+                                            text = "${display.categoryLabel} · ${display.locationLabel}",
+                                            style = MaterialTheme.typography.bodySmall,
+                                        )
+                                        Text(
+                                            text = display.careStatusLabel,
+                                            style = MaterialTheme.typography.bodySmall,
+                                        )
+                                    }
+                                },
                             )
                         }
                     }
+                    Text(
+                        text = "Your greenery registry stays on this device.",
+                        style = MaterialTheme.typography.bodySmall,
+                        modifier = Modifier.padding(top = 8.dp),
+                    )
                 }
             }
         }
