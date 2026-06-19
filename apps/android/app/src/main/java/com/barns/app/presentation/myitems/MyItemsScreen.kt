@@ -27,6 +27,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.barns.app.app.DependencyContainer
+import com.barns.app.domain.model.ProductItem
+import com.barns.app.presentation.support.ConsultationDraftScreen
 
 /**
  * My Items host. Owns minimal local navigation between the list, detail,
@@ -53,7 +55,19 @@ fun MyItemsScreen(
             val viewModel = remember(current.itemId) {
                 container.makeItemDetailViewModel(current.itemId)
             }
-            ItemDetailScreen(viewModel = viewModel, onBack = { route = MyItemsRoute.List })
+            ItemDetailScreen(
+                viewModel = viewModel,
+                onBack = { route = MyItemsRoute.List },
+                onPrepareConsultation = { item -> route = MyItemsRoute.Consultation(item) },
+            )
+        }
+        is MyItemsRoute.Consultation -> {
+            val item = current.item
+            val viewModel = remember(item.id) { container.makeConsultationDraftViewModel(item) }
+            ConsultationDraftScreen(
+                viewModel = viewModel,
+                onBack = { route = MyItemsRoute.Detail(item.id) },
+            )
         }
         MyItemsRoute.Add -> {
             val viewModel = remember(container) { container.makeAddItemViewModel() }
@@ -148,5 +162,6 @@ private fun MyItemsListScreen(
 private sealed interface MyItemsRoute {
     data object List : MyItemsRoute
     data class Detail(val itemId: String) : MyItemsRoute
+    data class Consultation(val item: ProductItem) : MyItemsRoute
     data object Add : MyItemsRoute
 }

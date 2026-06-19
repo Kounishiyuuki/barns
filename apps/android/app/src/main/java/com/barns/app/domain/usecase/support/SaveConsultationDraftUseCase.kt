@@ -17,6 +17,7 @@ class SaveConsultationDraftUseCase(
 ) {
     suspend fun execute(
         existing: ConsultationDraft?,
+        productItemId: String? = null,
         topic: String,
         category: ConsultationCategory,
         urgency: ConsultationUrgency,
@@ -25,7 +26,7 @@ class SaveConsultationDraftUseCase(
         val now = Instant.now()
         val draft = ConsultationDraft(
             id = existing?.id ?: UUID.randomUUID().toString(),
-            productItemId = existing?.productItemId,
+            productItemId = existing?.productItemId ?: productItemId,
             topic = topic,
             category = category,
             urgency = urgency,
