@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
@@ -19,11 +20,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.barns.app.domain.model.ProductItem
 
 @Composable
 fun ItemDetailScreen(
     viewModel: ItemDetailViewModel,
     onBack: () -> Unit,
+    onPrepareConsultation: (ProductItem) -> Unit = {},
 ) {
     val state by viewModel.state.collectAsState()
 
@@ -92,10 +95,17 @@ fun ItemDetailScreen(
                 )
 
                 SectionHeader("Support")
+                Button(
+                    onClick = { onPrepareConsultation(item) },
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text("Prepare consultation note")
+                }
                 Text(
-                    text = "Need a hand with this greenery? Phone consultation guidance " +
-                        "is available from the Support screen.",
+                    text = "Gather details about this greenery before contacting support. " +
+                        "Phone consultation guidance is available from the Support screen.",
                     style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.padding(top = 4.dp),
                 )
 
                 item.notes?.takeIf { it.isNotEmpty() }?.let { notes ->

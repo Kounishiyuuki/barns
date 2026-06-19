@@ -5,8 +5,10 @@ import androidx.lifecycle.viewModelScope
 import com.barns.app.domain.model.ConsultationCategory
 import com.barns.app.domain.model.ConsultationDraft
 import com.barns.app.domain.model.ConsultationUrgency
+import com.barns.app.domain.model.ProductItem
 import com.barns.app.domain.usecase.support.GetConsultationDraftUseCase
 import com.barns.app.domain.usecase.support.SaveConsultationDraftUseCase
+import com.barns.app.presentation.myitems.ProductItemPresentation
 import java.time.Instant
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,7 +18,14 @@ import kotlinx.coroutines.launch
 class ConsultationDraftViewModel(
     private val getConsultationDraftUseCase: GetConsultationDraftUseCase,
     private val saveConsultationDraftUseCase: SaveConsultationDraftUseCase,
+    // When the draft is started from a registered greenery item detail, this
+    // holds the item context so the note can be prefilled. Optional so the
+    // general Support draft flow keeps working unchanged.
+    private val item: ProductItem? = null,
 ) : ViewModel() {
+    /** Human-readable name of the registered greenery this note is about. */
+    val itemContextName: String? = item?.name
+
     // Selectable options for the local-only draft form.
     val categories: List<ConsultationCategory> = listOf(
         ConsultationCategory.MAINTENANCE,
@@ -52,6 +61,17 @@ class ConsultationDraftViewModel(
     }
 
     fun load() {
+        // Item-specific note: prefill from the registered greenery context.
+        // Local-only; nothing is submitted anywhere.
+        item?.let { current ->
+            val state = _state.value
+            _state.value = state.copy(
+                topic = if (state.topic.isBlank()) "Consultation: ${current.name}" else state.topic,
+                body = if (state.body.isBlank()) contextSummary(current) else state.body,
+            )
+            return
+        }
+
         viewModelScope.launch {
             val draft = runCatching { getConsultationDraftUseCase.execute() }.getOrNull() ?: return@launch
             existing = draft
@@ -64,6 +84,23 @@ class ConsultationDraftViewModel(
         }
     }
 
+    /**
+     * Builds a local-only context summary from existing item fields so the
+     * user can add their concern below it before contacting support.
+     */
+    private fun contextSummary(item: ProductItem): String {
+        val display = ProductItemPresentation.from(item)
+        return buildString {
+            appendLine("Item: ${display.name}")
+            appendLine("Type: ${display.typeLabel}")
+            appendLine("Category: ${display.categoryLabel}")
+            appendLine("Location: ${display.locationLabel}")
+            appendLine("Status: ${display.statusLabel}")
+            appendLine()
+            append("Concern: ")
+        }
+    }
+
     /** Saves the draft locally only. It is never sent to a server. */
     fun save() {
         val current = _state.value
@@ -73,6 +110,7 @@ class ConsultationDraftViewModel(
             runCatching {
                 saveConsultationDraftUseCase.execute(
                     existing = existing,
+                    productItemId = item?.id,
                     topic = current.topic.trim(),
                     category = current.category,
                     urgency = current.urgency,

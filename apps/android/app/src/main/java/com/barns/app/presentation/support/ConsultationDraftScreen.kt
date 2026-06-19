@@ -44,6 +44,18 @@ fun ConsultationDraftScreen(
         TextButton(onClick = onBack, modifier = Modifier.fillMaxWidth()) { Text("Back") }
         Text("Consultation draft", style = MaterialTheme.typography.titleLarge)
 
+        viewModel.itemContextName?.let { itemName ->
+            Text(
+                text = "For: $itemName",
+                style = MaterialTheme.typography.titleMedium,
+            )
+            Text(
+                text = "Preparing a local support note for this registered greenery. " +
+                    "It stays on your device and is not submitted.",
+                style = MaterialTheme.typography.bodySmall,
+            )
+        }
+
         OutlinedTextField(
             value = state.topic,
             onValueChange = viewModel::onTopicChange,

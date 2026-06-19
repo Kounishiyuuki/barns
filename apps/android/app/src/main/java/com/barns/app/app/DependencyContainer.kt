@@ -7,6 +7,7 @@ import com.barns.app.data.repository.MockHomeRepository
 import com.barns.app.data.repository.MockPatternRepository
 import com.barns.app.data.repository.MockProductItemRepository
 import com.barns.app.data.repository.MockSupportRepository
+import com.barns.app.domain.model.ProductItem
 import com.barns.app.domain.repository.AuthRepository
 import com.barns.app.domain.repository.CareRepository
 import com.barns.app.domain.repository.ConsultationDraftRepository
@@ -121,9 +122,10 @@ class DependencyContainer(
 
     fun makeSettingsViewModel(): SettingsViewModel = SettingsViewModel()
 
-    fun makeConsultationDraftViewModel(): ConsultationDraftViewModel =
+    fun makeConsultationDraftViewModel(item: ProductItem? = null): ConsultationDraftViewModel =
         ConsultationDraftViewModel(
             getConsultationDraftUseCase = GetConsultationDraftUseCase(consultationDraftRepository),
             saveConsultationDraftUseCase = SaveConsultationDraftUseCase(consultationDraftRepository),
+            item = item,
         )
 }
