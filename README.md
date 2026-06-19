@@ -60,3 +60,4 @@ barns/
 - [会社確認事項](docs/07_company_questions.md)
 - [法務・リリース・運用](docs/08_legal_release_operation.md)
 - [アーキテクチャ・データ境界](docs/architecture_and_data_boundaries.md)
+- [公式読み取り専用モックコンテンツ](docs/mock_official_content_data.md)
