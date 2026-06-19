@@ -10,6 +10,14 @@ struct ConsultationDraftView: View {
 
     var body: some View {
         Form {
+            if let itemName = viewModel.itemContextName {
+                Section {
+                    LabeledContent("For", value: itemName)
+                    Text("Preparing a local support note for this registered greenery. It stays on your device and is not submitted.")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                }
+            }
             Section("Topic") {
                 TextField("Topic", text: $viewModel.topic)
             }

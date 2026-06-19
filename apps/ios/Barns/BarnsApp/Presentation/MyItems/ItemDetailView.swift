@@ -2,9 +2,11 @@ import SwiftUI
 
 struct ItemDetailView: View {
     @StateObject private var viewModel: ItemDetailViewModel
+    private let container: DependencyContainer
 
-    init(viewModel: ItemDetailViewModel) {
+    init(viewModel: ItemDetailViewModel, container: DependencyContainer) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        self.container = container
     }
 
     var body: some View {
@@ -41,7 +43,12 @@ struct ItemDetailView: View {
                         .foregroundStyle(.secondary)
                 }
                 Section("Support") {
-                    Text("Need a hand with this greenery? Phone consultation guidance is available from the Support screen.")
+                    NavigationLink {
+                        ConsultationDraftView(viewModel: container.makeConsultationDraftViewModel(for: item))
+                    } label: {
+                        Label("Prepare consultation note", systemImage: "square.and.pencil")
+                    }
+                    Text("Gather details about this greenery before contacting support. Phone consultation guidance is available from the Support screen.")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }
@@ -63,7 +70,8 @@ struct ItemDetailView: View {
 #Preview {
     NavigationStack {
         ItemDetailView(
-            viewModel: DependencyContainer().makeItemDetailViewModel(itemId: "item-wall-green-001")
+            viewModel: DependencyContainer().makeItemDetailViewModel(itemId: "item-wall-green-001"),
+            container: DependencyContainer()
         )
     }
 }
