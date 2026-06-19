@@ -40,5 +40,33 @@
     "frequency": "週1回目安",
     "cautions": ["植物の種類により頻度は異なる。", "過湿に注意する。"],
     "imageUrl": null
+  },
+  {
+    "id": "guide-planter-sunlight-basic",
+    "title": "置き場所と日当たりの確認",
+    "categoryId": "cat-interior-green",
+    "summary": "植物の好みに合わせて明るさと風通しを整える。",
+    "steps": [
+      "直射日光が長時間当たる場所を避ける。",
+      "明るい日陰やレース越しの光が入る場所を選ぶ。",
+      "ときどき鉢の向きを変えて生育の偏りを抑える。"
+    ],
+    "frequency": "月1回目安",
+    "cautions": ["急な環境変化を避ける。", "エアコンの風が直接当たらないようにする。"],
+    "imageUrl": null
+  },
+  {
+    "id": "guide-seasonal-care-basic",
+    "title": "季節ごとのケア確認",
+    "categoryId": "cat-interior-green",
+    "summary": "季節に応じて水やりと環境を見直す。",
+    "steps": [
+      "春から夏は乾きやすいため土の状態をこまめに確認する。",
+      "秋から冬は水やりを控えめにする。",
+      "季節の変わり目に置き場所の明るさと温度を見直す。"
+    ],
+    "frequency": "季節の変わり目",
+    "cautions": ["冬の過湿に注意する。", "暖房や冷房の近くを避ける。"],
+    "imageUrl": null
   }
 ]
