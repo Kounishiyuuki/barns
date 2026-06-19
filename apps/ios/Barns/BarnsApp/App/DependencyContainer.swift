@@ -115,10 +115,11 @@ struct DependencyContainer {
     }
 
     @MainActor
-    func makeConsultationDraftViewModel() -> ConsultationDraftViewModel {
+    func makeConsultationDraftViewModel(for item: ProductItem? = nil) -> ConsultationDraftViewModel {
         ConsultationDraftViewModel(
             getConsultationDraftUseCase: GetConsultationDraftUseCase(repository: consultationDraftRepository),
-            saveConsultationDraftUseCase: SaveConsultationDraftUseCase(repository: consultationDraftRepository)
+            saveConsultationDraftUseCase: SaveConsultationDraftUseCase(repository: consultationDraftRepository),
+            item: item
         )
     }
 }

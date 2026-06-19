@@ -11,6 +11,7 @@ struct SaveConsultationDraftUseCase {
 
     func execute(
         existing: ConsultationDraft?,
+        productItemId: String? = nil,
         topic: String,
         category: ConsultationCategory,
         urgency: ConsultationUrgency,
@@ -19,7 +20,7 @@ struct SaveConsultationDraftUseCase {
         let now = Date()
         let draft = ConsultationDraft(
             id: existing?.id ?? UUID().uuidString,
-            productItemId: existing?.productItemId,
+            productItemId: existing?.productItemId ?? productItemId,
             topic: topic,
             category: category,
             urgency: urgency,

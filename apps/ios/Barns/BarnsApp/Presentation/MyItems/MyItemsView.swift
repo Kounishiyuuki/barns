@@ -51,7 +51,10 @@ struct MyItemsView: View {
                         ForEach(items) { item in
                             let display = ProductItemPresentation(item: item)
                             NavigationLink {
-                                ItemDetailView(viewModel: container.makeItemDetailViewModel(itemId: item.id))
+                                ItemDetailView(
+                                    viewModel: container.makeItemDetailViewModel(itemId: item.id),
+                                    container: container
+                                )
                             } label: {
                                 itemCard(display)
                             }
