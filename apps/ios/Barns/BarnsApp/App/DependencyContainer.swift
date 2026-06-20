@@ -6,6 +6,10 @@ struct DependencyContainer {
     private let patternRepository: PatternRepository
     private let supportRepository: SupportRepository
     private let consultationDraftRepository: ConsultationDraftRepository
+    // Official read-only content (mock now; replaceable by a read-only API).
+    private let catalogRepository: CatalogRepository
+    private let greeneryInfoRepository: GreeneryInfoRepository
+    private let careGuideRepository: CareGuideRepository
 
     init(
         authRepository: AuthRepository = MockAuthRepository(),
@@ -14,7 +18,10 @@ struct DependencyContainer {
         careRepository: CareRepository = MockCareRepository(),
         patternRepository: PatternRepository = MockPatternRepository(),
         supportRepository: SupportRepository = MockSupportRepository(),
-        consultationDraftRepository: ConsultationDraftRepository = MockConsultationDraftRepository()
+        consultationDraftRepository: ConsultationDraftRepository = MockConsultationDraftRepository(),
+        catalogRepository: CatalogRepository = MockCatalogRepository(),
+        greeneryInfoRepository: GreeneryInfoRepository = MockGreeneryInfoRepository(),
+        careGuideRepository: CareGuideRepository = MockCareGuideRepository()
     ) {
         self.authRepository = authRepository
         self.homeRepository = homeRepository
@@ -23,6 +30,9 @@ struct DependencyContainer {
         self.patternRepository = patternRepository
         self.supportRepository = supportRepository
         self.consultationDraftRepository = consultationDraftRepository
+        self.catalogRepository = catalogRepository
+        self.greeneryInfoRepository = greeneryInfoRepository
+        self.careGuideRepository = careGuideRepository
     }
 
     @MainActor
@@ -121,5 +131,25 @@ struct DependencyContainer {
             saveConsultationDraftUseCase: SaveConsultationDraftUseCase(repository: consultationDraftRepository),
             item: item
         )
+    }
+
+    // MARK: - Official read-only content use cases
+    // Exposed as use cases (not repositories) so future Catalog screens depend
+    // only on the domain, and the mock repositories can be swapped for an API.
+
+    func makeGetCatalogItemsUseCase() -> GetCatalogItemsUseCase {
+        GetCatalogItemsUseCase(repository: catalogRepository)
+    }
+
+    func makeGetCatalogItemDetailUseCase() -> GetCatalogItemDetailUseCase {
+        GetCatalogItemDetailUseCase(repository: catalogRepository)
+    }
+
+    func makeGetGreeneryInfoUseCase() -> GetGreeneryInfoUseCase {
+        GetGreeneryInfoUseCase(repository: greeneryInfoRepository)
+    }
+
+    func makeGetCareGuidesUseCase() -> GetCareGuidesUseCase {
+        GetCareGuidesUseCase(repository: careGuideRepository)
     }
 }
