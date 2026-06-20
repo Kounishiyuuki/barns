@@ -8,7 +8,17 @@ import com.barns.app.data.repository.MockPatternRepository
 import com.barns.app.data.repository.MockProductItemRepository
 import com.barns.app.data.repository.MockSupportRepository
 import com.barns.app.domain.model.ProductItem
+import com.barns.app.data.repository.MockCareGuideRepository
+import com.barns.app.data.repository.MockCatalogRepository
+import com.barns.app.data.repository.MockGreeneryInfoRepository
 import com.barns.app.domain.repository.AuthRepository
+import com.barns.app.domain.repository.CareGuideRepository
+import com.barns.app.domain.repository.CatalogRepository
+import com.barns.app.domain.repository.GreeneryInfoRepository
+import com.barns.app.domain.usecase.catalog.GetCareGuidesUseCase
+import com.barns.app.domain.usecase.catalog.GetCatalogItemDetailUseCase
+import com.barns.app.domain.usecase.catalog.GetCatalogItemsUseCase
+import com.barns.app.domain.usecase.catalog.GetGreeneryInfoUseCase
 import com.barns.app.domain.repository.CareRepository
 import com.barns.app.domain.repository.ConsultationDraftRepository
 import com.barns.app.domain.repository.HomeRepository
@@ -57,6 +67,10 @@ class DependencyContainer(
     private val patternRepository: PatternRepository = MockPatternRepository(),
     private val supportRepository: SupportRepository = MockSupportRepository(),
     private val consultationDraftRepository: ConsultationDraftRepository = MockConsultationDraftRepository(),
+    // Official read-only content (mock now; replaceable by a read-only API).
+    private val catalogRepository: CatalogRepository = MockCatalogRepository(),
+    private val greeneryInfoRepository: GreeneryInfoRepository = MockGreeneryInfoRepository(),
+    private val careGuideRepository: CareGuideRepository = MockCareGuideRepository(),
 ) {
     fun makeAuthViewModel(): AuthViewModel =
         AuthViewModel(
@@ -128,4 +142,20 @@ class DependencyContainer(
             saveConsultationDraftUseCase = SaveConsultationDraftUseCase(consultationDraftRepository),
             item = item,
         )
+
+    // Official read-only content use cases. Exposed as use cases (not
+    // repositories) so future Catalog screens depend only on the domain, and
+    // the mock repositories can be swapped for an API.
+
+    fun makeGetCatalogItemsUseCase(): GetCatalogItemsUseCase =
+        GetCatalogItemsUseCase(catalogRepository)
+
+    fun makeGetCatalogItemDetailUseCase(): GetCatalogItemDetailUseCase =
+        GetCatalogItemDetailUseCase(catalogRepository)
+
+    fun makeGetGreeneryInfoUseCase(): GetGreeneryInfoUseCase =
+        GetGreeneryInfoUseCase(greeneryInfoRepository)
+
+    fun makeGetCareGuidesUseCase(): GetCareGuidesUseCase =
+        GetCareGuidesUseCase(careGuideRepository)
 }
