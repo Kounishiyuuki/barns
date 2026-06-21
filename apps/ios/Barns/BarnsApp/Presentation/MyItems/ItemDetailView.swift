@@ -42,6 +42,9 @@ struct ItemDetailView: View {
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }
+                if let official = viewModel.officialContent {
+                    officialContentSections(official)
+                }
                 Section("Support") {
                     NavigationLink {
                         ConsultationDraftView(viewModel: container.makeConsultationDraftViewModel(for: item))
@@ -61,6 +64,44 @@ struct ItemDetailView: View {
                     Text("This registry is kept locally on your device in the current MVP.")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
+                }
+            }
+        }
+    }
+
+    /// Official, read-only reference sections shown as supporting after-care
+    /// information. Not personalized and not submitted anywhere.
+    @ViewBuilder
+    private func officialContentSections(_ official: ItemOfficialContent) -> some View {
+        if official.hasBasicInformation {
+            Section {
+                if let overview = official.overview {
+                    Text(overview)
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+                if let light = official.lightPreference {
+                    LabeledContent("Light", value: light)
+                }
+                if let watering = official.wateringOverview {
+                    LabeledContent("Watering", value: watering)
+                }
+            } header: {
+                Text("Basic information")
+            } footer: {
+                Text("Official reference information.")
+            }
+        }
+        if official.hasCareGuides {
+            Section("Care guide") {
+                ForEach(official.careGuides) { guide in
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(guide.title)
+                            .font(.subheadline)
+                        Text(guide.summary)
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+                    }
                 }
             }
         }

@@ -62,7 +62,9 @@ struct DependencyContainer {
     func makeItemDetailViewModel(itemId: ProductItem.ID) -> ItemDetailViewModel {
         ItemDetailViewModel(
             itemId: itemId,
-            getProductItemDetailUseCase: GetProductItemDetailUseCase(repository: productItemRepository)
+            getProductItemDetailUseCase: GetProductItemDetailUseCase(repository: productItemRepository),
+            getGreeneryInfoUseCase: GetGreeneryInfoUseCase(repository: greeneryInfoRepository),
+            getCareGuidesUseCase: GetCareGuidesUseCase(repository: careGuideRepository)
         )
     }
 
