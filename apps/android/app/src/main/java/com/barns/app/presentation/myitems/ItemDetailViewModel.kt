@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 class ItemDetailViewModel(
     private val itemId: String,
     private val getProductItemDetailUseCase: GetProductItemDetailUseCase,
+    private val officialContentResolver: ItemOfficialContentResolver,
 ) : ViewModel() {
     sealed interface State {
         object Loading : State
@@ -23,12 +24,25 @@ class ItemDetailViewModel(
     private val _state = MutableStateFlow<State>(State.Loading)
     val state: StateFlow<State> = _state.asStateFlow()
 
+    /**
+     * Official read-only reference content (basic info + care guides) for the
+     * loaded item. `null` until resolved; stays `null` if nothing matches.
+     */
+    private val _officialContent = MutableStateFlow<ItemOfficialContent?>(null)
+    val officialContent: StateFlow<ItemOfficialContent?> = _officialContent.asStateFlow()
+
     fun load() {
         _state.value = State.Loading
+        _officialContent.value = null
         viewModelScope.launch {
             runCatching { getProductItemDetailUseCase.execute(itemId) }
                 .onSuccess { item ->
-                    _state.value = if (item != null) State.Loaded(item) else State.NotFound
+                    if (item != null) {
+                        _state.value = State.Loaded(item)
+                        _officialContent.value = officialContentResolver.resolve(item)
+                    } else {
+                        _state.value = State.NotFound
+                    }
                 }
                 .onFailure { _state.value = State.Failed("Unable to load this item. Please try again.") }
         }
