@@ -29,6 +29,7 @@ fun ItemDetailScreen(
     onPrepareConsultation: (ProductItem) -> Unit = {},
 ) {
     val state by viewModel.state.collectAsState()
+    val official by viewModel.officialContent.collectAsState()
 
     LaunchedEffect(viewModel) { viewModel.load() }
 
@@ -94,6 +95,8 @@ fun ItemDetailScreen(
                     modifier = Modifier.padding(top = 4.dp),
                 )
 
+                official?.let { OfficialContentSections(it) }
+
                 SectionHeader("Support")
                 Button(
                     onClick = { onPrepareConsultation(item) },
@@ -130,4 +133,44 @@ private fun SectionHeader(title: String) {
         style = MaterialTheme.typography.titleMedium,
         modifier = Modifier.padding(top = 12.dp, bottom = 4.dp),
     )
+}
+
+/**
+ * Official, read-only reference sections shown as supporting after-care
+ * information. Not personalized and not submitted anywhere.
+ */
+@Composable
+private fun OfficialContentSections(official: ItemOfficialContent) {
+    if (official.hasBasicInformation) {
+        SectionHeader("Basic information")
+        official.overview?.let { overview ->
+            Text(text = overview, style = MaterialTheme.typography.bodyMedium)
+        }
+        official.lightPreference?.let { light ->
+            ListItem(
+                headlineContent = { Text("Light") },
+                supportingContent = { Text(light) },
+            )
+        }
+        official.wateringOverview?.let { watering ->
+            ListItem(
+                headlineContent = { Text("Watering") },
+                supportingContent = { Text(watering) },
+            )
+        }
+        Text(
+            text = "Official reference information.",
+            style = MaterialTheme.typography.bodySmall,
+            modifier = Modifier.padding(top = 4.dp),
+        )
+    }
+    if (official.hasCareGuides) {
+        SectionHeader("Care guide")
+        official.careGuides.forEach { guide ->
+            ListItem(
+                headlineContent = { Text(guide.title) },
+                supportingContent = { Text(guide.summary) },
+            )
+        }
+    }
 }

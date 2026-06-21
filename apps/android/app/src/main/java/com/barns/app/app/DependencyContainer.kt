@@ -46,6 +46,7 @@ import com.barns.app.presentation.care.CareViewModel
 import com.barns.app.presentation.home.HomeViewModel
 import com.barns.app.presentation.myitems.AddItemViewModel
 import com.barns.app.presentation.myitems.ItemDetailViewModel
+import com.barns.app.presentation.myitems.ItemOfficialContentResolver
 import com.barns.app.presentation.myitems.MyItemsViewModel
 import com.barns.app.presentation.patterns.PatternDetailViewModel
 import com.barns.app.presentation.patterns.PatternListViewModel
@@ -93,6 +94,10 @@ class DependencyContainer(
         ItemDetailViewModel(
             itemId = itemId,
             getProductItemDetailUseCase = GetProductItemDetailUseCase(productItemRepository),
+            officialContentResolver = ItemOfficialContentResolver(
+                getGreeneryInfoUseCase = GetGreeneryInfoUseCase(greeneryInfoRepository),
+                getCareGuidesUseCase = GetCareGuidesUseCase(careGuideRepository),
+            ),
         )
 
     fun makeAddItemViewModel(): AddItemViewModel =
