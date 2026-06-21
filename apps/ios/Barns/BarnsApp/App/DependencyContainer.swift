@@ -154,4 +154,19 @@ struct DependencyContainer {
     func makeGetCareGuidesUseCase() -> GetCareGuidesUseCase {
         GetCareGuidesUseCase(repository: careGuideRepository)
     }
+
+    @MainActor
+    func makeCatalogListViewModel() -> CatalogListViewModel {
+        CatalogListViewModel(getCatalogItemsUseCase: makeGetCatalogItemsUseCase())
+    }
+
+    @MainActor
+    func makeCatalogDetailViewModel(itemId: String) -> CatalogDetailViewModel {
+        CatalogDetailViewModel(
+            itemId: itemId,
+            getCatalogItemDetailUseCase: makeGetCatalogItemDetailUseCase(),
+            getGreeneryInfoUseCase: makeGetGreeneryInfoUseCase(),
+            getCareGuidesUseCase: makeGetCareGuidesUseCase()
+        )
+    }
 }
