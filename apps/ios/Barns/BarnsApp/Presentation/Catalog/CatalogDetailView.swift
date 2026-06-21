@@ -1,0 +1,81 @@
+import SwiftUI
+
+/// Concise, official read-only catalog detail. Reference content only — no
+/// price, stock, cart, order, or registration actions in this screen.
+struct CatalogDetailView: View {
+    @StateObject private var viewModel: CatalogDetailViewModel
+
+    init(viewModel: CatalogDetailViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
+
+    var body: some View {
+        content
+            .navigationTitle("Catalog item")
+            .navigationBarTitleDisplayMode(.inline)
+            .task { await viewModel.load() }
+    }
+
+    @ViewBuilder
+    private var content: some View {
+        switch viewModel.state {
+        case .loading:
+            ProgressView()
+        case .notFound:
+            ContentUnavailableView("Item not found", systemImage: "questionmark")
+        case .failed(let message):
+            Text(message)
+                .foregroundStyle(.secondary)
+        case .loaded(let detail):
+            List {
+                Section {
+                    LabeledContent("Name", value: detail.name)
+                    LabeledContent("Kind", value: detail.kindLabel)
+                    Text(detail.summary)
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                } header: {
+                    Text("Overview")
+                } footer: {
+                    Text("Official reference content.")
+                }
+                if detail.hasBasicInformation {
+                    Section("Basic information") {
+                        if let overview = detail.overview {
+                            Text(overview)
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                        }
+                        if let light = detail.lightPreference {
+                            LabeledContent("Light", value: light)
+                        }
+                        if let watering = detail.wateringOverview {
+                            LabeledContent("Watering", value: watering)
+                        }
+                    }
+                }
+                if detail.hasCareGuides {
+                    Section("Care guide") {
+                        ForEach(detail.careGuides) { guide in
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text(guide.title)
+                                    .font(.subheadline)
+                                Text(guide.summary)
+                                    .font(.footnote)
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+#Preview {
+    NavigationStack {
+        CatalogDetailView(
+            viewModel: DependencyContainer().makeCatalogDetailViewModel(itemId: "catalog-wall-green-panel")
+        )
+    }
+}

@@ -51,6 +51,11 @@ struct HomeView: View {
                     } label: {
                         Text(content.summary.patternsEntryLabel)
                     }
+                    NavigationLink {
+                        CatalogListView(viewModel: container.makeCatalogListViewModel(), container: container)
+                    } label: {
+                        Text("Explore official catalog")
+                    }
                 }
                 Section("Support") {
                     NavigationLink {
