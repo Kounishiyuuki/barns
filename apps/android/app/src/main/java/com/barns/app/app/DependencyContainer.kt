@@ -41,6 +41,8 @@ import com.barns.app.domain.usecase.support.GetConsultationDraftUseCase
 import com.barns.app.domain.usecase.support.GetSupportInfoUseCase
 import com.barns.app.domain.usecase.support.SaveConsultationDraftUseCase
 import com.barns.app.presentation.auth.AuthViewModel
+import com.barns.app.presentation.catalog.CatalogDetailViewModel
+import com.barns.app.presentation.catalog.CatalogListViewModel
 import com.barns.app.presentation.care.CareTaskDetailViewModel
 import com.barns.app.presentation.care.CareViewModel
 import com.barns.app.presentation.home.HomeViewModel
@@ -163,4 +165,15 @@ class DependencyContainer(
 
     fun makeGetCareGuidesUseCase(): GetCareGuidesUseCase =
         GetCareGuidesUseCase(careGuideRepository)
+
+    fun makeCatalogListViewModel(): CatalogListViewModel =
+        CatalogListViewModel(getCatalogItemsUseCase = makeGetCatalogItemsUseCase())
+
+    fun makeCatalogDetailViewModel(itemId: String): CatalogDetailViewModel =
+        CatalogDetailViewModel(
+            itemId = itemId,
+            getCatalogItemDetailUseCase = makeGetCatalogItemDetailUseCase(),
+            getGreeneryInfoUseCase = makeGetGreeneryInfoUseCase(),
+            getCareGuidesUseCase = makeGetCareGuidesUseCase(),
+        )
 }

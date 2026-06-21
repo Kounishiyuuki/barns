@@ -11,6 +11,7 @@ import com.barns.app.app.DependencyContainer
 import com.barns.app.presentation.auth.AuthScreen
 import com.barns.app.presentation.auth.AuthViewModel
 import com.barns.app.presentation.care.CareScreen
+import com.barns.app.presentation.catalog.CatalogScreen
 import com.barns.app.presentation.home.HomeScreen
 import com.barns.app.presentation.myitems.MyItemsScreen
 import com.barns.app.presentation.patterns.PatternListScreen
@@ -38,6 +39,7 @@ fun RootScreen(
             RootRoute.MyItems -> MyItemsScreen(container = container, onBack = { route = RootRoute.Home })
             RootRoute.Care -> CareScreen(container = container, onBack = { route = RootRoute.Home })
             RootRoute.Patterns -> PatternListScreen(container = container, onBack = { route = RootRoute.Home })
+            RootRoute.Catalog -> CatalogScreen(container = container, onBack = { route = RootRoute.Home })
             RootRoute.Support -> SupportScreen(container = container, onBack = { route = RootRoute.Home })
             RootRoute.Settings -> SettingsScreen(container = container, onBack = { route = RootRoute.Home })
             RootRoute.Home -> {
@@ -47,6 +49,7 @@ fun RootScreen(
                     onOpenMyItems = { route = RootRoute.MyItems },
                     onOpenCare = { route = RootRoute.Care },
                     onOpenPatterns = { route = RootRoute.Patterns },
+                    onOpenCatalog = { route = RootRoute.Catalog },
                     onOpenSupport = { route = RootRoute.Support },
                     onOpenSettings = { route = RootRoute.Settings },
                 )
@@ -62,6 +65,7 @@ private sealed interface RootRoute {
     data object MyItems : RootRoute
     data object Care : RootRoute
     data object Patterns : RootRoute
+    data object Catalog : RootRoute
     data object Support : RootRoute
     data object Settings : RootRoute
 }

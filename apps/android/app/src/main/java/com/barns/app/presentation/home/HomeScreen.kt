@@ -27,6 +27,7 @@ fun HomeScreen(
     onOpenMyItems: () -> Unit = {},
     onOpenCare: () -> Unit = {},
     onOpenPatterns: () -> Unit = {},
+    onOpenCatalog: () -> Unit = {},
     onOpenSupport: () -> Unit = {},
     onOpenSettings: () -> Unit = {},
 ) {
@@ -73,6 +74,11 @@ fun HomeScreen(
                     modifier = Modifier.clickable { onOpenPatterns() },
                     headlineContent = { Text("Patterns") },
                     supportingContent = { Text(content.summary.patternsEntryLabel) },
+                )
+                ListItem(
+                    modifier = Modifier.clickable { onOpenCatalog() },
+                    headlineContent = { Text("Explore official catalog") },
+                    supportingContent = { Text("Official greenery references") },
                 )
                 ListItem(
                     modifier = Modifier.clickable { onOpenSupport() },
