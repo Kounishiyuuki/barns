@@ -59,6 +59,7 @@ fun MyItemsScreen(
                 viewModel = viewModel,
                 onBack = { route = MyItemsRoute.List },
                 onPrepareConsultation = { item -> route = MyItemsRoute.Consultation(item) },
+                onEdit = { item -> route = MyItemsRoute.Edit(item) },
             )
         }
         is MyItemsRoute.Consultation -> {
@@ -67,6 +68,17 @@ fun MyItemsScreen(
             ConsultationDraftScreen(
                 viewModel = viewModel,
                 onBack = { route = MyItemsRoute.Detail(item.id) },
+            )
+        }
+        is MyItemsRoute.Edit -> {
+            // Local-only edit of a registered greenery. Returns to the detail
+            // on save or cancel; no write happens until the user taps Save.
+            val item = current.item
+            val viewModel = remember(item.id) { container.makeEditGreeneryViewModel(item) }
+            EditGreeneryScreen(
+                viewModel = viewModel,
+                onSaved = { route = MyItemsRoute.Detail(item.id) },
+                onCancel = { route = MyItemsRoute.Detail(item.id) },
             )
         }
         MyItemsRoute.Add -> {
@@ -163,5 +175,6 @@ private sealed interface MyItemsRoute {
     data object List : MyItemsRoute
     data class Detail(val itemId: String) : MyItemsRoute
     data class Consultation(val item: ProductItem) : MyItemsRoute
+    data class Edit(val item: ProductItem) : MyItemsRoute
     data object Add : MyItemsRoute
 }

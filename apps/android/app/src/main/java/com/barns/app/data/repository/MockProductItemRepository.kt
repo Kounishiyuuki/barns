@@ -49,4 +49,11 @@ class MockProductItemRepository : ProductItemRepository {
     override suspend fun addProductItem(item: ProductItem) {
         synchronized(lock) { items.add(item) }
     }
+
+    override suspend fun updateProductItem(item: ProductItem) {
+        synchronized(lock) {
+            val index = items.indexOfFirst { it.id == item.id }
+            if (index >= 0) items[index] = item
+        }
+    }
 }

@@ -1,7 +1,9 @@
 package com.barns.app.presentation.myitems
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -27,6 +29,7 @@ fun ItemDetailScreen(
     viewModel: ItemDetailViewModel,
     onBack: () -> Unit,
     onPrepareConsultation: (ProductItem) -> Unit = {},
+    onEdit: (ProductItem) -> Unit = {},
 ) {
     val state by viewModel.state.collectAsState()
     val official by viewModel.officialContent.collectAsState()
@@ -39,7 +42,12 @@ fun ItemDetailScreen(
             .verticalScroll(rememberScrollState())
             .padding(16.dp),
     ) {
-        TextButton(onClick = onBack, modifier = Modifier.fillMaxWidth()) { Text("Back") }
+        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+            TextButton(onClick = onBack) { Text("Back") }
+            (state as? ItemDetailViewModel.State.Loaded)?.let { loaded ->
+                TextButton(onClick = { onEdit(loaded.item) }) { Text("Edit") }
+            }
+        }
         when (val current = state) {
             ItemDetailViewModel.State.Loading -> {
                 Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {

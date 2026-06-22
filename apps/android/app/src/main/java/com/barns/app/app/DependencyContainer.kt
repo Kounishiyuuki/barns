@@ -33,6 +33,7 @@ import com.barns.app.domain.usecase.care.GetCareTaskDetailUseCase
 import com.barns.app.domain.usecase.care.GetCareTasksUseCase
 import com.barns.app.domain.usecase.home.GetHomeSummaryUseCase
 import com.barns.app.domain.usecase.myitems.AddProductItemUseCase
+import com.barns.app.domain.usecase.myitems.UpdateProductItemUseCase
 import com.barns.app.domain.usecase.myitems.GetProductItemDetailUseCase
 import com.barns.app.domain.usecase.myitems.GetProductItemsUseCase
 import com.barns.app.domain.usecase.patterns.GetPatternDetailUseCase
@@ -47,6 +48,7 @@ import com.barns.app.presentation.care.CareTaskDetailViewModel
 import com.barns.app.presentation.care.CareViewModel
 import com.barns.app.presentation.home.HomeViewModel
 import com.barns.app.presentation.myitems.AddItemViewModel
+import com.barns.app.presentation.myitems.EditGreeneryViewModel
 import com.barns.app.presentation.myitems.RegisterGreeneryPrefill
 import com.barns.app.presentation.myitems.ItemDetailViewModel
 import com.barns.app.presentation.myitems.ItemOfficialContentResolver
@@ -107,6 +109,12 @@ class DependencyContainer(
         AddItemViewModel(
             addProductItemUseCase = AddProductItemUseCase(productItemRepository),
             prefill = prefill,
+        )
+
+    fun makeEditGreeneryViewModel(item: ProductItem): EditGreeneryViewModel =
+        EditGreeneryViewModel(
+            item = item,
+            updateProductItemUseCase = UpdateProductItemUseCase(productItemRepository),
         )
 
     fun makeCareViewModel(): CareViewModel =
