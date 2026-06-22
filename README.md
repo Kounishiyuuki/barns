@@ -61,3 +61,4 @@ barns/
 - [法務・リリース・運用](docs/08_legal_release_operation.md)
 - [アーキテクチャ・データ境界](docs/architecture_and_data_boundaries.md)
 - [公式読み取り専用モックコンテンツ](docs/mock_official_content_data.md)
+- [Catalog→登録→My Greenery フロー](docs/catalog_to_my_greenery_flow.md)
