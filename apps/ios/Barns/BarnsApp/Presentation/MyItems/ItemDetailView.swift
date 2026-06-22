@@ -3,6 +3,7 @@ import SwiftUI
 struct ItemDetailView: View {
     @StateObject private var viewModel: ItemDetailViewModel
     private let container: DependencyContainer
+    @State private var editingItem: ProductItem?
 
     init(viewModel: ItemDetailViewModel, container: DependencyContainer) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -13,6 +14,18 @@ struct ItemDetailView: View {
         content
             .navigationTitle("Registered greenery")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                if case .loaded(let item) = viewModel.state {
+                    ToolbarItem(placement: .primaryAction) {
+                        Button("Edit") { editingItem = item }
+                    }
+                }
+            }
+            .sheet(item: $editingItem, onDismiss: { Task { await viewModel.load() } }) { item in
+                NavigationStack {
+                    EditGreeneryView(viewModel: container.makeEditGreeneryViewModel(item: item))
+                }
+            }
             .task { await viewModel.load() }
     }
 

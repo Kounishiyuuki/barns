@@ -77,6 +77,14 @@ struct DependencyContainer {
     }
 
     @MainActor
+    func makeEditGreeneryViewModel(item: ProductItem) -> EditGreeneryViewModel {
+        EditGreeneryViewModel(
+            item: item,
+            updateProductItemUseCase: UpdateProductItemUseCase(repository: productItemRepository)
+        )
+    }
+
+    @MainActor
     func makeCareViewModel() -> CareViewModel {
         CareViewModel(
             getCareTasksUseCase: GetCareTasksUseCase(repository: careRepository),
