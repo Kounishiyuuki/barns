@@ -3,7 +3,9 @@ import SwiftUI
 struct ItemDetailView: View {
     @StateObject private var viewModel: ItemDetailViewModel
     private let container: DependencyContainer
+    @Environment(\.dismiss) private var dismiss
     @State private var editingItem: ProductItem?
+    @State private var showArchiveConfirmation = false
 
     init(viewModel: ItemDetailViewModel, container: DependencyContainer) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -25,6 +27,18 @@ struct ItemDetailView: View {
                 NavigationStack {
                     EditGreeneryView(viewModel: container.makeEditGreeneryViewModel(item: item))
                 }
+            }
+            .confirmationDialog(
+                "Archive this greenery?",
+                isPresented: $showArchiveConfirmation,
+                titleVisibility: .visible
+            ) {
+                Button("Archive") {
+                    Task { if await viewModel.archive() { dismiss() } }
+                }
+                Button("Cancel", role: .cancel) {}
+            } message: {
+                Text("It will be removed from your active My Greenery list on this device. Nothing is deleted permanently.")
             }
             .task { await viewModel.load() }
     }
@@ -77,6 +91,13 @@ struct ItemDetailView: View {
                     Text("This registry is kept locally on your device in the current MVP.")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
+                }
+                if item.status == .active {
+                    Section {
+                        Button("Archive greenery") { showArchiveConfirmation = true }
+                    } footer: {
+                        Text("Archiving removes it from your active list. It is not deleted.")
+                    }
                 }
             }
         }

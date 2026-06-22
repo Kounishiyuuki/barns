@@ -64,7 +64,8 @@ struct DependencyContainer {
             itemId: itemId,
             getProductItemDetailUseCase: GetProductItemDetailUseCase(repository: productItemRepository),
             getGreeneryInfoUseCase: GetGreeneryInfoUseCase(repository: greeneryInfoRepository),
-            getCareGuidesUseCase: GetCareGuidesUseCase(repository: careGuideRepository)
+            getCareGuidesUseCase: GetCareGuidesUseCase(repository: careGuideRepository),
+            archiveProductItemUseCase: ArchiveProductItemUseCase(repository: productItemRepository)
         )
     }
 

@@ -14,7 +14,8 @@ final class ItemOfficialContentSmokeTests: XCTestCase {
             itemId: itemId,
             getProductItemDetailUseCase: GetProductItemDetailUseCase(repository: productRepo),
             getGreeneryInfoUseCase: GetGreeneryInfoUseCase(repository: greeneryRepo),
-            getCareGuidesUseCase: GetCareGuidesUseCase(repository: careRepo)
+            getCareGuidesUseCase: GetCareGuidesUseCase(repository: careRepo),
+            archiveProductItemUseCase: ArchiveProductItemUseCase(repository: productRepo)
         )
     }
 

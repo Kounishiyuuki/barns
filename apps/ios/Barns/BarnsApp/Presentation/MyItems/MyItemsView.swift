@@ -27,7 +27,9 @@ struct MyItemsView: View {
                     AddItemView(viewModel: container.makeAddItemViewModel())
                 }
             }
-            .task { await viewModel.load() }
+            // Reload on appear so the active list refreshes after returning
+            // from detail (e.g. when an item was archived).
+            .onAppear { Task { await viewModel.load() } }
     }
 
     @ViewBuilder
