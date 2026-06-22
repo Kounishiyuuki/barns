@@ -6,6 +6,7 @@ import com.barns.app.domain.model.CatalogItem
 import com.barns.app.domain.usecase.catalog.GetCareGuidesUseCase
 import com.barns.app.domain.usecase.catalog.GetCatalogItemDetailUseCase
 import com.barns.app.domain.usecase.catalog.GetGreeneryInfoUseCase
+import com.barns.app.presentation.myitems.RegisterGreeneryPrefill
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -75,6 +76,7 @@ class CatalogDetailViewModel(
             lightPreference = lightPreference,
             wateringOverview = wateringOverview,
             careGuides = summaries,
+            registerPrefill = RegisterGreeneryPrefill.from(item),
         )
     }
 }

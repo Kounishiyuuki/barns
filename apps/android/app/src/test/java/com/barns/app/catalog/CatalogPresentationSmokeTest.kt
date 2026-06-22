@@ -55,6 +55,7 @@ class CatalogPresentationSmokeTest {
             careGuides = guides.map {
                 CatalogDetailContent.CareGuideSummary(it.id, it.title, it.summary)
             },
+            registerPrefill = com.barns.app.presentation.myitems.RegisterGreeneryPrefill.from(item),
         )
     }
 

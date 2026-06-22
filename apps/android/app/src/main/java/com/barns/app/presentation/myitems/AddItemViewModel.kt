@@ -11,12 +11,16 @@ import kotlinx.coroutines.launch
 
 class AddItemViewModel(
     private val addProductItemUseCase: AddProductItemUseCase,
+    prefill: RegisterGreeneryPrefill? = null,
 ) : ViewModel() {
-    // MVP source skeleton: a fixed placeholder category until category
-    // selection is implemented. Local-only; never sent to a server.
-    private val categoryId = "cat-wall-green"
+    // MVP source skeleton: defaults to a placeholder category until full
+    // category selection exists. A Catalog prefill may override it. Local-only;
+    // never sent to a server.
+    private var categoryId = prefill?.categoryId ?: "cat-wall-green"
 
-    private val _state = MutableStateFlow(AddItemUiState())
+    private val _state = MutableStateFlow(
+        prefill?.let { AddItemUiState(name = it.name, type = it.type) } ?: AddItemUiState(),
+    )
     val state: StateFlow<AddItemUiState> = _state.asStateFlow()
 
     fun onNameChange(value: String) {

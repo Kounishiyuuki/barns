@@ -47,6 +47,7 @@ import com.barns.app.presentation.care.CareTaskDetailViewModel
 import com.barns.app.presentation.care.CareViewModel
 import com.barns.app.presentation.home.HomeViewModel
 import com.barns.app.presentation.myitems.AddItemViewModel
+import com.barns.app.presentation.myitems.RegisterGreeneryPrefill
 import com.barns.app.presentation.myitems.ItemDetailViewModel
 import com.barns.app.presentation.myitems.ItemOfficialContentResolver
 import com.barns.app.presentation.myitems.MyItemsViewModel
@@ -102,9 +103,10 @@ class DependencyContainer(
             ),
         )
 
-    fun makeAddItemViewModel(): AddItemViewModel =
+    fun makeAddItemViewModel(prefill: RegisterGreeneryPrefill? = null): AddItemViewModel =
         AddItemViewModel(
             addProductItemUseCase = AddProductItemUseCase(productItemRepository),
+            prefill = prefill,
         )
 
     fun makeCareViewModel(): CareViewModel =
