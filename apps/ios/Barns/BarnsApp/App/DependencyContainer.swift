@@ -69,9 +69,10 @@ struct DependencyContainer {
     }
 
     @MainActor
-    func makeAddItemViewModel() -> AddItemViewModel {
+    func makeAddItemViewModel(prefill: RegisterGreeneryPrefill? = nil) -> AddItemViewModel {
         AddItemViewModel(
-            addProductItemUseCase: AddProductItemUseCase(repository: productItemRepository)
+            addProductItemUseCase: AddProductItemUseCase(repository: productItemRepository),
+            prefill: prefill
         )
     }
 

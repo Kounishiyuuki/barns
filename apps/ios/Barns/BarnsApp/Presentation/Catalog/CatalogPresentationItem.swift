@@ -37,6 +37,9 @@ struct CatalogDetailContent: Equatable {
     let lightPreference: String?
     let wateringOverview: String?
     let careGuides: [CareGuideSummary]
+    /// Prefill for starting a local Register Greenery flow from this item.
+    /// Built from official fields only; the user still confirms and saves.
+    let registerPrefill: RegisterGreeneryPrefill
 
     var hasBasicInformation: Bool {
         overview != nil || lightPreference != nil || wateringOverview != nil
