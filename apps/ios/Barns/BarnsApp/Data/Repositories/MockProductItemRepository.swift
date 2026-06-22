@@ -45,4 +45,9 @@ actor MockProductItemRepository: ProductItemRepository {
     func addProductItem(_ item: ProductItem) async throws {
         items.append(item)
     }
+
+    func updateProductItem(_ item: ProductItem) async throws {
+        guard let index = items.firstIndex(where: { $0.id == item.id }) else { return }
+        items[index] = item
+    }
 }
