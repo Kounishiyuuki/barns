@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
@@ -28,6 +29,7 @@ import androidx.compose.ui.unit.dp
 fun CatalogDetailScreen(
     viewModel: CatalogDetailViewModel,
     onBack: () -> Unit,
+    onRegister: (com.barns.app.presentation.myitems.RegisterGreeneryPrefill) -> Unit = {},
 ) {
     val state by viewModel.state.collectAsState()
 
@@ -105,6 +107,20 @@ fun CatalogDetailScreen(
                         )
                     }
                 }
+
+                SectionHeader("My Greenery")
+                Button(
+                    onClick = { onRegister(detail.registerPrefill) },
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text("Register to My Greenery")
+                }
+                Text(
+                    text = "Already have this greenery? Start a local registry entry. " +
+                        "Nothing is ordered or purchased.",
+                    style = MaterialTheme.typography.bodySmall,
+                    modifier = Modifier.padding(top = 4.dp),
+                )
             }
         }
     }

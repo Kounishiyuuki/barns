@@ -35,6 +35,9 @@ data class CatalogDetailContent(
     val lightPreference: String?,
     val wateringOverview: String?,
     val careGuides: List<CareGuideSummary>,
+    // Prefill for starting a local Register Greenery flow from this item.
+    // Built from official fields only; the user still confirms and saves.
+    val registerPrefill: com.barns.app.presentation.myitems.RegisterGreeneryPrefill,
 ) {
     data class CareGuideSummary(
         val id: String,

@@ -25,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.barns.app.app.DependencyContainer
+import com.barns.app.presentation.myitems.AddItemScreen
 
 /**
  * Supporting Catalog host. Owns minimal local navigation between the official
@@ -51,7 +52,22 @@ fun CatalogScreen(
             val viewModel = remember(current.itemId) {
                 container.makeCatalogDetailViewModel(current.itemId)
             }
-            CatalogDetailScreen(viewModel = viewModel, onBack = { route = CatalogRoute.List })
+            CatalogDetailScreen(
+                viewModel = viewModel,
+                onBack = { route = CatalogRoute.List },
+                onRegister = { prefill -> route = CatalogRoute.Register(current.itemId, prefill) },
+            )
+        }
+        is CatalogRoute.Register -> {
+            // Local-only registration prefilled from the catalog item. Returns
+            // to the originating detail on save or cancel. No write happens
+            // until the user explicitly saves in the Register Greenery flow.
+            val viewModel = remember(current) { container.makeAddItemViewModel(current.prefill) }
+            AddItemScreen(
+                viewModel = viewModel,
+                onSaved = { route = CatalogRoute.Detail(current.itemId) },
+                onCancel = { route = CatalogRoute.Detail(current.itemId) },
+            )
         }
     }
 }
@@ -113,4 +129,8 @@ private fun CatalogListContent(
 private sealed interface CatalogRoute {
     data object List : CatalogRoute
     data class Detail(val itemId: String) : CatalogRoute
+    data class Register(
+        val itemId: String,
+        val prefill: com.barns.app.presentation.myitems.RegisterGreeneryPrefill,
+    ) : CatalogRoute
 }
