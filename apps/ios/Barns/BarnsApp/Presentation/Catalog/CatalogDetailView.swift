@@ -4,9 +4,11 @@ import SwiftUI
 /// price, stock, cart, order, or registration actions in this screen.
 struct CatalogDetailView: View {
     @StateObject private var viewModel: CatalogDetailViewModel
+    private let container: DependencyContainer
 
-    init(viewModel: CatalogDetailViewModel) {
+    init(viewModel: CatalogDetailViewModel, container: DependencyContainer) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        self.container = container
     }
 
     var body: some View {
@@ -67,6 +69,15 @@ struct CatalogDetailView: View {
                         }
                     }
                 }
+                Section {
+                    NavigationLink {
+                        AddItemView(viewModel: container.makeAddItemViewModel(prefill: detail.registerPrefill))
+                    } label: {
+                        Label("Register to My Greenery", systemImage: "plus.circle")
+                    }
+                } footer: {
+                    Text("Already have this greenery? Start a local registry entry. Nothing is ordered or purchased.")
+                }
             }
         }
     }
@@ -75,7 +86,8 @@ struct CatalogDetailView: View {
 #Preview {
     NavigationStack {
         CatalogDetailView(
-            viewModel: DependencyContainer().makeCatalogDetailViewModel(itemId: "catalog-wall-green-panel")
+            viewModel: DependencyContainer().makeCatalogDetailViewModel(itemId: "catalog-wall-green-panel"),
+            container: DependencyContainer()
         )
     }
 }

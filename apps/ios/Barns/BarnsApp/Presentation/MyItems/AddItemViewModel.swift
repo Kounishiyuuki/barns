@@ -11,14 +11,20 @@ final class AddItemViewModel: ObservableObject {
     @Published private(set) var isSaving: Bool = false
     @Published private(set) var errorMessage: String?
 
-    // MVP source skeleton: a fixed placeholder category until category
-    // selection is implemented. Local-only; never sent to a server.
-    private let categoryId = "cat-wall-green"
+    // MVP source skeleton: defaults to a placeholder category until full
+    // category selection exists. A Catalog prefill may override it. Local-only;
+    // never sent to a server.
+    private var categoryId = "cat-wall-green"
 
     private let addProductItemUseCase: AddProductItemUseCase
 
-    init(addProductItemUseCase: AddProductItemUseCase) {
+    init(addProductItemUseCase: AddProductItemUseCase, prefill: RegisterGreeneryPrefill? = nil) {
         self.addProductItemUseCase = addProductItemUseCase
+        if let prefill {
+            name = prefill.name
+            categoryId = prefill.categoryId
+            type = prefill.type
+        }
     }
 
     var canSave: Bool {

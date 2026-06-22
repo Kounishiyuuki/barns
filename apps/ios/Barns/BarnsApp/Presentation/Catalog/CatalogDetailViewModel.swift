@@ -70,7 +70,8 @@ final class CatalogDetailViewModel: ObservableObject {
             overview: overview,
             lightPreference: lightPreference,
             wateringOverview: wateringOverview,
-            careGuides: summaries
+            careGuides: summaries,
+            registerPrefill: RegisterGreeneryPrefill(catalogItem: item)
         )
     }
 }

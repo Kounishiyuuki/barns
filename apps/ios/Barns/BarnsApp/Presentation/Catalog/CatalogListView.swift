@@ -30,7 +30,10 @@ struct CatalogListView: View {
                 Section {
                     ForEach(items) { item in
                         NavigationLink {
-                            CatalogDetailView(viewModel: container.makeCatalogDetailViewModel(itemId: item.id))
+                            CatalogDetailView(
+                                viewModel: container.makeCatalogDetailViewModel(itemId: item.id),
+                                container: container
+                            )
                         } label: {
                             VStack(alignment: .leading, spacing: 2) {
                                 Text(item.name)
