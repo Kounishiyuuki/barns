@@ -18,17 +18,33 @@ final class ItemDetailViewModel: ObservableObject {
     private let getProductItemDetailUseCase: GetProductItemDetailUseCase
     private let getGreeneryInfoUseCase: GetGreeneryInfoUseCase
     private let getCareGuidesUseCase: GetCareGuidesUseCase
+    private let archiveProductItemUseCase: ArchiveProductItemUseCase
 
     init(
         itemId: ProductItem.ID,
         getProductItemDetailUseCase: GetProductItemDetailUseCase,
         getGreeneryInfoUseCase: GetGreeneryInfoUseCase,
-        getCareGuidesUseCase: GetCareGuidesUseCase
+        getCareGuidesUseCase: GetCareGuidesUseCase,
+        archiveProductItemUseCase: ArchiveProductItemUseCase
     ) {
         self.itemId = itemId
         self.getProductItemDetailUseCase = getProductItemDetailUseCase
         self.getGreeneryInfoUseCase = getGreeneryInfoUseCase
         self.getCareGuidesUseCase = getCareGuidesUseCase
+        self.archiveProductItemUseCase = archiveProductItemUseCase
+    }
+
+    /// Archives the loaded greenery locally (soft action; no hard delete).
+    /// Returns true on success so the view can return to the list.
+    func archive() async -> Bool {
+        guard case .loaded(let item) = state else { return false }
+        do {
+            _ = try await archiveProductItemUseCase.execute(item)
+            return true
+        } catch {
+            state = .failed("Unable to archive this item. Please try again.")
+            return false
+        }
     }
 
     func load() async {
