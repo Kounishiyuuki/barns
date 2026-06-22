@@ -3,6 +3,7 @@ package com.barns.app.presentation.myitems
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.barns.app.domain.model.ProductItem
+import com.barns.app.domain.model.ProductItemStatus
 import com.barns.app.domain.usecase.myitems.GetProductItemsUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -25,7 +26,11 @@ class MyItemsViewModel(
         _state.value = State.Loading
         viewModelScope.launch {
             runCatching { getProductItemsUseCase.execute() }
-                .onSuccess { items -> _state.value = State.Loaded(items) }
+                // The active My Greenery list excludes archived items. Archived
+                // items remain in the local store (no hard delete).
+                .onSuccess { items ->
+                    _state.value = State.Loaded(items.filter { it.status == ProductItemStatus.ACTIVE })
+                }
                 .onFailure { _state.value = State.Failed("Unable to load items. Please try again.") }
         }
     }

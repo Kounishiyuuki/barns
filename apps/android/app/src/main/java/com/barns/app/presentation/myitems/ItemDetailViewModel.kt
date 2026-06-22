@@ -3,6 +3,7 @@ package com.barns.app.presentation.myitems
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.barns.app.domain.model.ProductItem
+import com.barns.app.domain.usecase.myitems.ArchiveProductItemUseCase
 import com.barns.app.domain.usecase.myitems.GetProductItemDetailUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,6 +14,7 @@ class ItemDetailViewModel(
     private val itemId: String,
     private val getProductItemDetailUseCase: GetProductItemDetailUseCase,
     private val officialContentResolver: ItemOfficialContentResolver,
+    private val archiveProductItemUseCase: ArchiveProductItemUseCase,
 ) : ViewModel() {
     sealed interface State {
         object Loading : State
@@ -45,6 +47,21 @@ class ItemDetailViewModel(
                     }
                 }
                 .onFailure { _state.value = State.Failed("Unable to load this item. Please try again.") }
+        }
+    }
+
+    /**
+     * Archives the loaded greenery locally (soft action; no hard delete) and
+     * invokes [onArchived] on success so the screen can return to the list.
+     */
+    fun archive(onArchived: () -> Unit) {
+        val current = _state.value as? State.Loaded ?: return
+        viewModelScope.launch {
+            runCatching { archiveProductItemUseCase.execute(current.item) }
+                .onSuccess { onArchived() }
+                .onFailure {
+                    _state.value = State.Failed("Unable to archive this item. Please try again.")
+                }
         }
     }
 }
