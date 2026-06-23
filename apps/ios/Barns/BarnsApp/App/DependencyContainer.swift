@@ -59,6 +59,14 @@ struct DependencyContainer {
     }
 
     @MainActor
+    func makeArchivedGreeneryViewModel() -> ArchivedGreeneryViewModel {
+        ArchivedGreeneryViewModel(
+            getProductItemsUseCase: GetProductItemsUseCase(repository: productItemRepository),
+            restoreProductItemUseCase: RestoreProductItemUseCase(repository: productItemRepository)
+        )
+    }
+
+    @MainActor
     func makeItemDetailViewModel(itemId: ProductItem.ID) -> ItemDetailViewModel {
         ItemDetailViewModel(
             itemId: itemId,
