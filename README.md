@@ -65,3 +65,4 @@ barns/
 - [My Greenery ローカルライフサイクル（登録/編集/アーカイブ）](docs/my_greenery_lifecycle.md)
 - [MVPチェックポイント](docs/mvp_checkpoint.md)
 - [リリース準備チェックリスト](docs/release_readiness_checklist.md)
+- [デバイスQAチェックリスト](docs/device_qa_checklist.md)
