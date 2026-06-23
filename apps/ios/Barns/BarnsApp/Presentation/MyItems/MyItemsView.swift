@@ -21,6 +21,15 @@ struct MyItemsView: View {
                         Label("Register greenery", systemImage: "plus")
                     }
                 }
+                // Low-emphasis entry to the archived greenery list. Archived
+                // items stay customer-owned local data and can be restored.
+                ToolbarItem(placement: .secondaryAction) {
+                    NavigationLink {
+                        ArchivedGreeneryView(viewModel: container.makeArchivedGreeneryViewModel())
+                    } label: {
+                        Label("Archived greenery", systemImage: "archivebox")
+                    }
+                }
             }
             .sheet(isPresented: $isAddingItem, onDismiss: { Task { await viewModel.load() } }) {
                 NavigationStack {

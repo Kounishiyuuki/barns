@@ -42,8 +42,18 @@ parallel. See also
 - **No hard delete.**
 - The **active My Greenery list excludes archived items.**
 - The archived item **remains in the local repository**.
-- **No restore flow yet** — restore is intentionally out of scope unless future
-  work explicitly adds it.
+
+### Restore Greenery (local-only, iOS)
+- An archived item can be **restored** back to active locally via
+  `status = active` (iOS `ProductItemStatus.active`).
+- **Explicit action only**, confirmed via an alert; soft action, **no hard
+  delete** and no re-insertion (item count is stable).
+- Stable fields (`id`, `categoryId`, `name`, `type`, `installedOrPurchasedAt`,
+  `locationLabel`, `careGuideIds`, `notes`, `imageUrl`) are preserved; only
+  `status` flips and `updatedAt` refreshes.
+- After restore, the item reappears in the active My Greenery list on reload.
+- iOS exposes an Archived Greenery list (low-emphasis entry from My Greenery)
+  with this restore action. Android restore is not part of this change.
 
 ## 3. Data boundaries
 
