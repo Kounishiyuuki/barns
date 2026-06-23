@@ -48,7 +48,15 @@ fun MyItemsScreen(
                 viewModel = viewModel,
                 onItemClick = { id -> route = MyItemsRoute.Detail(id) },
                 onAddClick = { route = MyItemsRoute.Add },
+                onArchivedClick = { route = MyItemsRoute.Archived },
                 onBack = onBack,
+            )
+        }
+        MyItemsRoute.Archived -> {
+            val viewModel = remember(container) { container.makeArchivedGreeneryViewModel() }
+            ArchivedGreeneryScreen(
+                viewModel = viewModel,
+                onBack = { route = MyItemsRoute.List },
             )
         }
         is MyItemsRoute.Detail -> {
@@ -98,6 +106,7 @@ private fun MyItemsListScreen(
     viewModel: MyItemsViewModel,
     onItemClick: (String) -> Unit,
     onAddClick: () -> Unit,
+    onArchivedClick: () -> Unit,
     onBack: () -> Unit,
 ) {
     val state by viewModel.state.collectAsState()
@@ -112,11 +121,20 @@ private fun MyItemsListScreen(
             TextButton(onClick = onBack) { Text("Back") }
             Button(onClick = onAddClick) { Text("Register greenery") }
         }
-        Text(
-            text = "My Greenery",
-            style = MaterialTheme.typography.titleLarge,
-            modifier = Modifier.padding(vertical = 8.dp),
-        )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Text(
+                text = "My Greenery",
+                style = MaterialTheme.typography.titleLarge,
+                modifier = Modifier.padding(vertical = 8.dp),
+            )
+            // Low-emphasis entry to the archived greenery list. Archived items
+            // stay customer-owned local data and can be restored.
+            TextButton(onClick = onArchivedClick) { Text("Archived") }
+        }
         when (val current = state) {
             MyItemsViewModel.State.Loading -> {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
@@ -178,4 +196,5 @@ private sealed interface MyItemsRoute {
     data class Consultation(val item: ProductItem) : MyItemsRoute
     data class Edit(val item: ProductItem) : MyItemsRoute
     data object Add : MyItemsRoute
+    data object Archived : MyItemsRoute
 }
