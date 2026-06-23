@@ -144,6 +144,10 @@ is intentionally not overstated — these are smoke-level boundary checks.
     `testActiveListExcludesArchivedItems`,
     `testArchiveOnlyHappensThroughExplicitAction`,
     `testEditFlowStillUpdatesItem`.
+- `RestoreGreenerySmokeTests`
+  - Smoke-level local boundary coverage for Archived Greenery list filtering,
+    explicit restore, stable item count, preserved stable fields, active-list
+    reload, official content separation, and existing archive behavior.
 - `RegisterFromCatalogSmokeTests` — `testAddItemViewModelAppliesPrefillButDoesNotAutoSave`
   (no auto-save), `testExplicitSavePersistsLocallyWithPrefilledCategory`.
 
@@ -160,5 +164,9 @@ is intentionally not overstated — these are smoke-level boundary checks.
     `activeListFilterExcludesArchivedItems`,
     `myItemsViewModelLoadExcludesArchivedItems`,
     `itemDetailViewModelArchivesOnlyOnExplicitAction`.
+- `myitems/RestoreGreenerySmokeTest`
+  - Smoke-level local boundary coverage for Archived Greenery list filtering,
+    explicit restore, stable item count, preserved stable fields, active and
+    archived list reload, official content separation, and existing archive behavior.
 - `catalog/RegisterFromCatalogSmokeTest` — `addItemViewModelAppliesPrefillButDoesNotAutoSave`
   (no auto-save), `explicitUseCaseSavePersistsLocallyWithPrefilledCategory`.
