@@ -9,20 +9,26 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.barns.app.domain.model.ProductItem
+import com.barns.app.domain.model.ProductItemStatus
 
 @Composable
 fun ItemDetailScreen(
@@ -30,11 +36,35 @@ fun ItemDetailScreen(
     onBack: () -> Unit,
     onPrepareConsultation: (ProductItem) -> Unit = {},
     onEdit: (ProductItem) -> Unit = {},
+    onArchived: () -> Unit = {},
 ) {
     val state by viewModel.state.collectAsState()
     val official by viewModel.officialContent.collectAsState()
+    var showArchiveDialog by remember { mutableStateOf(false) }
 
     LaunchedEffect(viewModel) { viewModel.load() }
+
+    if (showArchiveDialog) {
+        AlertDialog(
+            onDismissRequest = { showArchiveDialog = false },
+            title = { Text("Archive this greenery?") },
+            text = {
+                Text(
+                    "It will be removed from your active My Greenery list on this device. " +
+                        "Nothing is deleted permanently.",
+                )
+            },
+            confirmButton = {
+                TextButton(onClick = {
+                    showArchiveDialog = false
+                    viewModel.archive(onArchived = onArchived)
+                }) { Text("Archive") }
+            },
+            dismissButton = {
+                TextButton(onClick = { showArchiveDialog = false }) { Text("Cancel") }
+            },
+        )
+    }
 
     Column(
         modifier = Modifier
@@ -129,6 +159,20 @@ fun ItemDetailScreen(
                     style = MaterialTheme.typography.bodySmall,
                     modifier = Modifier.padding(top = 12.dp),
                 )
+
+                if (item.status == ProductItemStatus.ACTIVE) {
+                    OutlinedButton(
+                        onClick = { showArchiveDialog = true },
+                        modifier = Modifier.fillMaxWidth().padding(top = 12.dp),
+                    ) {
+                        Text("Archive greenery")
+                    }
+                    Text(
+                        text = "Archiving removes it from your active list. It is not deleted.",
+                        style = MaterialTheme.typography.bodySmall,
+                        modifier = Modifier.padding(top = 4.dp),
+                    )
+                }
             }
         }
     }

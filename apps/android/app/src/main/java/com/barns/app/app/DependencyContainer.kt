@@ -33,6 +33,7 @@ import com.barns.app.domain.usecase.care.GetCareTaskDetailUseCase
 import com.barns.app.domain.usecase.care.GetCareTasksUseCase
 import com.barns.app.domain.usecase.home.GetHomeSummaryUseCase
 import com.barns.app.domain.usecase.myitems.AddProductItemUseCase
+import com.barns.app.domain.usecase.myitems.ArchiveProductItemUseCase
 import com.barns.app.domain.usecase.myitems.UpdateProductItemUseCase
 import com.barns.app.domain.usecase.myitems.GetProductItemDetailUseCase
 import com.barns.app.domain.usecase.myitems.GetProductItemsUseCase
@@ -103,6 +104,7 @@ class DependencyContainer(
                 getGreeneryInfoUseCase = GetGreeneryInfoUseCase(greeneryInfoRepository),
                 getCareGuidesUseCase = GetCareGuidesUseCase(careGuideRepository),
             ),
+            archiveProductItemUseCase = ArchiveProductItemUseCase(productItemRepository),
         )
 
     fun makeAddItemViewModel(prefill: RegisterGreeneryPrefill? = null): AddItemViewModel =

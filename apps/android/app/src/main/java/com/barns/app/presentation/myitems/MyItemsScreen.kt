@@ -60,6 +60,7 @@ fun MyItemsScreen(
                 onBack = { route = MyItemsRoute.List },
                 onPrepareConsultation = { item -> route = MyItemsRoute.Consultation(item) },
                 onEdit = { item -> route = MyItemsRoute.Edit(item) },
+                onArchived = { route = MyItemsRoute.List },
             )
         }
         is MyItemsRoute.Consultation -> {
