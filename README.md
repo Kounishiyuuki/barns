@@ -63,3 +63,4 @@ barns/
 - [公式読み取り専用モックコンテンツ](docs/mock_official_content_data.md)
 - [Catalog→登録→My Greenery フロー](docs/catalog_to_my_greenery_flow.md)
 - [My Greenery ローカルライフサイクル（登録/編集/アーカイブ）](docs/my_greenery_lifecycle.md)
+- [MVPチェックポイント](docs/mvp_checkpoint.md)
