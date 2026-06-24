@@ -32,11 +32,15 @@ final class SettingsViewModel: ObservableObject {
                 ]
             ),
             Section(
-                title: "Support",
+                title: "About",
                 items: [
                     Item(
-                        title: "Getting help",
-                        detail: "Use the Support screen for phone consultation guidance."
+                        title: "What barns is",
+                        detail: "An after-support app for the greenery you own or had installed."
+                    ),
+                    Item(
+                        title: "My Greenery",
+                        detail: "Your own registry. Catalog and care guides are official read-only reference."
                     )
                 ]
             ),
@@ -45,7 +49,33 @@ final class SettingsViewModel: ObservableObject {
                 items: [
                     Item(
                         title: "Your data",
-                        detail: "Customer-side data stays local on this device in the current MVP."
+                        detail: "My Greenery stays local on this device. Nothing is sent anywhere in this MVP."
+                    ),
+                    Item(
+                        title: "Consultation drafts",
+                        detail: "Prepared locally for your reference and never submitted."
+                    ),
+                    Item(
+                        title: "Archived greenery",
+                        detail: "Archive and Restore only change status. Nothing is permanently deleted."
+                    )
+                ]
+            ),
+            Section(
+                title: "Support",
+                items: [
+                    Item(
+                        title: "Getting help",
+                        detail: "Use the Support screen for phone consultation guidance. Your notes stay on this device."
+                    )
+                ]
+            ),
+            Section(
+                title: "Legal",
+                items: [
+                    Item(
+                        title: "Notices",
+                        detail: "Legal and notice content is being prepared. This MVP build is not a final release."
                     )
                 ]
             ),
@@ -54,7 +84,11 @@ final class SettingsViewModel: ObservableObject {
                 items: [
                     Item(
                         title: "Status",
-                        detail: "Real API, authentication, and persistence are not enabled yet."
+                        detail: "Real API, authentication, sync, and cloud storage are not enabled yet."
+                    ),
+                    Item(
+                        title: "Not included",
+                        detail: "No analytics, tracking, payments, or orders."
                     )
                 ]
             )
