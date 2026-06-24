@@ -95,7 +95,10 @@ private fun CareListScreen(
                 val content = current.content
                 Text(text = "Upcoming", style = MaterialTheme.typography.titleMedium)
                 if (content.upcoming.isEmpty()) {
-                    Text(text = "No upcoming care.", style = MaterialTheme.typography.bodyMedium)
+                    Text(
+                        text = "No upcoming care tasks. Care you plan for your My Greenery appears here.",
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
                 } else {
                     content.upcoming.forEach { task ->
                         ListItem(
@@ -106,12 +109,15 @@ private fun CareListScreen(
                     }
                 }
                 Text(
-                    text = "Recent care",
+                    text = "Recent care log",
                     style = MaterialTheme.typography.titleMedium,
                     modifier = Modifier.padding(top = 8.dp),
                 )
                 if (content.recentLogs.isEmpty()) {
-                    Text(text = "No care logged yet.", style = MaterialTheme.typography.bodyMedium)
+                    Text(
+                        text = "No care logged yet. Completed care is recorded here on this device.",
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
                 } else {
                     content.recentLogs.forEach { log ->
                         ListItem(
@@ -119,6 +125,12 @@ private fun CareListScreen(
                         )
                     }
                 }
+                Text(
+                    text = "Care tasks and logs are local records for your My Greenery. barns does " +
+                        "not send reminders or notifications, and nothing is synced.",
+                    style = MaterialTheme.typography.bodySmall,
+                    modifier = Modifier.padding(top = 12.dp),
+                )
             }
         }
     }

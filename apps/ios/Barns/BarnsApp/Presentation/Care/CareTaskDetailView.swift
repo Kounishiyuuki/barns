@@ -9,7 +9,7 @@ struct CareTaskDetailView: View {
 
     var body: some View {
         content
-            .navigationTitle("Care task")
+            .navigationTitle("Care Task")
             .task { await viewModel.load() }
     }
 
@@ -39,6 +39,8 @@ struct CareTaskDetailView: View {
                         Text(task.status == .completed ? "Completed" : "Mark as completed")
                     }
                     .disabled(task.status == .completed || viewModel.isCompleting)
+                } footer: {
+                    Text("Marking care as done records it locally on this device. No reminders or notifications are sent.")
                 }
             }
         }
