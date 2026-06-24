@@ -68,3 +68,4 @@ barns/
 - [デバイスQAチェックリスト](docs/device_qa_checklist.md)
 - [パフォーマンス・プロダクト成長方針](docs/performance_and_product_growth_policy.md)
 - [UI一貫性チェックリスト](docs/ui_consistency_checklist.md)
+- [Settings/法務/プライバシー磨き込み計画](docs/settings_legal_privacy_polish_plan.md)
