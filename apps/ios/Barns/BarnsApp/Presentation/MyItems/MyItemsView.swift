@@ -18,7 +18,7 @@ struct MyItemsView: View {
                     Button {
                         isAddingItem = true
                     } label: {
-                        Label("Register greenery", systemImage: "plus")
+                        Label("Register Greenery", systemImage: "plus")
                     }
                 }
                 // Low-emphasis entry to the archived greenery list. Archived
@@ -27,7 +27,7 @@ struct MyItemsView: View {
                     NavigationLink {
                         ArchivedGreeneryView(viewModel: container.makeArchivedGreeneryViewModel())
                     } label: {
-                        Label("Archived greenery", systemImage: "archivebox")
+                        Label("Archived Greenery", systemImage: "archivebox")
                     }
                 }
             }
@@ -81,18 +81,7 @@ struct MyItemsView: View {
     @ViewBuilder
     private func itemCard(_ display: ProductItemPresentation) -> some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(display.name)
-                .font(.headline)
-            Text(display.ownershipSummary)
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-            HStack(spacing: 6) {
-                Label(display.categoryLabel, systemImage: "leaf")
-                Text("·")
-                Label(display.locationLabel, systemImage: "mappin.and.ellipse")
-            }
-            .font(.caption)
-            .foregroundStyle(.secondary)
+            GreenerySummaryView(display: display)
             Text(display.careStatusLabel)
                 .font(.caption)
                 .foregroundStyle(.secondary)
