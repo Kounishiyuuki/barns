@@ -61,7 +61,7 @@ fun ArchivedGreeneryScreen(
     Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
         TextButton(onClick = onBack) { Text("Back") }
         Text(
-            text = "Archived greenery",
+            text = "Archived Greenery",
             style = MaterialTheme.typography.titleLarge,
             modifier = Modifier.padding(vertical = 8.dp),
         )
@@ -93,13 +93,7 @@ fun ArchivedGreeneryScreen(
                             ListItem(
                                 headlineContent = { Text(display.name) },
                                 supportingContent = {
-                                    Column {
-                                        Text(display.ownershipSummary)
-                                        Text(
-                                            text = "${display.categoryLabel} · ${display.locationLabel}",
-                                            style = MaterialTheme.typography.bodySmall,
-                                        )
-                                    }
+                                    GreenerySummary(display = display)
                                 },
                                 trailingContent = {
                                     TextButton(onClick = { itemPendingRestore = item }) {

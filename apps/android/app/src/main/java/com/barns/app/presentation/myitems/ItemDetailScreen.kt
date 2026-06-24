@@ -11,6 +11,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
@@ -55,10 +56,17 @@ fun ItemDetailScreen(
                 )
             },
             confirmButton = {
-                TextButton(onClick = {
-                    showArchiveDialog = false
-                    viewModel.archive(onArchived = onArchived)
-                }) { Text("Archive") }
+                // Cautious, destructive-like emphasis. Archiving is still a soft
+                // status update (active -> archived), never a hard delete.
+                TextButton(
+                    onClick = {
+                        showArchiveDialog = false
+                        viewModel.archive(onArchived = onArchived)
+                    },
+                    colors = ButtonDefaults.textButtonColors(
+                        contentColor = MaterialTheme.colorScheme.error,
+                    ),
+                ) { Text("Archive") }
             },
             dismissButton = {
                 TextButton(onClick = { showArchiveDialog = false }) { Text("Cancel") }

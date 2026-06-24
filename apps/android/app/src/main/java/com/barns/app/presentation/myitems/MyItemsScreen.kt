@@ -119,7 +119,7 @@ private fun MyItemsListScreen(
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             TextButton(onClick = onBack) { Text("Back") }
-            Button(onClick = onAddClick) { Text("Register greenery") }
+            Button(onClick = onAddClick) { Text("Register Greenery") }
         }
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -164,17 +164,7 @@ private fun MyItemsListScreen(
                                 modifier = Modifier.clickable { onItemClick(item.id) },
                                 headlineContent = { Text(display.name) },
                                 supportingContent = {
-                                    Column {
-                                        Text(display.ownershipSummary)
-                                        Text(
-                                            text = "${display.categoryLabel} · ${display.locationLabel}",
-                                            style = MaterialTheme.typography.bodySmall,
-                                        )
-                                        Text(
-                                            text = display.careStatusLabel,
-                                            style = MaterialTheme.typography.bodySmall,
-                                        )
-                                    }
+                                    GreenerySummary(display = display, showCareStatus = true)
                                 },
                             )
                         }

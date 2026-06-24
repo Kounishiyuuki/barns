@@ -43,7 +43,7 @@ fun EditGreeneryScreen(
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        Text(text = "Edit greenery", style = MaterialTheme.typography.titleLarge)
+        Text(text = "Edit Greenery", style = MaterialTheme.typography.titleLarge)
         OutlinedTextField(
             value = state.name,
             onValueChange = viewModel::onNameChange,
