@@ -62,7 +62,7 @@ fun HomeScreen(
                 Text(text = content.summary.welcomeMessage, style = MaterialTheme.typography.bodyMedium)
                 ListItem(
                     modifier = Modifier.clickable { onOpenMyItems() },
-                    headlineContent = { Text("Registered items") },
+                    headlineContent = { Text("My Greenery") },
                     supportingContent = { Text(content.summary.registeredItemCount.toString()) },
                 )
                 ListItem(
