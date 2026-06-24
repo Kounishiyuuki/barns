@@ -27,7 +27,7 @@ struct CareView: View {
             List {
                 Section("Upcoming") {
                     if care.upcoming.isEmpty {
-                        Text("No upcoming care.")
+                        Text("No upcoming care tasks. Care you plan for your My Greenery appears here.")
                             .foregroundStyle(.secondary)
                     } else {
                         ForEach(care.upcoming) { task in
@@ -45,15 +45,20 @@ struct CareView: View {
                         }
                     }
                 }
-                Section("Recent care") {
+                Section("Recent care log") {
                     if care.recentLogs.isEmpty {
-                        Text("No care logged yet.")
+                        Text("No care logged yet. Completed care is recorded here on this device.")
                             .foregroundStyle(.secondary)
                     } else {
                         ForEach(care.recentLogs) { log in
                             Text(log.performedAt.formatted(date: .abbreviated, time: .omitted))
                         }
                     }
+                }
+                Section {
+                    Text("Care tasks and logs are local records for your My Greenery. barns does not send reminders or notifications, and nothing is synced.")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
                 }
             }
         }

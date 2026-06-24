@@ -81,6 +81,12 @@ fun CareTaskDetailScreen(
                 ) {
                     Text(if (isCompleted) "Completed" else "Mark as completed")
                 }
+                Text(
+                    text = "Marking care as done records it locally on this device. " +
+                        "No reminders or notifications are sent.",
+                    style = MaterialTheme.typography.bodySmall,
+                    modifier = Modifier.padding(top = 8.dp),
+                )
             }
         }
     }
