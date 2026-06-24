@@ -42,7 +42,13 @@ fun ConsultationDraftScreen(
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         TextButton(onClick = onBack, modifier = Modifier.fillMaxWidth()) { Text("Back") }
-        Text("Consultation draft", style = MaterialTheme.typography.titleLarge)
+        Text("Consultation Draft", style = MaterialTheme.typography.titleLarge)
+
+        Text(
+            text = "Prepare notes for a phone consultation. Everything stays on your device — " +
+                "nothing is submitted, and this is not a chat or support ticket.",
+            style = MaterialTheme.typography.bodySmall,
+        )
 
         viewModel.itemContextName?.let { itemName ->
             Text(
@@ -96,7 +102,12 @@ fun ConsultationDraftScreen(
             Text(text = message)
         }
         if (state.savedAt != null) {
-            Text(text = "Saved locally.", style = MaterialTheme.typography.bodySmall)
+            // Local review confirmation. Saving keeps the draft on this device
+            // only; there is no submitted state.
+            Text(
+                text = "Saved on this device. Not submitted.",
+                style = MaterialTheme.typography.bodySmall,
+            )
         }
 
         Button(
