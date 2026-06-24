@@ -104,7 +104,7 @@ private fun SupportInfoContent(
                     Text("Phone consultation")
                 }
                 Button(onClick = onOpenDraft, modifier = Modifier.fillMaxWidth().padding(top = 8.dp)) {
-                    Text("Consultation draft")
+                    Text("Consultation Draft")
                 }
             }
         }
