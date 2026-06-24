@@ -16,7 +16,7 @@ class SettingsSmokeTest {
         val viewModel = SettingsViewModel()
 
         val titles = viewModel.sections.map { it.title }
-        assertEquals(listOf("App", "Support", "Privacy", "Development"), titles)
+        assertEquals(listOf("App", "About", "Privacy", "Support", "Legal", "Development"), titles)
 
         viewModel.sections.forEach { section ->
             assertTrue(section.items.isNotEmpty())
