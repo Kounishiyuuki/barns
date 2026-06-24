@@ -37,7 +37,7 @@ struct HomeView: View {
                     NavigationLink {
                         MyItemsView(viewModel: container.makeMyItemsViewModel(), container: container)
                     } label: {
-                        LabeledContent("My Items", value: "\(content.summary.registeredItemCount)")
+                        LabeledContent("My Greenery", value: "\(content.summary.registeredItemCount)")
                     }
                     NavigationLink {
                         CareView(viewModel: container.makeCareViewModel(), container: container)

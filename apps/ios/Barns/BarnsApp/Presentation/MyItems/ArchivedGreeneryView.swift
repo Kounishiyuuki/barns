@@ -13,7 +13,7 @@ struct ArchivedGreeneryView: View {
 
     var body: some View {
         content
-            .navigationTitle("Archived greenery")
+            .navigationTitle("Archived Greenery")
             .navigationBarTitleDisplayMode(.inline)
             .alert(
                 "Restore to My Greenery",
@@ -67,20 +67,7 @@ struct ArchivedGreeneryView: View {
     private func archivedRow(_ item: ProductItem) -> some View {
         let display = ProductItemPresentation(item: item)
         HStack(alignment: .top) {
-            VStack(alignment: .leading, spacing: 4) {
-                Text(display.name)
-                    .font(.headline)
-                Text(display.ownershipSummary)
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-                HStack(spacing: 6) {
-                    Label(display.categoryLabel, systemImage: "leaf")
-                    Text("·")
-                    Label(display.locationLabel, systemImage: "mappin.and.ellipse")
-                }
-                .font(.caption)
-                .foregroundStyle(.secondary)
-            }
+            GreenerySummaryView(display: display)
             Spacer(minLength: 12)
             Button("Restore") { itemPendingRestore = item }
                 .buttonStyle(.bordered)

@@ -33,7 +33,7 @@ struct ItemDetailView: View {
                 isPresented: $showArchiveConfirmation,
                 titleVisibility: .visible
             ) {
-                Button("Archive") {
+                Button("Archive", role: .destructive) {
                     Task { if await viewModel.archive() { dismiss() } }
                 }
                 Button("Cancel", role: .cancel) {}

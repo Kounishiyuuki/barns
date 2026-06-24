@@ -49,7 +49,7 @@ struct EditGreeneryView: View {
                     .font(.footnote)
             }
         }
-        .navigationTitle("Edit greenery")
+        .navigationTitle("Edit Greenery")
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
                 Button("Cancel") { dismiss() }
