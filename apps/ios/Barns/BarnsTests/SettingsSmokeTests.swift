@@ -8,7 +8,7 @@ final class SettingsSmokeTests: XCTestCase {
         let viewModel = SettingsViewModel()
 
         let titles = viewModel.sections.map(\.title)
-        XCTAssertEqual(titles, ["App", "Support", "Privacy", "Development"])
+        XCTAssertEqual(titles, ["App", "About", "Privacy", "Support", "Legal", "Development"])
 
         // Every section has at least one item, and no item is empty.
         for section in viewModel.sections {
