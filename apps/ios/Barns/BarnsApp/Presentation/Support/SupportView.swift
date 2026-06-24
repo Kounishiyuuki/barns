@@ -40,7 +40,7 @@ struct SupportView: View {
                     NavigationLink("Phone consultation") {
                         PhoneInquiryView(viewModel: container.makePhoneInquiryViewModel())
                     }
-                    NavigationLink("Consultation draft") {
+                    NavigationLink("Consultation Draft") {
                         ConsultationDraftView(viewModel: container.makeConsultationDraftViewModel())
                     }
                 }

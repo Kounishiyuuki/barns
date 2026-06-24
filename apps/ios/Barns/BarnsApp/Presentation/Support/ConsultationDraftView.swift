@@ -10,6 +10,11 @@ struct ConsultationDraftView: View {
 
     var body: some View {
         Form {
+            Section {
+                Text("Prepare notes for a phone consultation. Everything stays on your device — nothing is submitted, and this is not a chat or support ticket.")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+            }
             if let itemName = viewModel.itemContextName {
                 Section {
                     LabeledContent("For", value: itemName)
@@ -41,12 +46,23 @@ struct ConsultationDraftView: View {
                     Task { await viewModel.save() }
                 }
                 .disabled(!viewModel.canSave)
-                Text("Saved locally only. Not sent to any server.")
+                if let savedAt = viewModel.savedAt {
+                    // Local review confirmation. Saving keeps the draft on this
+                    // device only; there is no submitted state.
+                    Label(
+                        "Saved on this device · \(savedAt.formatted(date: .abbreviated, time: .shortened)). Not submitted.",
+                        systemImage: "checkmark.circle"
+                    )
                     .font(.footnote)
                     .foregroundStyle(.secondary)
+                } else {
+                    Text("Saved locally only. Not sent to any server.")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                }
             }
         }
-        .navigationTitle("Consultation draft")
+        .navigationTitle("Consultation Draft")
         .task { await viewModel.load() }
     }
 }
