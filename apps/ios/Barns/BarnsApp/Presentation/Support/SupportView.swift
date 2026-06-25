@@ -34,7 +34,7 @@ struct SupportView: View {
                             .foregroundStyle(.secondary)
                     }
                 }
-                Section("Consultation") {
+                Section {
                     Text(info.inquiryPolicy)
                         .foregroundStyle(.secondary)
                     NavigationLink("Phone consultation") {
@@ -43,6 +43,10 @@ struct SupportView: View {
                     NavigationLink("Consultation Draft") {
                         ConsultationDraftView(viewModel: container.makeConsultationDraftViewModel())
                     }
+                } header: {
+                    Text("Consultation")
+                } footer: {
+                    Text("Consultation drafts are local preparation. Not submitted.")
                 }
             }
         }
