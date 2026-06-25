@@ -1,4 +1,4 @@
-# My Greenery Local Lifecycle: Register / Edit / Archive
+# My Greenery Local Lifecycle: Register / Edit / Archive / Restore
 
 Cross-platform reference for the customer-owned My Greenery lifecycle so future
 implementation stays aligned with the product direction and the data boundaries.
@@ -16,8 +16,8 @@ parallel. See also
   customer owns or has installed.
 - **Catalog is supporting** official read-only reference content, not the center
   of the app and not a shopping flow.
-- **Register / Edit / Archive are local, customer-owned data operations.** They
-  never reach a real backend; data stays local-first / mock-first.
+- **Register / Edit / Archive / Restore are local, customer-owned data operations.**
+  They never reach a real backend; data stays local-first / mock-first.
 
 ## 2. Lifecycle overview
 
