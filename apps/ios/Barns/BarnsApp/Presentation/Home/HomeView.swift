@@ -54,7 +54,12 @@ struct HomeView: View {
                     NavigationLink {
                         CatalogListView(viewModel: container.makeCatalogListViewModel(), container: container)
                     } label: {
-                        Text("Explore official catalog")
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Explore official catalog")
+                            Text("Official read-only reference")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
                     }
                 }
                 Section("Support") {

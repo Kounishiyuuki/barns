@@ -60,15 +60,21 @@ fun HomeScreen(
             ) {
                 Text(text = content.greeting, style = MaterialTheme.typography.titleLarge)
                 Text(text = content.summary.welcomeMessage, style = MaterialTheme.typography.bodyMedium)
+                Text(text = "Your greenery", style = MaterialTheme.typography.titleMedium)
                 ListItem(
                     modifier = Modifier.clickable { onOpenMyItems() },
                     headlineContent = { Text("My Greenery") },
-                    supportingContent = { Text(content.summary.registeredItemCount.toString()) },
+                    supportingContent = { Text("${content.summary.registeredItemCount} registered locally") },
                 )
                 ListItem(
                     modifier = Modifier.clickable { onOpenCare() },
                     headlineContent = { Text("Next care") },
                     supportingContent = { Text(content.summary.nextCareLabel) },
+                )
+                Text(
+                    text = "Explore",
+                    style = MaterialTheme.typography.titleMedium,
+                    modifier = Modifier.padding(top = 8.dp),
                 )
                 ListItem(
                     modifier = Modifier.clickable { onOpenPatterns() },
@@ -78,12 +84,22 @@ fun HomeScreen(
                 ListItem(
                     modifier = Modifier.clickable { onOpenCatalog() },
                     headlineContent = { Text("Explore official catalog") },
-                    supportingContent = { Text("Official greenery references") },
+                    supportingContent = { Text("Official read-only reference") },
+                )
+                Text(
+                    text = "Support",
+                    style = MaterialTheme.typography.titleMedium,
+                    modifier = Modifier.padding(top = 8.dp),
                 )
                 ListItem(
                     modifier = Modifier.clickable { onOpenSupport() },
                     headlineContent = { Text("Support") },
                     supportingContent = { Text(content.summary.supportGuidance) },
+                )
+                Text(
+                    text = "More",
+                    style = MaterialTheme.typography.titleMedium,
+                    modifier = Modifier.padding(top = 8.dp),
                 )
                 ListItem(
                     modifier = Modifier.clickable { onOpenSettings() },
