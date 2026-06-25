@@ -106,6 +106,11 @@ private fun SupportInfoContent(
                 Button(onClick = onOpenDraft, modifier = Modifier.fillMaxWidth().padding(top = 8.dp)) {
                     Text("Consultation Draft")
                 }
+                Text(
+                    text = "Consultation drafts are local preparation. Not submitted.",
+                    style = MaterialTheme.typography.bodySmall,
+                    modifier = Modifier.padding(top = 4.dp),
+                )
             }
         }
     }
