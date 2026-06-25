@@ -39,7 +39,7 @@ struct CatalogDetailView: View {
                 } header: {
                     Text("Overview")
                 } footer: {
-                    Text("Official reference content.")
+                    Text("Official read-only reference content.")
                 }
                 if detail.hasBasicInformation {
                     Section("Basic information") {
@@ -76,7 +76,7 @@ struct CatalogDetailView: View {
                         Label("Register to My Greenery", systemImage: "plus.circle")
                     }
                 } footer: {
-                    Text("Already have this greenery? Start a local registry entry. Nothing is ordered or purchased.")
+                    Text("Already have this greenery? Add it to your local My Greenery registry. This creates a local entry only — nothing is ordered, reserved, or submitted.")
                 }
             }
         }

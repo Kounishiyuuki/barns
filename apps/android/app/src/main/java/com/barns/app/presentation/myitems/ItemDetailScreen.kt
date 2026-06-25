@@ -163,7 +163,8 @@ fun ItemDetailScreen(
                 }
 
                 Text(
-                    text = "This registry is kept locally on your device in the current MVP.",
+                    text = "Registered locally as your own greenery, kept on this device. Official " +
+                        "catalog and care content is read-only reference and is not changed here.",
                     style = MaterialTheme.typography.bodySmall,
                     modifier = Modifier.padding(top = 12.dp),
                 )
