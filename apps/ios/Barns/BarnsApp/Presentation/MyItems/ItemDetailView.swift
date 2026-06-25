@@ -88,7 +88,7 @@ struct ItemDetailView: View {
                     }
                 }
                 Section {
-                    Text("This registry is kept locally on your device in the current MVP.")
+                    Text("Registered locally as your own greenery, kept on this device. Official catalog and care content is read-only reference and is not changed here.")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                 }

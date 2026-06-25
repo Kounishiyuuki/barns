@@ -76,7 +76,7 @@ fun CatalogDetailScreen(
                     modifier = Modifier.padding(top = 4.dp),
                 )
                 Text(
-                    text = "Official reference content.",
+                    text = "Official read-only reference content.",
                     style = MaterialTheme.typography.bodySmall,
                     modifier = Modifier.padding(top = 4.dp),
                 )
@@ -116,8 +116,8 @@ fun CatalogDetailScreen(
                     Text("Register to My Greenery")
                 }
                 Text(
-                    text = "Already have this greenery? Start a local registry entry. " +
-                        "Nothing is ordered or purchased.",
+                    text = "Already have this greenery? Add it to your local My Greenery registry. " +
+                        "This creates a local entry only — nothing is ordered, reserved, or submitted.",
                     style = MaterialTheme.typography.bodySmall,
                     modifier = Modifier.padding(top = 4.dp),
                 )
