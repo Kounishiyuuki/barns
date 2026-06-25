@@ -32,7 +32,7 @@ struct AddItemView: View {
                 TextField("Notes for your own reference", text: $viewModel.notes, axis: .vertical)
             }
             Section {
-                Text("Your registry is kept locally on this device in the current MVP. Care and support guidance stay in one place.")
+                Text("Saves a local My Greenery entry on this device — no order, reservation, estimate, payment, or submission is created. If you started from the Catalog, official details only prefill these fields; the official read-only reference is not changed.")
                     .font(.footnote)
                     .foregroundStyle(.secondary)
             }
