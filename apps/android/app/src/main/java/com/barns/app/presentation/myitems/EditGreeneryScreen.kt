@@ -100,8 +100,8 @@ fun EditGreeneryScreen(
         }
 
         Text(
-            text = "Changes are saved locally on this device. Official catalog and " +
-                "care content is not changed.",
+            text = "Updates this local My Greenery entry only, saved on this device. Official " +
+                "catalog and care content is read-only reference and is not changed.",
             style = MaterialTheme.typography.bodySmall,
         )
         state.errorMessage?.let { message ->

@@ -39,7 +39,7 @@ struct EditGreeneryView: View {
                 }
             }
             Section {
-                Text("Changes are saved locally on this device. Official catalog and care content is not changed.")
+                Text("Updates this local My Greenery entry only, saved on this device. Official catalog and care content is read-only reference and is not changed.")
                     .font(.footnote)
                     .foregroundStyle(.secondary)
             }

@@ -177,7 +177,8 @@ fun ItemDetailScreen(
                         Text("Archive greenery")
                     }
                     Text(
-                        text = "Archiving removes it from your active list. It is not deleted.",
+                        text = "Archiving removes it from your active My Greenery list. Nothing is " +
+                            "permanently deleted, and you can restore it anytime.",
                         style = MaterialTheme.typography.bodySmall,
                         modifier = Modifier.padding(top = 4.dp),
                     )

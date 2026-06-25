@@ -96,7 +96,7 @@ struct ItemDetailView: View {
                     Section {
                         Button("Archive greenery") { showArchiveConfirmation = true }
                     } footer: {
-                        Text("Archiving removes it from your active list. It is not deleted.")
+                        Text("Archiving removes it from your active My Greenery list. Nothing is permanently deleted, and you can restore it anytime.")
                     }
                 }
             }
