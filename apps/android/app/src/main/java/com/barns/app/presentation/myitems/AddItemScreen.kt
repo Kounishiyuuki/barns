@@ -83,8 +83,9 @@ fun AddItemScreen(
             modifier = Modifier.fillMaxWidth(),
         )
         Text(
-            text = "Your registry is kept locally on this device in the current MVP. " +
-                "Care and support guidance stay in one place.",
+            text = "Saves a local My Greenery entry on this device — no order, reservation, estimate, " +
+                "payment, or submission is created. If you started from the Catalog, official details " +
+                "only prefill these fields; the official read-only reference is not changed.",
             style = MaterialTheme.typography.bodySmall,
         )
         state.errorMessage?.let { message ->
