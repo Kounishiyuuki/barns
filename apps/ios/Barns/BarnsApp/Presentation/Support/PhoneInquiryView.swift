@@ -34,7 +34,7 @@ struct PhoneInquiryView: View {
                             .font(.footnote)
                             .foregroundStyle(.secondary)
                     }
-                    Text("Calling from the app is not enabled yet.")
+                    Text("Calling from the app is not enabled yet. This is guidance for contacting support yourself — no request is submitted from the app, and no customer data is sent automatically.")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                 }

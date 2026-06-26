@@ -57,7 +57,9 @@ fun PhoneInquiryScreen(
                     Text(text = hours, style = MaterialTheme.typography.bodySmall)
                 }
                 Text(
-                    text = "Calling from the app is not enabled yet.",
+                    text = "Calling from the app is not enabled yet. This is guidance for contacting " +
+                        "support yourself — no request is submitted from the app, and no customer " +
+                        "data is sent automatically.",
                     style = MaterialTheme.typography.bodySmall,
                     modifier = Modifier.padding(top = 8.dp),
                 )
