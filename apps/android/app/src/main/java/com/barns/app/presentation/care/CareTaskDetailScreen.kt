@@ -53,6 +53,11 @@ fun CareTaskDetailScreen(
             }
             is CareTaskDetailViewModel.State.Loaded -> {
                 val task = current.task
+                Text(
+                    text = "Care Task",
+                    style = MaterialTheme.typography.titleLarge,
+                    modifier = Modifier.padding(vertical = 8.dp),
+                )
                 ListItem(
                     headlineContent = { Text("Title") },
                     supportingContent = { Text(task.title) },
