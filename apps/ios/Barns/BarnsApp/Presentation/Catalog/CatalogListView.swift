@@ -48,7 +48,7 @@ struct CatalogListView: View {
                         }
                     }
                 } footer: {
-                    Text("Official reference content. Browse only — no ordering in the app.")
+                    Text("Official read-only reference content. Browse only — no ordering in the app.")
                 }
             }
         }

@@ -117,7 +117,7 @@ private fun CatalogListContent(
                     }
                 }
                 Text(
-                    text = "Official reference content. Browse only — no ordering in the app.",
+                    text = "Official read-only reference content. Browse only — no ordering in the app.",
                     style = MaterialTheme.typography.bodySmall,
                     modifier = Modifier.padding(top = 8.dp),
                 )
