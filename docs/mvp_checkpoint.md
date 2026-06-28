@@ -18,6 +18,13 @@ behavior. See also
   hard delete** and **no customer data leaving the device**.
 - The lifecycle stays **mock-first / local-first**; no real API, auth, or sync has
   been introduced. This checkpoint marks a safe point to plan the next phase.
+- A follow-up **cross-platform UI completion pass** has since aligned local-only /
+  read-only / not-submitted wording and small UI polish across Home, My Greenery,
+  the lifecycle, Catalog list / detail, Care, Consultation Draft, Phone guidance,
+  Support, and Settings. See the
+  [Device QA Checklist](device_qa_checklist.md#9-wording--boundary-parity-after-the-cross-platform-ui-completion-pass)
+  for the wording/boundary parity checks. This is UI/wording polish only — it does
+  **not** add backend, auth, sync, submission, or release readiness.
 
 ## 2. Current completed capabilities
 

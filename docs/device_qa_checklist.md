@@ -98,7 +98,44 @@ Confirm none of these appear or are reachable:
 - [ ] Active / archived list counts behave as expected
 - [ ] Official info / care guide links remain visible after edit / archive / restore where appropriate
 
-## 9. Known gaps
+## 9. Wording & boundary parity (after the cross-platform UI completion pass)
+
+Recent PRs aligned local-only / read-only / not-submitted wording and small UI polish
+across Home, My Greenery, the Register / Edit / Archive / Restore lifecycle, Catalog
+list / detail, Care Tasks / Care Logs, Consultation Draft, Phone guidance, Support, and
+Settings. Verify on **both iOS and Android**:
+
+- [ ] Wording parity — equivalent screens use the same terminology (My Greenery,
+  Register Greenery, Edit Greenery, Archive / Restore, Consultation Draft, Care Task,
+  official read-only reference)
+- [ ] Empty states render and read well (My Greenery, Archived Greenery, Care upcoming /
+  care log)
+- [ ] No EC / order / reservation / estimate / payment implication anywhere (such terms
+  appear only as negative guardrails)
+- [ ] No backend submission implication (nothing is "sent", "submitted", or "synced")
+- [ ] No hard-delete implication — Archive reads as reversible; "nothing is permanently
+  deleted"
+- [ ] Catalog → Register still uses the explicit local save flow (prefill only, no
+  auto-save); the official reference is described as not changed
+- [ ] Support flows do not imply chat / ticket / in-app submission; Phone guidance reads
+  as guidance only, with no request or customer data sent automatically
+- [ ] Care does not imply notifications / reminders / sync — care tasks and logs read as
+  local records
+- [ ] Home reads as a calm after-support dashboard, not a sales / acquisition screen
+- [ ] Settings / Legal / Privacy read as local-first / mock-first MVP status, not final
+  legal / release approval
+
+Surface-level expectations confirmed by the UI completion work:
+
+- Home is an after-support dashboard; My Greenery is the local owned registry.
+- Register Greenery creates a local entry; Catalog is official read-only reference.
+- Care Tasks / Care Logs are local after-care records.
+- Consultation Draft is local-only preparation and not submitted.
+- Phone guidance is guidance only; no request or customer data is sent automatically.
+- Archive / Restore are local, reversible soft lifecycle controls (no hard delete).
+- Settings / Legal / Privacy communicate local-first / mock-first MVP status only.
+
+## 10. Known gaps
 
 - No confirmed real distribution setup (none assumed present)
 - No final device matrix
@@ -107,7 +144,7 @@ Confirm none of these appear or are reachable:
 - No store screenshot / metadata QA
 - No final legal / privacy approval
 
-## 10. Recommended next PRs (planning only)
+## 11. Recommended next PRs (planning only)
 
 Do **not** start these here:
 
