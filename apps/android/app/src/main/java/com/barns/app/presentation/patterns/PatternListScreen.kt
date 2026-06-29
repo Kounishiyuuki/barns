@@ -22,6 +22,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.barns.app.app.DependencyContainer
 
@@ -83,7 +84,7 @@ private fun PatternListContent(
                 LazyColumn {
                     items(current.patterns) { pattern ->
                         ListItem(
-                            modifier = Modifier.clickable { onPatternClick(pattern.id) },
+                            modifier = Modifier.clickable(role = Role.Button) { onPatternClick(pattern.id) },
                             headlineContent = { Text(pattern.name) },
                             supportingContent = { Text(pattern.recommendedSpace) },
                         )

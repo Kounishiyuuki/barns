@@ -16,11 +16,17 @@ struct GreenerySummaryView: View {
                 .foregroundStyle(.secondary)
             HStack(spacing: 6) {
                 Label(display.categoryLabel, systemImage: "leaf")
+                // Decorative separator only; hidden from VoiceOver so the row
+                // reads as one clean summary.
                 Text("·")
+                    .accessibilityHidden(true)
                 Label(display.locationLabel, systemImage: "mappin.and.ellipse")
             }
             .font(.caption)
             .foregroundStyle(.secondary)
         }
+        // Read the whole summary as a single VoiceOver element instead of
+        // fragmented name / ownership / category / location pieces.
+        .accessibilityElement(children: .combine)
     }
 }

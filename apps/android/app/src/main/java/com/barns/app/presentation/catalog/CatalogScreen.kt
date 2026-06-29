@@ -23,6 +23,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.barns.app.app.DependencyContainer
 import com.barns.app.presentation.myitems.AddItemScreen
@@ -102,7 +103,7 @@ private fun CatalogListContent(
                 LazyColumn {
                     items(current.items) { item ->
                         ListItem(
-                            modifier = Modifier.clickable { onItemClick(item.id) },
+                            modifier = Modifier.clickable(role = Role.Button) { onItemClick(item.id) },
                             headlineContent = { Text(item.name) },
                             supportingContent = {
                                 Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {

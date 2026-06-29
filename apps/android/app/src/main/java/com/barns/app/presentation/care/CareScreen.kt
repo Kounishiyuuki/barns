@@ -22,6 +22,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.barns.app.app.DependencyContainer
 import java.time.ZoneId
@@ -102,7 +103,7 @@ private fun CareListScreen(
                 } else {
                     content.upcoming.forEach { task ->
                         ListItem(
-                            modifier = Modifier.clickable { onTaskClick(task.id) },
+                            modifier = Modifier.clickable(role = Role.Button) { onTaskClick(task.id) },
                             headlineContent = { Text(task.title) },
                             supportingContent = { Text("Due ${careDateFormatter.format(task.dueDate)}") },
                         )
