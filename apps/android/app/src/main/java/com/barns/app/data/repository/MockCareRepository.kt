@@ -19,7 +19,7 @@ class MockCareRepository : CareRepository {
         CareTask(
             id = "care-task-001",
             productItemId = "item-wall-green-001",
-            title = "Inspect wall greenery",
+            title = "Inspect the entryway green wall",
             careType = CareType.INSPECTION,
             dueDate = Instant.now().plus(2, ChronoUnit.DAYS),
             repeatRule = CareRepeatRule.MONTHLY,
@@ -30,7 +30,7 @@ class MockCareRepository : CareRepository {
         CareTask(
             id = "care-task-002",
             productItemId = "item-interior-green-001",
-            title = "Water desk planter",
+            title = "Water the reception planter",
             careType = CareType.WATERING,
             dueDate = Instant.now().plus(5, ChronoUnit.DAYS),
             repeatRule = CareRepeatRule.WEEKLY,
@@ -46,7 +46,7 @@ class MockCareRepository : CareRepository {
             careTaskId = null,
             careType = CareType.CLEANING,
             performedAt = Instant.now().minus(7, ChronoUnit.DAYS),
-            memo = null,
+            memo = "Wiped dust from the panel leaves.",
             imageUrl = null,
         ),
     )
