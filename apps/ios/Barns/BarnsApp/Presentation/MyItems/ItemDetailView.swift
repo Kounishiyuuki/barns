@@ -14,7 +14,7 @@ struct ItemDetailView: View {
 
     var body: some View {
         content
-            .navigationTitle("Registered greenery")
+            .navigationTitle("Registered Greenery")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 if case .loaded(let item) = viewModel.state {

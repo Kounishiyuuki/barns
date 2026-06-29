@@ -100,6 +100,18 @@ private fun CatalogListContent(
                 Text(text = current.message, style = MaterialTheme.typography.bodyMedium)
             }
             is CatalogListViewModel.State.Loaded -> {
+                if (current.items.isEmpty()) {
+                    Text(
+                        text = "No catalog items",
+                        style = MaterialTheme.typography.titleMedium,
+                        modifier = Modifier.padding(top = 8.dp),
+                    )
+                    Text(
+                        text = "Official reference greenery will appear here. This is read-only " +
+                            "reference content.",
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
+                }
                 LazyColumn {
                     items(current.items) { item ->
                         ListItem(

@@ -103,7 +103,7 @@ fun ItemDetailScreen(
                 val display = ProductItemPresentation.from(item)
 
                 Text(
-                    text = "Registered greenery",
+                    text = "Registered Greenery",
                     style = MaterialTheme.typography.titleLarge,
                     modifier = Modifier.padding(vertical = 8.dp),
                 )
