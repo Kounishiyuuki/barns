@@ -92,6 +92,7 @@ Confirm none of these appear or are reachable:
 - [ ] No real API / auth / sync
 - [ ] No analytics / tracking
 - [ ] No image upload
+- [ ] Local mock image assets are visually clean, brand-neutral, and contain no people, logos, text, contact information, or sales/order cues before any future UI wiring
 - [ ] No hard delete
 - [ ] No staff / admin flow
 
