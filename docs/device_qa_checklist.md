@@ -50,7 +50,10 @@ Run on both iOS and Android:
 - [ ] Back / dismiss returns to the expected screen
 - [ ] Form validation and field readability
 - [ ] Empty states render correctly (empty My Greenery, empty archived list)
-- [ ] Dynamic Type / basic accessibility (if applicable)
+- [ ] VoiceOver: each My Greenery / Archived row reads as one clear element
+  (name, ownership, category, location) without the decorative separator
+- [ ] Dynamic Type at large sizes: helper text (local-only / read-only /
+  not-submitted) wraps and is not truncated
 - [ ] Portrait layout
 - [ ] No unexpected network / auth prompts
 - [ ] No crash during Register / Edit / Archive / Restore
@@ -62,7 +65,10 @@ Run on both iOS and Android:
 - [ ] System back behavior is correct
 - [ ] Form validation and field readability
 - [ ] Empty states render correctly (empty My Greenery, empty archived list)
-- [ ] Basic accessibility labels / content descriptions where applicable
+- [ ] TalkBack: tappable list rows (Home, My Greenery, Care, Catalog,
+  Patterns) announce as buttons
+- [ ] Large font scale: helper text (local-only / read-only / not-submitted)
+  wraps and is not truncated
 - [ ] Layout holds on common emulator sizes
 - [ ] No unexpected network / auth prompts
 - [ ] No crash during Register / Edit / Archive / Restore

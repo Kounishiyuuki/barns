@@ -25,6 +25,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.barns.app.app.DependencyContainer
 import com.barns.app.domain.model.ProductItem
@@ -161,7 +162,7 @@ private fun MyItemsListScreen(
                         items(current.items) { item ->
                             val display = ProductItemPresentation.from(item)
                             ListItem(
-                                modifier = Modifier.clickable { onItemClick(item.id) },
+                                modifier = Modifier.clickable(role = Role.Button) { onItemClick(item.id) },
                                 headlineContent = { Text(display.name) },
                                 supportingContent = {
                                     GreenerySummary(display = display, showCareStatus = true)

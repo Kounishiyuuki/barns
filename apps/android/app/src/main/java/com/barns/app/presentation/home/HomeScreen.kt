@@ -16,6 +16,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 
 /**
@@ -62,12 +63,12 @@ fun HomeScreen(
                 Text(text = content.summary.welcomeMessage, style = MaterialTheme.typography.bodyMedium)
                 Text(text = "Your greenery", style = MaterialTheme.typography.titleMedium)
                 ListItem(
-                    modifier = Modifier.clickable { onOpenMyItems() },
+                    modifier = Modifier.clickable(role = Role.Button) { onOpenMyItems() },
                     headlineContent = { Text("My Greenery") },
                     supportingContent = { Text("${content.summary.registeredItemCount} registered locally") },
                 )
                 ListItem(
-                    modifier = Modifier.clickable { onOpenCare() },
+                    modifier = Modifier.clickable(role = Role.Button) { onOpenCare() },
                     headlineContent = { Text("Next care") },
                     supportingContent = { Text(content.summary.nextCareLabel) },
                 )
@@ -77,12 +78,12 @@ fun HomeScreen(
                     modifier = Modifier.padding(top = 8.dp),
                 )
                 ListItem(
-                    modifier = Modifier.clickable { onOpenPatterns() },
+                    modifier = Modifier.clickable(role = Role.Button) { onOpenPatterns() },
                     headlineContent = { Text("Patterns") },
                     supportingContent = { Text(content.summary.patternsEntryLabel) },
                 )
                 ListItem(
-                    modifier = Modifier.clickable { onOpenCatalog() },
+                    modifier = Modifier.clickable(role = Role.Button) { onOpenCatalog() },
                     headlineContent = { Text("Explore official catalog") },
                     supportingContent = { Text("Official read-only reference") },
                 )
@@ -92,7 +93,7 @@ fun HomeScreen(
                     modifier = Modifier.padding(top = 8.dp),
                 )
                 ListItem(
-                    modifier = Modifier.clickable { onOpenSupport() },
+                    modifier = Modifier.clickable(role = Role.Button) { onOpenSupport() },
                     headlineContent = { Text("Support") },
                     supportingContent = { Text(content.summary.supportGuidance) },
                 )
@@ -102,7 +103,7 @@ fun HomeScreen(
                     modifier = Modifier.padding(top = 8.dp),
                 )
                 ListItem(
-                    modifier = Modifier.clickable { onOpenSettings() },
+                    modifier = Modifier.clickable(role = Role.Button) { onOpenSettings() },
                     headlineContent = { Text("Settings") },
                     supportingContent = { Text("App status and guardrails") },
                 )
