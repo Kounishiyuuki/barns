@@ -14,7 +14,7 @@ actor MockCareRepository: CareRepository {
             CareTask(
                 id: "care-task-001",
                 productItemId: "item-wall-green-001",
-                title: "Inspect wall greenery",
+                title: "Inspect the entryway green wall",
                 careType: .inspection,
                 dueDate: now.addingTimeInterval(2 * day),
                 repeatRule: .monthly,
@@ -25,7 +25,7 @@ actor MockCareRepository: CareRepository {
             CareTask(
                 id: "care-task-002",
                 productItemId: "item-interior-green-001",
-                title: "Water desk planter",
+                title: "Water the reception planter",
                 careType: .watering,
                 dueDate: now.addingTimeInterval(5 * day),
                 repeatRule: .weekly,
@@ -42,7 +42,7 @@ actor MockCareRepository: CareRepository {
                 careTaskId: nil,
                 careType: .cleaning,
                 performedAt: now.addingTimeInterval(-7 * day),
-                memo: nil,
+                memo: "Wiped dust from the panel leaves.",
                 imageUrl: nil
             )
         ]
