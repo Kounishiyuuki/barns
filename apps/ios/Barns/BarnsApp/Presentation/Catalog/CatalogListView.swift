@@ -25,6 +25,12 @@ struct CatalogListView: View {
         case .failed(let message):
             Text(message)
                 .foregroundStyle(.secondary)
+        case .loaded(let items) where items.isEmpty:
+            ContentUnavailableView(
+                "No catalog items",
+                systemImage: "leaf",
+                description: Text("Official reference greenery will appear here. This is read-only reference content.")
+            )
         case .loaded(let items):
             List {
                 Section {

@@ -58,6 +58,11 @@ fun CatalogDetailScreen(
                 val detail = current.content
 
                 Text(
+                    text = "Catalog item",
+                    style = MaterialTheme.typography.titleLarge,
+                    modifier = Modifier.padding(vertical = 8.dp),
+                )
+                Text(
                     text = "Overview",
                     style = MaterialTheme.typography.titleMedium,
                     modifier = Modifier.padding(top = 8.dp, bottom = 4.dp),
