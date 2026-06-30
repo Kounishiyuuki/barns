@@ -159,6 +159,20 @@ Any future mapping should preserve existing explicit save behavior and should no
 3. Add iOS and Android presentation support in separate small PRs if local asset rendering is approved.
 4. Run platform-specific tests/builds only when app code, mock data behavior, or rendering is changed.
 
+### 12.1 Implemented Phase: Catalog + My Greenery UI integration
+
+The first UI integration phase is now implemented for **Catalog** and **My Greenery** only:
+
+- A local mock reference convention is used: `mock://<category>/<asset-name>`, stored in the existing optional `imageUrl` field (no schema/model change).
+- iOS renders bundled JPEGs via a small `LocalMockImageView` (loads from the app bundle by asset name; no network). Assets live under `apps/ios/Barns/BarnsApp/Resources/MockImages/`.
+- Android renders bundled drawables via a small `LocalMockImage` composable using `painterResource` (no Coil/Glide, no network). Assets live under `apps/android/app/src/main/res/drawable-nodpi/` with sanitized names (`mock_<category>_<asset>`).
+- Wired surfaces: Catalog list cards, Catalog detail hero, My Greenery list cards, My Greenery detail hero.
+- Only the subset of generated assets needed for the current seed demo is bundled into each app (3 catalog + 2 my-greenery). The full 32-image pack remains in `shared/mock-assets/images/`.
+- Seed mapping uses existing optional image fields only; IDs, counts, category IDs, and care guide IDs are unchanged. One catalog seed (maintenance kit) intentionally keeps a `null` image to exercise the safe fallback.
+- Fallback: list rows show a neutral placeholder when no image is mapped; detail heroes are only shown when an image resolves. `null` / unknown / remote references never load and never crash.
+
+Remaining future work (not in this PR): Care / Guide / Hero image display, and any wider asset coverage.
+
 ## 13. Validation Checklist
 
 - `git diff --check` is clean.

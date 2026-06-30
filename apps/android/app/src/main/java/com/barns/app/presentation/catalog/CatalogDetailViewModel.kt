@@ -77,6 +77,7 @@ class CatalogDetailViewModel(
             wateringOverview = wateringOverview,
             careGuides = summaries,
             registerPrefill = RegisterGreeneryPrefill.from(item),
+            imageReference = item.imageUrl,
         )
     }
 }

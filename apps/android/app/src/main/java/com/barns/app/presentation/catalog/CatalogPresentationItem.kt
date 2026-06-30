@@ -15,6 +15,9 @@ data class CatalogPresentationItem(
     val name: String,
     val kindLabel: String,
     val summary: String,
+    // Optional local mock demo image reference ("mock://…"). Read-only
+    // reference imagery only; resolves to null safely when unmapped.
+    val imageReference: String? = null,
 ) {
     companion object {
         fun from(item: CatalogItem): CatalogPresentationItem = CatalogPresentationItem(
@@ -22,6 +25,7 @@ data class CatalogPresentationItem(
             name = item.name,
             kindLabel = CatalogKind.label(item.kind),
             summary = item.summary,
+            imageReference = item.imageUrl,
         )
     }
 }
@@ -38,6 +42,9 @@ data class CatalogDetailContent(
     // Prefill for starting a local Register Greenery flow from this item.
     // Built from official fields only; the user still confirms and saves.
     val registerPrefill: com.barns.app.presentation.myitems.RegisterGreeneryPrefill,
+    // Optional local mock demo image reference ("mock://…"). Read-only
+    // reference imagery only; resolves to null safely when unmapped.
+    val imageReference: String? = null,
 ) {
     data class CareGuideSummary(
         val id: String,

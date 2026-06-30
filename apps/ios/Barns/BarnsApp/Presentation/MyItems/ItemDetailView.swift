@@ -56,6 +56,20 @@ struct ItemDetailView: View {
         case .loaded(let item):
             let display = ProductItemPresentation(item: item)
             List {
+                if let heroImage = LocalMockImage.uiImage(for: item.imageUrl) {
+                    Section {
+                        Image(uiImage: heroImage)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 200)
+                            .clipped()
+                            .accessibilityHidden(true)
+                            .listRowInsets(EdgeInsets())
+                    } footer: {
+                        Text("Mock demo image. Not a real customer photo.")
+                    }
+                }
                 Section("Overview") {
                     LabeledContent("Name", value: display.name)
                     LabeledContent("Type", value: display.typeLabel)

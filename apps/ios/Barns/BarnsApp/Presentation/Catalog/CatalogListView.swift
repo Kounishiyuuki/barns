@@ -41,15 +41,20 @@ struct CatalogListView: View {
                                 container: container
                             )
                         } label: {
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text(item.name)
-                                    .font(.headline)
-                                Text(item.kindLabel)
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
-                                Text(item.summary)
-                                    .font(.subheadline)
-                                    .foregroundStyle(.secondary)
+                            HStack(spacing: 12) {
+                                LocalMockImageView(reference: item.imageReference)
+                                    .frame(width: 56, height: 56)
+                                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text(item.name)
+                                        .font(.headline)
+                                    Text(item.kindLabel)
+                                        .font(.caption)
+                                        .foregroundStyle(.secondary)
+                                    Text(item.summary)
+                                        .font(.subheadline)
+                                        .foregroundStyle(.secondary)
+                                }
                             }
                         }
                     }

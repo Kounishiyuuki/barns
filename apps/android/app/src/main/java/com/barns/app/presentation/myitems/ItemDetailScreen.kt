@@ -6,8 +6,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
@@ -27,9 +29,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.barns.app.domain.model.ProductItem
 import com.barns.app.domain.model.ProductItemStatus
+import com.barns.app.presentation.common.LocalMockImage
+import com.barns.app.presentation.common.localMockDrawableRes
 
 @Composable
 fun ItemDetailScreen(
@@ -107,6 +112,22 @@ fun ItemDetailScreen(
                     style = MaterialTheme.typography.titleLarge,
                     modifier = Modifier.padding(vertical = 8.dp),
                 )
+
+                if (localMockDrawableRes(item.imageUrl) != null) {
+                    LocalMockImage(
+                        reference = item.imageUrl,
+                        showPlaceholder = false,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(200.dp)
+                            .clip(RoundedCornerShape(12.dp)),
+                    )
+                    Text(
+                        text = "Mock demo image. Not a real customer photo.",
+                        style = MaterialTheme.typography.bodySmall,
+                        modifier = Modifier.padding(top = 4.dp),
+                    )
+                }
 
                 SectionHeader("Overview")
                 ListItem(

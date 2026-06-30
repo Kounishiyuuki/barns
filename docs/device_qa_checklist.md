@@ -105,6 +105,25 @@ Confirm none of these appear or are reachable:
 - [ ] Active / archived list counts behave as expected
 - [ ] Official info / care guide links remain visible after edit / archive / restore where appropriate
 
+## 8.1 Local mock image rendering (Catalog + My Greenery)
+
+Generated **local mock** demo images are wired into Catalog and My Greenery only.
+Images are mock/demo assets, bundled locally, with no network loading. Verify on
+**both iOS and Android**:
+
+- [ ] Catalog list cards show a local thumbnail where mapped; rows without a mapped
+  image still render cleanly (neutral placeholder, no broken/empty layout)
+- [ ] Catalog detail shows a hero image where mapped; items without an image show no
+  hero and no empty gap (e.g. the maintenance kit has no image)
+- [ ] My Greenery list cards show a local thumbnail; My Greenery detail shows a hero
+  image
+- [ ] Detail image captions read as mock/demo (e.g. "Mock demo image. Not a real
+  customer photo.") — not implying real customer / production / EC photos
+- [ ] Images never imply ordering, reservation, estimate, payment, or support submission
+- [ ] No image loads from the network; offline / airplane mode does not affect rendering
+- [ ] Large-text / accessibility: images are decorative and do not block row text or
+  VoiceOver / TalkBack reading of the item name
+
 ## 9. Wording & boundary parity (after the cross-platform UI completion pass)
 
 Recent PRs aligned local-only / read-only / not-submitted wording and small UI polish

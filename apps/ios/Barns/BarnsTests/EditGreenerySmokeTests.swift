@@ -75,7 +75,7 @@ final class EditGreenerySmokeTests: XCTestCase {
         XCTAssertEqual(stored?.imageUrl, item.imageUrl)
     }
 
-    func testUpdateUseCasePreservesOfficialLinksAndImageNil() async throws {
+    func testUpdateUseCasePreservesOfficialLinksAndImageReference() async throws {
         let repository = MockProductItemRepository()
         let item = try await seededItem(from: repository)
         let update = UpdateProductItemUseCase(repository: repository)
@@ -91,7 +91,10 @@ final class EditGreenerySmokeTests: XCTestCase {
 
         XCTAssertEqual(updated.categoryId, item.categoryId)
         XCTAssertEqual(updated.careGuideIds, item.careGuideIds)
-        XCTAssertNil(updated.imageUrl)
+        // The local mock image reference is preserved through an edit (never
+        // mutated or dropped); it is a local `mock://` reference, not remote.
+        XCTAssertEqual(updated.imageUrl, item.imageUrl)
+        XCTAssertTrue(updated.imageUrl == nil || updated.imageUrl?.scheme == "mock")
         XCTAssertEqual(updated.id, item.id)
     }
 

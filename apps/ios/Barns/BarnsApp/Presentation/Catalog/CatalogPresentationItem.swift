@@ -13,12 +13,16 @@ struct CatalogPresentationItem: Equatable, Identifiable {
     let name: String
     let kindLabel: String
     let summary: String
+    /// Optional local mock demo image reference (`mock://…`). Read-only
+    /// reference imagery only; resolves to nil safely when unmapped.
+    let imageReference: URL?
 
     init(item: CatalogItem) {
         id = item.id
         name = item.name
         kindLabel = CatalogKind.label(for: item.kind)
         summary = item.summary
+        imageReference = item.imageUrl
     }
 }
 
@@ -40,6 +44,9 @@ struct CatalogDetailContent: Equatable {
     /// Prefill for starting a local Register Greenery flow from this item.
     /// Built from official fields only; the user still confirms and saves.
     let registerPrefill: RegisterGreeneryPrefill
+    /// Optional local mock demo image reference (`mock://…`). Read-only
+    /// reference imagery only; resolves to nil safely when unmapped.
+    let imageReference: URL?
 
     var hasBasicInformation: Bool {
         overview != nil || lightPreference != nil || wateringOverview != nil

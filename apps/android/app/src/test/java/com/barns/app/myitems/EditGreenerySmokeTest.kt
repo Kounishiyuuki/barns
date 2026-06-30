@@ -80,7 +80,10 @@ class EditGreenerySmokeTest {
         assertEquals(item.id, updated.id)
         assertEquals(item.categoryId, updated.categoryId)
         assertEquals(item.careGuideIds, updated.careGuideIds)
-        assertNull(updated.imageUrl)
+        // The local mock image reference is preserved through an edit (never
+        // mutated or dropped); it is a local `mock://` reference, not remote.
+        assertEquals(item.imageUrl, updated.imageUrl)
+        assertTrue(updated.imageUrl == null || updated.imageUrl!!.startsWith("mock://"))
     }
 
     @Test
