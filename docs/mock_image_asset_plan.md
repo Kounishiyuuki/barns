@@ -163,7 +163,7 @@ Any future mapping should preserve existing explicit save behavior and should no
 
 The first UI integration phase is now implemented for **Catalog** and **My Greenery** only:
 
-- A local mock reference convention is used: `mock://<category>/<asset-name>`, stored in the existing optional `imageUrl` field (no schema/model change).
+- A local mock reference convention is used: `mock://<category>/<asset-name>`, stored in the existing optional `imageUrl` field (no schema/model change). Runtime resolution requires an exact allowlisted category + asset-name pair.
 - iOS renders bundled JPEGs via a small `LocalMockImageView` (loads from the app bundle by asset name; no network). Assets live under `apps/ios/Barns/BarnsApp/Resources/MockImages/`.
 - Android renders bundled drawables via a small `LocalMockImage` composable using `painterResource` (no Coil/Glide, no network). Assets live under `apps/android/app/src/main/res/drawable-nodpi/` with sanitized names (`mock_<category>_<asset>`).
 - Wired surfaces: Catalog list cards, Catalog detail hero, My Greenery list cards, My Greenery detail hero.

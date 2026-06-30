@@ -5,7 +5,7 @@ import XCTest
 /// the pure `mock://…` reference parsing — bundled-asset loading is exercised
 /// at runtime/QA, not here. Mock/demo, local-only; no network involved.
 final class LocalMockImageSmokeTests: XCTestCase {
-    func testResolvesAssetNameFromMockReference() {
+    func testResolvesAssetNameFromCatalogMockReference() {
         let reference = URL(string: "mock://catalog/catalog-office-vertical-green-wall-01")
         XCTAssertEqual(
             LocalMockImage.assetName(for: reference),
@@ -13,8 +13,34 @@ final class LocalMockImageSmokeTests: XCTestCase {
         )
     }
 
+    func testResolvesAssetNameFromMyGreeneryMockReference() {
+        let reference = URL(string: "mock://my-greenery/my-greenery-entryway-green-wall-01")
+        XCTAssertEqual(
+            LocalMockImage.assetName(for: reference),
+            "my-greenery-entryway-green-wall-01"
+        )
+    }
+
     func testNilReferenceResolvesToNoAsset() {
         XCTAssertNil(LocalMockImage.assetName(for: nil))
+    }
+
+    func testMissingOrUnknownAssetIsRejected() {
+        XCTAssertNil(LocalMockImage.assetName(for: URL(string: "mock://catalog")))
+        XCTAssertNil(LocalMockImage.assetName(for: URL(string: "mock://catalog/unknown-asset")))
+    }
+
+    func testWrongCategoryOrCrossCategoryAssetIsRejected() {
+        XCTAssertNil(
+            LocalMockImage.assetName(
+                for: URL(string: "mock://wrong-category/catalog-office-vertical-green-wall-01")
+            )
+        )
+        XCTAssertNil(
+            LocalMockImage.assetName(
+                for: URL(string: "mock://catalog/my-greenery-entryway-green-wall-01")
+            )
+        )
     }
 
     func testNonMockSchemeIsRejected() {

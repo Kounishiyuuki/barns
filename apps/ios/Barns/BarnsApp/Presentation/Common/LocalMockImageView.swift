@@ -12,12 +12,29 @@ import UIKit
 /// happens: unknown or `nil` references resolve to no image so image-null
 /// states stay safe.
 enum LocalMockImage {
-    /// Extracts the bundled asset base name from a `mock://…` reference.
-    /// Returns `nil` for `nil`, non-`mock` schemes (e.g. http), or empty paths.
+    private static let allowedAssetsByCategory: [String: Set<String>] = [
+        "catalog": [
+            "catalog-office-vertical-green-wall-01",
+            "catalog-reception-greenery-wall-01",
+            "catalog-compact-framed-moss-panel-01",
+        ],
+        "my-greenery": [
+            "my-greenery-entryway-green-wall-01",
+            "my-greenery-reception-foliage-planter-01",
+        ],
+    ]
+
+    /// Extracts the bundled asset base name from an allowlisted `mock://…`
+    /// reference. Returns `nil` for `nil`, non-`mock` schemes (e.g. http),
+    /// unknown categories, missing names, or category/name mismatches.
     static func assetName(for reference: URL?) -> String? {
-        guard let reference, reference.scheme == "mock" else { return nil }
+        guard let reference,
+              reference.scheme == "mock",
+              let category = reference.host,
+              let allowedAssets = allowedAssetsByCategory[category],
+              reference.pathComponents.count == 2 else { return nil }
         let name = reference.lastPathComponent
-        return name.isEmpty ? nil : name
+        return allowedAssets.contains(name) ? name : nil
     }
 
     #if canImport(UIKit)

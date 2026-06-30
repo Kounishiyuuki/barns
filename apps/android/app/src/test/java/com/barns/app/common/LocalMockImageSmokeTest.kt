@@ -18,10 +18,14 @@ import org.junit.Test
 class LocalMockImageSmokeTest {
 
     @Test
-    fun mockReferenceResolvesToDrawable() {
+    fun catalogMockReferenceResolvesToDrawable() {
         assertNotNull(
             localMockDrawableRes("mock://catalog/catalog-office-vertical-green-wall-01"),
         )
+    }
+
+    @Test
+    fun myGreeneryMockReferenceResolvesToDrawable() {
         assertNotNull(
             localMockDrawableRes("mock://my-greenery/my-greenery-entryway-green-wall-01"),
         )
@@ -37,7 +41,19 @@ class LocalMockImageSmokeTest {
         // Guardrail: only local `mock://` references are honored; remote URLs
         // never resolve to a drawable (no network image loading).
         assertNull(localMockDrawableRes("https://example.com/x.jpg"))
+        assertNull(localMockDrawableRes("http://example.com/x.jpg"))
+        assertNull(localMockDrawableRes("mock://catalog"))
         assertNull(localMockDrawableRes("mock://catalog/unknown-asset"))
+    }
+
+    @Test
+    fun wrongCategoryOrCrossCategoryReferenceResolvesToNull() {
+        assertNull(
+            localMockDrawableRes("mock://wrong-category/catalog-office-vertical-green-wall-01"),
+        )
+        assertNull(
+            localMockDrawableRes("mock://catalog/my-greenery-entryway-green-wall-01"),
+        )
     }
 
     @Test

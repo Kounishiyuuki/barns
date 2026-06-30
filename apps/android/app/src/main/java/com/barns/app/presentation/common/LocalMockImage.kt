@@ -22,12 +22,20 @@ import com.barns.app.R
  */
 fun localMockDrawableRes(reference: String?): Int? {
     if (reference == null || !reference.startsWith("mock://")) return null
-    return when (reference.substringAfterLast('/')) {
-        "catalog-office-vertical-green-wall-01" -> R.drawable.mock_catalog_office_vertical_green_wall_01
-        "catalog-reception-greenery-wall-01" -> R.drawable.mock_catalog_reception_greenery_wall_01
-        "catalog-compact-framed-moss-panel-01" -> R.drawable.mock_catalog_compact_framed_moss_panel_01
-        "my-greenery-entryway-green-wall-01" -> R.drawable.mock_my_greenery_entryway_green_wall_01
-        "my-greenery-reception-foliage-planter-01" -> R.drawable.mock_my_greenery_reception_foliage_planter_01
+    val parts = reference.removePrefix("mock://").split("/")
+    if (parts.size != 2 || parts.any { it.isBlank() }) return null
+    val (category, assetName) = parts
+    return when (category to assetName) {
+        "catalog" to "catalog-office-vertical-green-wall-01" ->
+            R.drawable.mock_catalog_office_vertical_green_wall_01
+        "catalog" to "catalog-reception-greenery-wall-01" ->
+            R.drawable.mock_catalog_reception_greenery_wall_01
+        "catalog" to "catalog-compact-framed-moss-panel-01" ->
+            R.drawable.mock_catalog_compact_framed_moss_panel_01
+        "my-greenery" to "my-greenery-entryway-green-wall-01" ->
+            R.drawable.mock_my_greenery_entryway_green_wall_01
+        "my-greenery" to "my-greenery-reception-foliage-planter-01" ->
+            R.drawable.mock_my_greenery_reception_foliage_planter_01
         else -> null
     }
 }
