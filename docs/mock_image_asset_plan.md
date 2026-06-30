@@ -68,12 +68,12 @@ Generated image count in this PR: 32.
 - Lowercase kebab-case.
 - Stable semantic prefix by category: `catalog-`, `my-greenery-`, `care-`, or `hero-`.
 - One-based two-digit concept suffix is not required unless multiple variants are generated later.
-- Preferred file extension after generation: `.png`, unless the generation and optimization pipeline produces high-quality JPEGs with smaller size and no visible quality loss.
+- Preferred file extension after optimization: `.jpg` for high-quality JPEGs with smaller size and no visible quality loss.
 
 Example:
 
 ```text
-catalog-living-room-moss-wall-01.png
+catalog-living-room-moss-wall-01.jpg
 ```
 
 ## 7. Manifest Schema
