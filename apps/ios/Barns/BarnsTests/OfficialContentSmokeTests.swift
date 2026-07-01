@@ -10,8 +10,9 @@ final class OfficialContentSmokeTests: XCTestCase {
         let items = try await getItems.execute()
 
         XCTAssertFalse(items.isEmpty)
-        // Official content has no image in the MVP.
-        XCTAssertTrue(items.allSatisfy { $0.imageUrl == nil })
+        // Official content uses only local mock image references (or none) —
+        // never remote URLs.
+        XCTAssertTrue(items.allSatisfy { $0.imageUrl == nil || $0.imageUrl?.scheme == "mock" })
     }
 
     func testCatalogItemReferencesResolve() async throws {

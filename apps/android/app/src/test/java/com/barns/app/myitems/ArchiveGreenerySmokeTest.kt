@@ -115,7 +115,8 @@ class ArchiveGreenerySmokeTest {
 
         assertEquals("Edited", updated.name)
         assertEquals("Edited", repository.productItem(item.id)?.name)
-        assertNull(updated.imageUrl)
+        // The seed's local mock image reference is preserved through the edit.
+        assertEquals(item.imageUrl, updated.imageUrl)
     }
 
     @Test

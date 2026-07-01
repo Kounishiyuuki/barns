@@ -7,8 +7,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
@@ -23,9 +25,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.barns.app.app.DependencyContainer
+import com.barns.app.presentation.common.LocalMockImage
 import com.barns.app.presentation.myitems.AddItemScreen
 
 /**
@@ -116,6 +120,14 @@ private fun CatalogListContent(
                     items(current.items) { item ->
                         ListItem(
                             modifier = Modifier.clickable(role = Role.Button) { onItemClick(item.id) },
+                            leadingContent = {
+                                LocalMockImage(
+                                    reference = item.imageReference,
+                                    modifier = Modifier
+                                        .size(56.dp)
+                                        .clip(RoundedCornerShape(8.dp)),
+                                )
+                            },
                             headlineContent = { Text(item.name) },
                             supportingContent = {
                                 Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {

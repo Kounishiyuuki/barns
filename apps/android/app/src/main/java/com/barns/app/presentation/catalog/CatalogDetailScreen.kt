@@ -4,8 +4,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
@@ -19,7 +21,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import com.barns.app.presentation.common.LocalMockImage
+import com.barns.app.presentation.common.localMockDrawableRes
 
 /**
  * Concise, official read-only catalog detail. Reference content only — no
@@ -62,6 +67,21 @@ fun CatalogDetailScreen(
                     style = MaterialTheme.typography.titleLarge,
                     modifier = Modifier.padding(vertical = 8.dp),
                 )
+                if (localMockDrawableRes(detail.imageReference) != null) {
+                    LocalMockImage(
+                        reference = detail.imageReference,
+                        showPlaceholder = false,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(200.dp)
+                            .clip(RoundedCornerShape(12.dp)),
+                    )
+                    Text(
+                        text = "Mock demo reference image. Not a real product or customer photo.",
+                        style = MaterialTheme.typography.bodySmall,
+                        modifier = Modifier.padding(top = 4.dp),
+                    )
+                }
                 Text(
                     text = "Overview",
                     style = MaterialTheme.typography.titleMedium,

@@ -30,6 +30,20 @@ struct CatalogDetailView: View {
                 .foregroundStyle(.secondary)
         case .loaded(let detail):
             List {
+                if let heroImage = LocalMockImage.uiImage(for: detail.imageReference) {
+                    Section {
+                        Image(uiImage: heroImage)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 200)
+                            .clipped()
+                            .accessibilityHidden(true)
+                            .listRowInsets(EdgeInsets())
+                    } footer: {
+                        Text("Mock demo reference image. Not a real product or customer photo.")
+                    }
+                }
                 Section {
                     LabeledContent("Name", value: detail.name)
                     LabeledContent("Kind", value: detail.kindLabel)

@@ -77,7 +77,8 @@ final class CatalogPresentationSmokeTests: XCTestCase {
         let detailFields = Set(Mirror(reflecting: CatalogDetailContent(
             name: "n", kindLabel: "k", summary: "s",
             overview: nil, lightPreference: nil, wateringOverview: nil, careGuides: [],
-            registerPrefill: RegisterGreeneryPrefill(name: "n", categoryId: "c", type: .installed)
+            registerPrefill: RegisterGreeneryPrefill(name: "n", categoryId: "c", type: .installed),
+            imageReference: nil
         )).children.compactMap { $0.label })
         let item = CatalogItem(
             id: "x", categoryId: "c", name: "n", kind: "k", summary: "s",

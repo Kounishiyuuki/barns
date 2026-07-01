@@ -71,7 +71,8 @@ final class CatalogDetailViewModel: ObservableObject {
             lightPreference: lightPreference,
             wateringOverview: wateringOverview,
             careGuides: summaries,
-            registerPrefill: RegisterGreeneryPrefill(catalogItem: item)
+            registerPrefill: RegisterGreeneryPrefill(catalogItem: item),
+            imageReference: item.imageUrl
         )
     }
 }

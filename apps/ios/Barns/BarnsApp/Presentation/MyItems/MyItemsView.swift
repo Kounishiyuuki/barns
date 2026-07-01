@@ -67,7 +67,7 @@ struct MyItemsView: View {
                                     container: container
                                 )
                             } label: {
-                                itemCard(display)
+                                itemCard(display, imageReference: item.imageUrl)
                             }
                         }
                     } footer: {
@@ -79,12 +79,17 @@ struct MyItemsView: View {
     }
 
     @ViewBuilder
-    private func itemCard(_ display: ProductItemPresentation) -> some View {
-        VStack(alignment: .leading, spacing: 4) {
-            GreenerySummaryView(display: display)
-            Text(display.careStatusLabel)
-                .font(.caption)
-                .foregroundStyle(.secondary)
+    private func itemCard(_ display: ProductItemPresentation, imageReference: URL?) -> some View {
+        HStack(spacing: 12) {
+            LocalMockImageView(reference: imageReference)
+                .frame(width: 56, height: 56)
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+            VStack(alignment: .leading, spacing: 4) {
+                GreenerySummaryView(display: display)
+                Text(display.careStatusLabel)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
         }
         .padding(.vertical, 2)
     }

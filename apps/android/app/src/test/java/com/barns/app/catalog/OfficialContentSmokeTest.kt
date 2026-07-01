@@ -27,8 +27,9 @@ class OfficialContentSmokeTest {
         val items = GetCatalogItemsUseCase(MockCatalogRepository()).execute()
 
         assertTrue(items.isNotEmpty())
-        // Official content has no image in the MVP.
-        assertTrue(items.all { it.imageUrl == null })
+        // Official content uses only local mock image references (or none) —
+        // never remote URLs.
+        assertTrue(items.all { it.imageUrl == null || it.imageUrl!!.startsWith("mock://") })
     }
 
     @Test

@@ -22,7 +22,7 @@ class MockProductItemRepository : ProductItemRepository {
             status = ProductItemStatus.ACTIVE,
             careGuideIds = emptyList(),
             notes = "Installed green wall in the main entrance.",
-            imageUrl = null,
+            imageUrl = "mock://my-greenery/my-greenery-entryway-green-wall-01",
             updatedAt = null,
         ),
         ProductItem(
@@ -35,7 +35,7 @@ class MockProductItemRepository : ProductItemRepository {
             status = ProductItemStatus.ACTIVE,
             careGuideIds = emptyList(),
             notes = "Potted foliage on the reception counter.",
-            imageUrl = null,
+            imageUrl = "mock://my-greenery/my-greenery-reception-foliage-planter-01",
             updatedAt = null,
         ),
     )

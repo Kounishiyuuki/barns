@@ -19,7 +19,7 @@ class MockCatalogRepository : CatalogRepository {
             summary = "壁面を彩る標準的なグリーンパネルの参考情報。設置候補の一例。",
             greeneryInfoId = "greenery-info-wall-green",
             careGuideIds = listOf("guide-wall-green-basic", "guide-cleaning-basic"),
-            imageUrl = null,
+            imageUrl = "mock://catalog/catalog-office-vertical-green-wall-01",
         ),
         CatalogItem(
             id = "catalog-interior-foliage-pot",
@@ -29,7 +29,7 @@ class MockCatalogRepository : CatalogRepository {
             summary = "受付や共有スペース向けの観葉グリーンの参考情報。",
             greeneryInfoId = "greenery-info-interior-foliage",
             careGuideIds = listOf("guide-watering-basic", "guide-planter-sunlight-basic"),
-            imageUrl = null,
+            imageUrl = "mock://catalog/catalog-reception-greenery-wall-01",
         ),
         CatalogItem(
             id = "catalog-desk-planter",
@@ -39,7 +39,7 @@ class MockCatalogRepository : CatalogRepository {
             summary = "机上や棚に置きやすい小型プランターの参考情報。",
             greeneryInfoId = "greenery-info-desk-planter",
             careGuideIds = listOf("guide-watering-basic", "guide-seasonal-care-basic"),
-            imageUrl = null,
+            imageUrl = "mock://catalog/catalog-compact-framed-moss-panel-01",
         ),
         CatalogItem(
             id = "catalog-maintenance-kit",

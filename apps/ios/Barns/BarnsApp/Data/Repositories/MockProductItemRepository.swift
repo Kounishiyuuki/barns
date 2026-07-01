@@ -1,3 +1,5 @@
+import Foundation
+
 /// In-memory, local-only product items. No persistence, no network.
 /// Seed data is fake, non-sensitive, and image-null compatible.
 actor MockProductItemRepository: ProductItemRepository {
@@ -15,7 +17,7 @@ actor MockProductItemRepository: ProductItemRepository {
                 status: .active,
                 careGuideIds: [],
                 notes: "Installed green wall in the main entrance.",
-                imageUrl: nil,
+                imageUrl: URL(string: "mock://my-greenery/my-greenery-entryway-green-wall-01"),
                 updatedAt: nil
             ),
             ProductItem(
@@ -28,7 +30,7 @@ actor MockProductItemRepository: ProductItemRepository {
                 status: .active,
                 careGuideIds: [],
                 notes: "Potted foliage on the reception counter.",
-                imageUrl: nil,
+                imageUrl: URL(string: "mock://my-greenery/my-greenery-reception-foliage-planter-01"),
                 updatedAt: nil
             )
         ]
