@@ -15,11 +15,19 @@ struct SettingsView: View {
             ForEach(viewModel.sections) { section in
                 Section(section.title) {
                     ForEach(section.items) { item in
-                        LabeledContent(item.title) {
+                        // Stacked title + full-width detail. Long details (e.g.
+                        // the About / Privacy notes) read far better wrapping
+                        // across the row than squeezed into a trailing value,
+                        // and this mirrors the Android headline / supporting
+                        // layout for cross-platform parity.
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(item.title)
                             Text(item.detail)
-                                .multilineTextAlignment(.trailing)
+                                .font(.subheadline)
                                 .foregroundStyle(.secondary)
                         }
+                        .padding(.vertical, 2)
+                        .accessibilityElement(children: .combine)
                     }
                 }
             }
