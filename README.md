@@ -69,3 +69,4 @@ barns/
 - [パフォーマンス・プロダクト成長方針](docs/performance_and_product_growth_policy.md)
 - [UI一貫性チェックリスト](docs/ui_consistency_checklist.md)
 - [Settings/法務/プライバシー磨き込み計画](docs/settings_legal_privacy_polish_plan.md)
+- [セキュリティ・プライバシー強化ロードマップ](docs/security_privacy_hardening_plan.md)
