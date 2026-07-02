@@ -25,10 +25,14 @@ final class SettingsViewModel: ObservableObject {
     init() {
         sections = [
             Section(
-                title: "App",
+                title: "App Status",
                 items: [
-                    Item(title: "Name", detail: "Barns MVP"),
-                    Item(title: "Mode", detail: "Local-first / mock-first")
+                    Item(title: "Build", detail: "Barns MVP · Local-first / mock-first"),
+                    Item(title: "Account", detail: "No account, and no cloud sync."),
+                    Item(
+                        title: "Images",
+                        detail: "Catalog and My Greenery show local mock/demo assets, not real photos."
+                    )
                 ]
             ),
             Section(
@@ -45,15 +49,23 @@ final class SettingsViewModel: ObservableObject {
                 ]
             ),
             Section(
-                title: "Privacy",
+                title: "Data & Privacy",
                 items: [
                     Item(
-                        title: "Your data",
-                        detail: "My Greenery stays local on this device. Nothing is sent anywhere in this MVP."
+                        title: "On this device",
+                        detail: "My Greenery, Care Logs, and Consultation Drafts stay on this device."
                     ),
                     Item(
                         title: "Consultation drafts",
-                        detail: "Prepared locally for your reference and never submitted."
+                        detail: "Prepared locally and never submitted."
+                    ),
+                    Item(
+                        title: "No tracking",
+                        detail: "No analytics or tracking, and no advertising identifiers."
+                    ),
+                    Item(
+                        title: "No uploads",
+                        detail: "No image upload and no cloud sync."
                     ),
                     Item(
                         title: "Archived greenery",
@@ -71,24 +83,21 @@ final class SettingsViewModel: ObservableObject {
                 ]
             ),
             Section(
+                title: "Release Readiness",
+                items: [
+                    Item(title: "Current", detail: "Internal demo-ready."),
+                    Item(
+                        title: "Before release",
+                        detail: "Store / TestFlight release still needs manual QA, privacy and legal review, and release configuration."
+                    )
+                ]
+            ),
+            Section(
                 title: "Legal",
                 items: [
                     Item(
                         title: "Notices",
                         detail: "Legal and notice content is being prepared. This MVP build is not a final release."
-                    )
-                ]
-            ),
-            Section(
-                title: "Development",
-                items: [
-                    Item(
-                        title: "Status",
-                        detail: "Real API, authentication, sync, and cloud storage are not enabled yet."
-                    ),
-                    Item(
-                        title: "Not included",
-                        detail: "No analytics, tracking, payments, or orders."
                     )
                 ]
             )

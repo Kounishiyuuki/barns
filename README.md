@@ -72,3 +72,5 @@ barns/
 - [UI一貫性チェックリスト](docs/ui_consistency_checklist.md)
 - [Settings/法務/プライバシー磨き込み計画](docs/settings_legal_privacy_polish_plan.md)
 - [セキュリティ・プライバシー強化ロードマップ](docs/security_privacy_hardening_plan.md)
+- [iOS プライバシーマニフェスト注記](docs/ios_privacy_manifest_notes.md)
+- [Android Data Safety ドラフト](docs/android_data_safety_draft.md)

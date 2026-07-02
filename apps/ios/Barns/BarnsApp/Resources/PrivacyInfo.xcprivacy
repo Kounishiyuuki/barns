@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plist version="1.0">
+<dict>
+	<!--
+	  Minimal, accurate privacy manifest for the current local-first / mock-first
+	  MVP. See docs/ios_privacy_manifest_notes.md for the audit behind each value
+	  and what must be re-verified before any store submission.
+
+	  Current MVP: no tracking, no analytics SDK, no data collected or transmitted
+	  off device (all repositories are in-memory / local-only mocks), no account,
+	  no image upload, no networking, and no required-reason API usage found.
+	-->
+	<key>NSPrivacyTracking</key>
+	<false/>
+	<key>NSPrivacyTrackingDomains</key>
+	<array/>
+	<key>NSPrivacyCollectedDataTypes</key>
+	<array/>
+	<key>NSPrivacyAccessedAPITypes</key>
+	<array/>
+</dict>
+</plist>

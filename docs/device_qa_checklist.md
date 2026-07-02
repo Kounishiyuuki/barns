@@ -157,6 +157,9 @@ Settings. Verify on **both iOS and Android**:
 - [ ] Home reads as a calm after-support dashboard, not a sales / acquisition screen
 - [ ] Settings / Legal / Privacy read as local-first / mock-first MVP status, not final
   legal / release approval
+- [ ] Settings surfaces App Status, Data & Privacy (no tracking / no uploads / on-device
+  only), and Release Readiness (internal demo-ready, not store-ready) clearly and reads
+  well at large font sizes on both platforms
 
 Surface-level expectations confirmed by the UI completion work:
 

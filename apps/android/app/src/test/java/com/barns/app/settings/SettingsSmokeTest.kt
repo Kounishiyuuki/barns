@@ -16,7 +16,10 @@ class SettingsSmokeTest {
         val viewModel = SettingsViewModel()
 
         val titles = viewModel.sections.map { it.title }
-        assertEquals(listOf("App", "About", "Privacy", "Support", "Legal", "Development"), titles)
+        assertEquals(
+            listOf("App Status", "About", "Data & Privacy", "Support", "Release Readiness", "Legal"),
+            titles,
+        )
 
         viewModel.sections.forEach { section ->
             assertTrue(section.items.isNotEmpty())
@@ -28,11 +31,30 @@ class SettingsSmokeTest {
     }
 
     @Test
-    fun appSectionReportsMvpStatus() {
+    fun appStatusSectionReportsMvpStatus() {
         val viewModel = SettingsViewModel()
 
-        val appItems = viewModel.sections.first { it.title == "App" }.items
-        assertEquals("Barns MVP", appItems.first { it.title == "Name" }.detail)
-        assertEquals("Local-first / mock-first", appItems.first { it.title == "Mode" }.detail)
+        val appItems = viewModel.sections.first { it.title == "App Status" }.items
+        assertEquals("Barns MVP · Local-first / mock-first", appItems.first { it.title == "Build" }.detail)
+        assertEquals("No account, and no cloud sync.", appItems.first { it.title == "Account" }.detail)
+    }
+
+    @Test
+    fun dataAndPrivacySectionStatesNoTrackingOrUploads() {
+        val viewModel = SettingsViewModel()
+
+        val privacyItems = viewModel.sections.first { it.title == "Data & Privacy" }.items
+        assertTrue(privacyItems.any { it.title == "No tracking" })
+        assertTrue(privacyItems.any { it.title == "No uploads" })
+    }
+
+    @Test
+    fun releaseReadinessDoesNotClaimStoreReadiness() {
+        val viewModel = SettingsViewModel()
+
+        val readiness = viewModel.sections.first { it.title == "Release Readiness" }.items
+        val beforeRelease = readiness.first { it.title == "Before release" }.detail
+        assertTrue(beforeRelease.contains("manual QA"))
+        assertTrue(beforeRelease.lowercase().contains("release"))
     }
 }
