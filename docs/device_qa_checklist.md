@@ -123,6 +123,8 @@ Images are mock/demo assets, bundled locally, with no network loading. Verify on
 - [ ] No image loads from the network; offline / airplane mode does not affect rendering
 - [ ] Large-text / accessibility: images are decorative and do not block row text or
   VoiceOver / TalkBack reading of the item name
+- [ ] Detail hero is a rounded, inset card and reads consistently on iOS and Android
+  (see [MVP Visual QA Pass](mvp_visual_qa_pass.md) for the polish pass and open items)
 
 ## 9. Wording & boundary parity (after the cross-platform UI completion pass)
 

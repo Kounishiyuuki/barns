@@ -63,9 +63,8 @@ struct ItemDetailView: View {
                             .scaledToFill()
                             .frame(maxWidth: .infinity)
                             .frame(height: 200)
-                            .clipped()
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
                             .accessibilityHidden(true)
-                            .listRowInsets(EdgeInsets())
                     } footer: {
                         Text("Mock demo image. Not a real customer photo.")
                     }
