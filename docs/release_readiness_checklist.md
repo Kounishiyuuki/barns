@@ -71,7 +71,9 @@ Guardrails — none of these are in the release candidate and must not be added 
 - [ ] Bundle identifier / display name reviewed *(only if already configured; do not change here)*
 - [ ] App icon / launch screen reviewed *(only if already configured; do not change here)*
 - [ ] Signing / provisioning / distribution status — **to be checked later**, not part of this checklist
-- [ ] `PrivacyInfo.xcprivacy` / privacy manifest status — **not present yet**; review/add when release work starts
+- [x] `PrivacyInfo.xcprivacy` — a **minimal, accurate manifest** for the current MVP
+  is bundled (no tracking, no collected data, no required-reason API usage). Must be
+  re-audited at release; see [iOS Privacy Manifest Notes](ios_privacy_manifest_notes.md)
 - [ ] No production URLs / secrets
 - [ ] No real customer / company data
 - [ ] No tracking / analytics
@@ -93,7 +95,9 @@ Guardrails — none of these are in the release candidate and must not be added 
 - [ ] Local-only behavior verified (no customer data leaves the device)
 - [ ] Accessibility / large font scale / manual TalkBack check on a real device — **still required**
 - [ ] Performance smoke check on a real device — **still required**
-- [ ] Data Safety form preparation — **not prepared yet**; prepare when release work starts
+- [x] Data Safety form — a **draft** for the current MVP exists (no data collected/
+  shared, no permissions); must be finalized/submitted at release. See
+  [Android Data Safety Draft](android_data_safety_draft.md)
 - [ ] Store listing — **not required yet** unless release work starts
 
 ## 6. Privacy / security checklist
@@ -139,8 +143,10 @@ External inquiries remain **phone consultation guidance only**; no in-app submis
 - No release screenshots / store metadata
 - No final company legal approval
 - No final privacy policy / store data-safety declarations
-- iOS `PrivacyInfo.xcprivacy` privacy manifest not added yet
-- Android Data Safety form not prepared yet
+- iOS `PrivacyInfo.xcprivacy` present as a minimal MVP manifest, but not yet
+  re-audited for a real release (see [notes](ios_privacy_manifest_notes.md))
+- Android Data Safety exists only as a draft; the final form is not submitted
+  (see [draft](android_data_safety_draft.md))
 - No device QA matrix; only partial simulator / emulator screenshot QA performed so far
 - No accessibility / Dynamic Type / manual VoiceOver / TalkBack pass on real devices
 - No performance smoke check on real devices

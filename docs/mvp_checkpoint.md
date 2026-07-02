@@ -68,6 +68,12 @@ suitable for a **local demo / stakeholder walkthrough**, while remaining
 - A **security / privacy hardening roadmap** exists as planning only
   ([Security & Privacy Hardening Plan](security_privacy_hardening_plan.md)); it is
   **not yet implemented** as production hardening.
+- **Internal-release readiness scaffolding**: a minimal, accurate iOS
+  [PrivacyInfo.xcprivacy](ios_privacy_manifest_notes.md) and an
+  [Android Data Safety draft](android_data_safety_draft.md), plus Settings
+  App Status / Data & Privacy / Release Readiness sections. These are readiness
+  scaffolding only — **not** production security, final privacy/legal approval,
+  or store readiness.
 
 ### Current readiness level
 

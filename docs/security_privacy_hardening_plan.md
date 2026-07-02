@@ -43,6 +43,20 @@ barns is **local-first and mock-first**. As of this plan:
 This posture is low-risk precisely because little sensitive data exists and
 nothing is transmitted. The hardening work below applies when that changes.
 
+### 2.1 Release-readiness scaffolding (Current)
+
+As internal-release preparation, two accurate-but-minimal artifacts now exist.
+They are **readiness scaffolding, not production hardening**:
+
+- A minimal iOS **`PrivacyInfo.xcprivacy`** reflecting the current MVP (no
+  tracking, no collected data, no required-reason API usage) — see
+  [iOS Privacy Manifest Notes](ios_privacy_manifest_notes.md).
+- An Android **Data Safety draft** (no data collected/shared, no permissions) —
+  see [Android Data Safety Draft](android_data_safety_draft.md).
+
+Both must be **re-audited** when any real data handling is added, and neither
+implies production security, final privacy/legal approval, or store readiness.
+
 ## 3. Data classification
 
 Classification drives every later decision (storage, logging, transmission,
