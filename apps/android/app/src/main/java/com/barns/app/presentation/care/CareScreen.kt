@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.barns.app.app.DependencyContainer
+import com.barns.app.domain.model.CareType
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
@@ -122,7 +123,8 @@ private fun CareListScreen(
                 } else {
                     content.recentLogs.forEach { log ->
                         ListItem(
-                            headlineContent = { Text(careDateFormatter.format(log.performedAt)) },
+                            headlineContent = { Text(careTypeLabel(log.careType)) },
+                            supportingContent = { Text(careDateFormatter.format(log.performedAt)) },
                         )
                     }
                 }
@@ -135,6 +137,19 @@ private fun CareListScreen(
             }
         }
     }
+}
+
+/**
+ * Short noun label for a logged care action, so recent care reads clearly
+ * (e.g. "Watering") instead of showing only a date.
+ */
+private fun careTypeLabel(careType: CareType): String = when (careType) {
+    CareType.WATERING -> "Watering"
+    CareType.CLEANING -> "Cleaning"
+    CareType.PRUNING -> "Pruning"
+    CareType.INSPECTION -> "Inspection"
+    CareType.REPLACEMENT -> "Replacement"
+    CareType.OTHER -> "Care"
 }
 
 private sealed interface CareRoute {

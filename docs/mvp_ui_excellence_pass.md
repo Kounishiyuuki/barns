@@ -62,8 +62,6 @@ mock-first; no real auth/API/sync/upload/analytics. See also
 - **Navigation pattern** (Android in-screen `Back` buttons vs iOS
   `NavigationStack`) — converting to `Scaffold`/`TopAppBar` app-wide is a broad,
   risky refactor and out of scope for a polish pass.
-- **iOS Home count row** — the trailing count is an idiomatic iOS list style and
-  reads clearly; left native.
 - **Wording / boundaries** — local-only / read-only / not-submitted copy was
   already aligned in earlier PRs; no wording changes were needed.
 
@@ -89,3 +87,36 @@ off-screen list footers), lift the weakest surfaces (Android empty states, iOS
 Settings readability) to match the rest of the app, and tighten cross-platform
 parity — while preserving every local-first / mock-only / read-only /
 not-submitted boundary and all `mock://` allowlist / null-image safety.
+
+## 7. Screenshot-based visual QA round (follow-up)
+
+A second refinement loop driven by **actual screenshots** of the running apps,
+not only code review.
+
+### How the screens were reached
+
+- **iOS:** a temporary, uncommitted QA harness in `RootView` rendered each real
+  production view (unchanged, real mock data) selected by a launch env var,
+  bypassing only the auth gate and navigation taps. It was fully reverted before
+  committing (no QA code ships). Screens captured and inspected: Home, My
+  Greenery list, My Greenery detail, Catalog list, Catalog detail, Care, Support,
+  Settings.
+- **Android:** a Pixel 9 emulator was booted; the debug APK was installed and
+  driven with `adb shell input tap`. Screens captured and inspected: auth, Home,
+  Care, My Greenery list, Catalog list.
+- Screenshots were kept as local QA artifacts only (not committed).
+
+### What the screenshots revealed and fixed
+
+| Platform | Screen | Finding | Fix |
+| --- | --- | --- | --- |
+| iOS | Home | Read like a settings menu: mixed row styles (trailing counts, one/two-line), flat hierarchy, redundant with the nav title. | Calm dashboard hero (greeting + line); every destination on one consistent two-line rhythm (title + supporting context); My Greenery reads as primary with a "N registered locally" cue. Now matches the Android Home content. |
+| iOS + Android | Care → Recent care log | Rows showed only a bare date ("Jun 25, 2026") with no context. | Lead each log with the care kind ("Cleaning") over the date, so it reads as a scannable record. |
+
+### Verified good in screenshots (no change)
+
+- My Greenery / Catalog list + detail heroes and captions, and the catalog
+  null-image (maintenance kit) placeholder, render cleanly on both platforms.
+- PR #81's Android fixes confirmed live: the My Greenery / Catalog reassurance
+  footers are visible below the list; Home renders fully.
+- Support and Settings read as calm and trustworthy.
