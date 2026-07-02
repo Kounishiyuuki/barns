@@ -21,12 +21,12 @@ mock-first; no real auth/API/sync/upload/analytics. See also
   `Column`/`LazyColumn`), respecting native conventions.
 - iOS build + unit tests: **passed** (65 tests). Android build + unit tests:
   **passed**.
-- iOS app launched in the Simulator; mock-auth landing screenshotted, renders
-  cleanly with no crash.
-- **Not run:** automated in-app navigation to each screen. The environment has
-  no tap automation (no `cliclick` / `idb`; System Events lacks accessibility
-  permission), so screens behind the first tap were verified by code review,
-  not visually driven. See §5 for the manual QA that remains.
+- Initial pass: iOS app launched in the Simulator; mock-auth landing
+  screenshotted and rendered cleanly with no crash. Deeper navigation was
+  reviewed at code level because tap automation was not available.
+- Follow-up pass: a partial screenshot-based QA round captured and inspected
+  selected iOS and Android screens (see §7). This was not full real-device QA,
+  and the remaining manual checks are tracked in §5.
 
 ## 2. What felt weak before
 
