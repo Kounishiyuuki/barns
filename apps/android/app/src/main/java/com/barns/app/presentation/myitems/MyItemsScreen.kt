@@ -32,6 +32,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.barns.app.app.DependencyContainer
 import com.barns.app.domain.model.ProductItem
+import com.barns.app.presentation.common.EmptyState
 import com.barns.app.presentation.common.LocalMockImage
 import com.barns.app.presentation.support.ConsultationDraftScreen
 
@@ -151,18 +152,13 @@ private fun MyItemsListScreen(
             }
             is MyItemsViewModel.State.Loaded -> {
                 if (current.items.isEmpty()) {
-                    Text(
-                        text = "Register your greenery",
-                        style = MaterialTheme.typography.titleMedium,
-                        modifier = Modifier.padding(top = 8.dp),
-                    )
-                    Text(
-                        text = "Add the wall greening and interior green you own or had " +
+                    EmptyState(
+                        title = "Register your greenery",
+                        message = "Add the wall greening and interior green you own or had " +
                             "installed to keep their care and support in one place.",
-                        style = MaterialTheme.typography.bodyMedium,
                     )
                 } else {
-                    LazyColumn {
+                    LazyColumn(modifier = Modifier.weight(1f)) {
                         items(current.items) { item ->
                             val display = ProductItemPresentation.from(item)
                             ListItem(

@@ -125,6 +125,10 @@ Images are mock/demo assets, bundled locally, with no network loading. Verify on
   VoiceOver / TalkBack reading of the item name
 - [ ] Detail hero is a rounded, inset card and reads consistently on iOS and Android
   (see [MVP Visual QA Pass](mvp_visual_qa_pass.md) for the polish pass and open items)
+- [ ] Android Home scrolls fully at large font scale; My Greenery / Catalog list
+  footers stay visible; My Greenery / Catalog empty states read as calm centered
+  states; iOS Settings long details wrap full-width (see
+  [MVP UI Excellence Pass](mvp_ui_excellence_pass.md) for the final polish pass)
 
 ## 9. Wording & boundary parity (after the cross-platform UI completion pass)
 

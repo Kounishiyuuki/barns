@@ -28,56 +28,77 @@ struct HomeView: View {
         case .loaded(let content):
             List {
                 Section {
-                    Text(content.greeting)
-                        .font(.headline)
-                    Text(content.summary.welcomeMessage)
-                        .foregroundStyle(.secondary)
+                    // Calm dashboard hero: a warm greeting over a short
+                    // after-support line, giving Home a clear top-level
+                    // identity rather than opening straight into a menu.
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text(content.greeting)
+                            .font(.title3)
+                            .fontWeight(.semibold)
+                        Text(content.summary.welcomeMessage)
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                    }
+                    .padding(.vertical, 4)
+                    .accessibilityElement(children: .combine)
                 }
                 Section("Your greenery") {
                     NavigationLink {
                         MyItemsView(viewModel: container.makeMyItemsViewModel(), container: container)
                     } label: {
-                        LabeledContent("My Greenery", value: "\(content.summary.registeredItemCount)")
+                        homeRow(
+                            title: "My Greenery",
+                            subtitle: "\(content.summary.registeredItemCount) registered locally"
+                        )
                     }
                     NavigationLink {
                         CareView(viewModel: container.makeCareViewModel(), container: container)
                     } label: {
-                        LabeledContent("Next care", value: content.summary.nextCareLabel)
+                        homeRow(title: "Next care", subtitle: content.summary.nextCareLabel)
                     }
                 }
                 Section("Explore") {
                     NavigationLink {
                         PatternListView(viewModel: container.makePatternListViewModel(), container: container)
                     } label: {
-                        Text(content.summary.patternsEntryLabel)
+                        homeRow(title: "Patterns", subtitle: content.summary.patternsEntryLabel)
                     }
                     NavigationLink {
                         CatalogListView(viewModel: container.makeCatalogListViewModel(), container: container)
                     } label: {
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text("Explore official catalog")
-                            Text("Official read-only reference")
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
-                        }
+                        homeRow(title: "Explore official catalog", subtitle: "Official read-only reference")
                     }
                 }
                 Section("Support") {
                     NavigationLink {
                         SupportView(viewModel: container.makeSupportViewModel(), container: container)
                     } label: {
-                        Text(content.summary.supportGuidance)
+                        homeRow(title: "Support", subtitle: content.summary.supportGuidance)
                     }
                 }
                 Section("More") {
                     NavigationLink {
                         SettingsView(viewModel: container.makeSettingsViewModel())
                     } label: {
-                        Text("Settings")
+                        homeRow(title: "Settings", subtitle: "App status and guardrails")
                     }
                 }
             }
         }
+    }
+
+    /// Consistent two-line entry row: a clear destination title over a short
+    /// supporting line. Keeps every Home destination on the same rhythm and
+    /// mirrors the Android Home list for cross-platform parity.
+    private func homeRow(title: String, subtitle: String) -> some View {
+        VStack(alignment: .leading, spacing: 3) {
+            Text(title)
+            Text(subtitle)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        }
+        .padding(.vertical, 2)
+        .accessibilityElement(children: .combine)
     }
 }
 

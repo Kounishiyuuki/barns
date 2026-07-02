@@ -51,7 +51,17 @@ struct CareView: View {
                             .foregroundStyle(.secondary)
                     } else {
                         ForEach(care.recentLogs) { log in
-                            Text(log.performedAt.formatted(date: .abbreviated, time: .omitted))
+                            // Lead with the kind of care so a log entry reads as
+                            // a scannable record, not a bare date.
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text(careTypeLabel(log.careType))
+                                    .font(.subheadline)
+                                Text(log.performedAt.formatted(date: .abbreviated, time: .omitted))
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+                            .padding(.vertical, 2)
+                            .accessibilityElement(children: .combine)
                         }
                     }
                 }
@@ -61,6 +71,19 @@ struct CareView: View {
                         .foregroundStyle(.secondary)
                 }
             }
+        }
+    }
+
+    /// Short noun label for a logged care action, so recent care reads clearly
+    /// (e.g. "Watering") instead of showing only a date.
+    private func careTypeLabel(_ careType: CareType) -> String {
+        switch careType {
+        case .watering: return "Watering"
+        case .cleaning: return "Cleaning"
+        case .pruning: return "Pruning"
+        case .inspection: return "Inspection"
+        case .replacement: return "Replacement"
+        case .other: return "Care"
         }
     }
 }

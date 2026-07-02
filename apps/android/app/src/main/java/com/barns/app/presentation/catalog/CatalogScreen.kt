@@ -29,6 +29,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.barns.app.app.DependencyContainer
+import com.barns.app.presentation.common.EmptyState
 import com.barns.app.presentation.common.LocalMockImage
 import com.barns.app.presentation.myitems.AddItemScreen
 
@@ -105,47 +106,43 @@ private fun CatalogListContent(
             }
             is CatalogListViewModel.State.Loaded -> {
                 if (current.items.isEmpty()) {
+                    EmptyState(
+                        title = "No catalog items",
+                        message = "Official reference greenery will appear here. This is " +
+                            "read-only reference content.",
+                    )
+                } else {
+                    LazyColumn(modifier = Modifier.weight(1f)) {
+                        items(current.items) { item ->
+                            ListItem(
+                                modifier = Modifier.clickable(role = Role.Button) { onItemClick(item.id) },
+                                leadingContent = {
+                                    LocalMockImage(
+                                        reference = item.imageReference,
+                                        modifier = Modifier
+                                            .size(56.dp)
+                                            .clip(RoundedCornerShape(8.dp)),
+                                    )
+                                },
+                                headlineContent = { Text(item.name) },
+                                supportingContent = {
+                                    Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                                        Text(
+                                            text = item.kindLabel,
+                                            style = MaterialTheme.typography.bodySmall,
+                                        )
+                                        Text(item.summary)
+                                    }
+                                },
+                            )
+                        }
+                    }
                     Text(
-                        text = "No catalog items",
-                        style = MaterialTheme.typography.titleMedium,
+                        text = "Official read-only reference content. Browse only — no ordering in the app.",
+                        style = MaterialTheme.typography.bodySmall,
                         modifier = Modifier.padding(top = 8.dp),
                     )
-                    Text(
-                        text = "Official reference greenery will appear here. This is read-only " +
-                            "reference content.",
-                        style = MaterialTheme.typography.bodyMedium,
-                    )
                 }
-                LazyColumn {
-                    items(current.items) { item ->
-                        ListItem(
-                            modifier = Modifier.clickable(role = Role.Button) { onItemClick(item.id) },
-                            leadingContent = {
-                                LocalMockImage(
-                                    reference = item.imageReference,
-                                    modifier = Modifier
-                                        .size(56.dp)
-                                        .clip(RoundedCornerShape(8.dp)),
-                                )
-                            },
-                            headlineContent = { Text(item.name) },
-                            supportingContent = {
-                                Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
-                                    Text(
-                                        text = item.kindLabel,
-                                        style = MaterialTheme.typography.bodySmall,
-                                    )
-                                    Text(item.summary)
-                                }
-                            },
-                        )
-                    }
-                }
-                Text(
-                    text = "Official read-only reference content. Browse only — no ordering in the app.",
-                    style = MaterialTheme.typography.bodySmall,
-                    modifier = Modifier.padding(top = 8.dp),
-                )
             }
         }
     }
