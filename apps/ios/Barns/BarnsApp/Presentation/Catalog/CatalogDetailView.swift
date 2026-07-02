@@ -37,9 +37,8 @@ struct CatalogDetailView: View {
                             .scaledToFill()
                             .frame(maxWidth: .infinity)
                             .frame(height: 200)
-                            .clipped()
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
                             .accessibilityHidden(true)
-                            .listRowInsets(EdgeInsets())
                     } footer: {
                         Text("Mock demo reference image. Not a real product or customer photo.")
                     }
