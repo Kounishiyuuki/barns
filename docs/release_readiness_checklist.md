@@ -21,14 +21,33 @@ What the current app actually contains (iOS + Android, local-only):
 
 - My Greenery lifecycle — Register, Register from Catalog (prefill), Edit, Archive,
   Archived list, Restore. The active list excludes archived items; no hard delete.
+- Local Care Tasks / Care Logs (on-device after-care records; no reminders / sync).
 - Catalog reference support (official, read-only).
 - Official basic info / care guide sections (read-only).
 - Local consultation draft (`ConsultationDraft`) — preparation note only, never submitted.
-- Settings screen (both platforms).
+- Support phone guidance (guidance only; no in-app submission).
+- Settings / Legal / Privacy / About informational sections (both platforms).
+- Local mock image rendering in Catalog / My Greenery — generated, optimized,
+  brand-neutral demo assets resolved by an **exact `mock://` allowlist**
+  (category + asset name), bundled locally with **no network image loading**;
+  `nil` / unknown / `http(s)` references stay safe. Not real customer/company photos.
+- UI/demo-readiness polish landed across Home, My Greenery, Catalog, Care, Support,
+  and Settings (see [MVP Visual QA Pass](mvp_visual_qa_pass.md) and
+  [MVP UI Excellence Pass](mvp_ui_excellence_pass.md)).
 - Security / privacy and legal/release docs:
   [05_security_privacy.md](05_security_privacy.md),
-  [08_legal_release_operation.md](08_legal_release_operation.md).
+  [08_legal_release_operation.md](08_legal_release_operation.md), and the
+  [Security & Privacy Hardening Plan](security_privacy_hardening_plan.md)
+  (planning roadmap only — **not** implemented as production hardening).
 - **No** real account / sync / API.
+
+### Readiness level
+
+- **Suitable for**: a local MVP demo / stakeholder walkthrough.
+- **Not**: production-ready, App Store / TestFlight-ready, or internal-Android-
+  release-ready. Those require the tasks below to be completed and approved.
+- Only **partial simulator / emulator screenshot QA** has been performed; full
+  manual real-device QA is still required.
 
 ## 3. Must remain out of release scope (for now)
 
@@ -50,12 +69,15 @@ Guardrails — none of these are in the release candidate and must not be added 
 - [ ] `xcodebuild` build for the iOS Simulator passes
 - [ ] `BarnsTests` smoke tests pass
 - [ ] Bundle identifier / display name reviewed *(only if already configured; do not change here)*
-- [ ] Signing / distribution status — **to be checked later**, not part of this checklist
-- [ ] `PrivacyInfo.xcprivacy` / privacy manifest status — **not present yet**; add when release work starts
+- [ ] App icon / launch screen reviewed *(only if already configured; do not change here)*
+- [ ] Signing / provisioning / distribution status — **to be checked later**, not part of this checklist
+- [ ] `PrivacyInfo.xcprivacy` / privacy manifest status — **not present yet**; review/add when release work starts
 - [ ] No production URLs / secrets
 - [ ] No real customer / company data
 - [ ] No tracking / analytics
 - [ ] Local-only behavior verified (no customer data leaves the device)
+- [ ] Accessibility / Dynamic Type / manual VoiceOver check on a real device — **still required**
+- [ ] Performance smoke check on a real device — **still required**
 - [ ] Screenshots / store copy — **not required yet** unless release work starts
 
 ## 5. Android readiness checklist
@@ -63,11 +85,15 @@ Guardrails — none of these are in the release candidate and must not be added 
 - [ ] `./gradlew assembleDebug` passes
 - [ ] `./gradlew testDebugUnitTest` (unit tests) pass
 - [ ] Package / application id reviewed *(only if already configured; do not change here)*
-- [ ] Signing / release build status — **to be checked later**, not part of this checklist
+- [ ] App icon / launch / display name reviewed *(only if already configured; do not change here)*
+- [ ] Signing / release build status (internal release build readiness) — **to be checked later**, not part of this checklist
 - [ ] No production URLs / secrets
 - [ ] No real customer / company data
 - [ ] No tracking / analytics
 - [ ] Local-only behavior verified (no customer data leaves the device)
+- [ ] Accessibility / large font scale / manual TalkBack check on a real device — **still required**
+- [ ] Performance smoke check on a real device — **still required**
+- [ ] Data Safety form preparation — **not prepared yet**; prepare when release work starts
 - [ ] Store listing — **not required yet** unless release work starts
 
 ## 6. Privacy / security checklist
@@ -113,8 +139,13 @@ External inquiries remain **phone consultation guidance only**; no in-app submis
 - No release screenshots / store metadata
 - No final company legal approval
 - No final privacy policy / store data-safety declarations
-- No device QA matrix
-- No accessibility / localization QA pass
+- iOS `PrivacyInfo.xcprivacy` privacy manifest not added yet
+- Android Data Safety form not prepared yet
+- No device QA matrix; only partial simulator / emulator screenshot QA performed so far
+- No accessibility / Dynamic Type / manual VoiceOver / TalkBack pass on real devices
+- No performance smoke check on real devices
+- No localization QA pass
+- Security / privacy hardening roadmap not yet implemented as production hardening
 
 ## 10. Recommended next PRs (planning only)
 
