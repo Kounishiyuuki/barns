@@ -153,6 +153,7 @@ Settings. Verify on **both iOS and Android**:
   as guidance only, with no request or customer data sent automatically
 - [ ] Care does not imply notifications / reminders / sync — care tasks and logs read as
   local records
+- [ ] Care recent-log rows read clearly (care kind + date, not a bare date) on both platforms
 - [ ] Home reads as a calm after-support dashboard, not a sales / acquisition screen
 - [ ] Settings / Legal / Privacy read as local-first / mock-first MVP status, not final
   legal / release approval
@@ -171,6 +172,8 @@ Surface-level expectations confirmed by the UI completion work:
 
 - No confirmed real distribution setup (none assumed present)
 - No final device matrix
+- Only a partial simulator / emulator screenshot QA pass so far; full manual
+  real-device QA across a device matrix is still required
 - No accessibility QA pass yet
 - No localization QA pass yet
 - No store screenshot / metadata QA

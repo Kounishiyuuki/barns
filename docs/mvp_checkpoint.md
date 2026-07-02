@@ -26,6 +26,59 @@ behavior. See also
   for the wording/boundary parity checks. This is UI/wording polish only — it does
   **not** add backend, auth, sync, submission, or release readiness.
 
+## 1.1 MVP demo checkpoint update (after PR #77–#82)
+
+Since the lifecycle-parity milestone above, a further phase of local mock image
+work, UI polish, and security/privacy planning has landed. The MVP is now
+suitable for a **local demo / stakeholder walkthrough**, while remaining
+**mock-first / local-first** and **not production-ready**.
+
+### Current MVP capabilities (both platforms, local-only)
+
+- Local **My Greenery** registry with the full local Register / Edit / Archive /
+  Archived list / Restore lifecycle (soft status only, no hard delete).
+- Local **Care Tasks / Care Logs** as on-device after-care records (no reminders,
+  notifications, or sync).
+- Official **read-only Catalog / GreeneryInfo / CareGuide** reference content.
+- **Support** guidance and local **Consultation Draft** preparation (never
+  submitted).
+- **Settings / Legal / Privacy / About** informational placeholder/readiness
+  sections communicating local-first / mock-first MVP status (not final legal or
+  release approval).
+- **Local mock image assets** (generated, optimized, brand-neutral demo images)
+  rendered in **Catalog and My Greenery** only, via a `mock://<category>/<asset>`
+  reference resolved by an **exact allowlist** (category + asset name). No network
+  image loading; `nil` / unknown / `http(s)` references stay safe. These are
+  mock/demo images only — **not** real customer or company photos.
+
+### Recent UI / image / security / QA improvements
+
+- Generated, optimized local mock images and their Catalog / My Greenery
+  rendering (see [Mock Image Asset Plan](mock_image_asset_plan.md)).
+- Improved Home hierarchy (calm dashboard hero, consistent entry rows).
+- Android Home scroll resilience and calmer list empty states; visible list
+  reassurance footers.
+- iOS Settings readability (full-width detail rows).
+- iOS detail hero consistency (rounded, inset card) matching Android.
+- Care recent-log readability (care kind + date instead of a bare date).
+- A **partial, screenshot-based visual QA** round (iOS Simulator + Android
+  emulator) documented in [MVP Visual QA Pass](mvp_visual_qa_pass.md) and
+  [MVP UI Excellence Pass](mvp_ui_excellence_pass.md). This is **not** full
+  real-device QA across a device matrix.
+- A **security / privacy hardening roadmap** exists as planning only
+  ([Security & Privacy Hardening Plan](security_privacy_hardening_plan.md)); it is
+  **not yet implemented** as production hardening.
+
+### Current readiness level
+
+- **Suitable for**: local MVP demo / stakeholder walkthrough.
+- **Not**: production-ready, App Store / TestFlight-ready, or internal-Android-
+  release-ready — those depend on the release tasks in
+  [Release Readiness Checklist](release_readiness_checklist.md) being completed.
+- **Manual real-device QA is still required** (see
+  [Device QA Checklist](device_qa_checklist.md)); only partial simulator /
+  emulator screenshot QA has been performed so far.
+
 ## 2. Current completed capabilities
 
 ### iOS (Swift / SwiftUI)
@@ -37,6 +90,10 @@ behavior. See also
 - Archived Greenery list
 - Restore archived greenery
 - Official basic info / care guide sections (read-only)
+- Local Care Tasks / Care Logs (on-device records)
+- Support guidance / local Consultation Draft (never submitted)
+- Settings / Legal / Privacy / About informational sections
+- Local mock image rendering in Catalog / My Greenery (allowlisted, no network)
 
 ### Android (Kotlin / Jetpack Compose)
 - My Greenery list / detail
@@ -47,12 +104,20 @@ behavior. See also
 - Archived Greenery list
 - Restore archived greenery
 - Official basic info / care guide sections (read-only)
+- Local Care Tasks / Care Logs (on-device records)
+- Support guidance / local Consultation Draft (never submitted)
+- Settings / Legal / Privacy / About informational sections
+- Local mock image rendering in Catalog / My Greenery (allowlisted, no network)
 
 ### Documentation
 - [Architecture & Data Boundaries](architecture_and_data_boundaries.md)
 - [Catalog → Register → My Greenery Flow](catalog_to_my_greenery_flow.md)
 - [My Greenery Lifecycle](my_greenery_lifecycle.md)
 - [Official Read-only Mock Content](mock_official_content_data.md)
+- [Mock Image Asset Plan](mock_image_asset_plan.md)
+- [MVP Visual QA Pass](mvp_visual_qa_pass.md) / [MVP UI Excellence Pass](mvp_ui_excellence_pass.md)
+- [Security & Privacy Hardening Plan](security_privacy_hardening_plan.md)
+- [Release Readiness Checklist](release_readiness_checklist.md) / [Device QA Checklist](device_qa_checklist.md)
 
 ## 3. Product scope confirmation
 
@@ -143,13 +208,22 @@ Out of scope at this checkpoint (no work started):
 - Real API / sync
 - Cloud persistence
 - Image upload
+- User photo handling (local mock images are demo assets only, not user photos)
 - Push / local notifications (unless explicitly planned)
 - Chat
 - Scheduling
 - Order / estimate / payment
 - Analytics / tracking
+- Support ticket / in-app submission (external inquiries stay phone guidance only)
 - Staff / admin console
 - Hard delete
+- Production URLs / secrets
+- Real company / customer / contact data
+
+Guardrail summary: local-only / mock-only, no remote image loading, no secrets,
+no production URL, no real support submission, a clear separation between mock
+demo images and any future user photos, and a security/privacy roadmap that
+exists but is **not yet implemented** as production hardening.
 
 ## 9. Recommended next PRs
 
